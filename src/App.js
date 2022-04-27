@@ -12,7 +12,7 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">List Users</Link>
+              <Link to="/admin/users">List Users</Link>
             </li>
             <li>
               <Link to="/admin/users/create">Create Users</Link>
@@ -20,7 +20,7 @@ function App() {
           </ul>
         </nav>
         <Routes>
-          <Route index element={<ListUser />} />
+          <Route path="/admin/users" element={<ListUser />} />
           <Route path="/admin/users/create" element={<CreateUser />} />
           <Route path="/admin/users/:userId/edit" element={<EditUser />} />
         </Routes>

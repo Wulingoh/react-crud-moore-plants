@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { API_HOST } from "../config";
 
 export default function ListUser() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export default function ListUser() {
     getUser();
   }, []);
   function getUser() {
-    axios.get(`http://localhost:8888/api/users/${userId}`).then(function (response) {
+    axios.get(`${API_HOST}api/users/${userId}`).then(function (response) {
       console.log(response.data);
       setInputs(response.data);
     });
@@ -23,10 +24,10 @@ export default function ListUser() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .put(`http:localhost:8888/api/users/${userId}/edit`, inputs)
+      .put(`${API_HOST}api/users/${userId}`, inputs)
       .then(function (response) {
         console.log(response.data);
-        navigate("/");
+        navigate("/admin/users");
       });
   };
   return (

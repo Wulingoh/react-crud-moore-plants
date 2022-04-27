@@ -1,19 +1,31 @@
-import axios from "axios"
-import {useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_HOST } from "../config";
+
 export default function ListUser() {
     const [Users, setUsers] = useState([]);
     useEffect(() => {
         getUsers();
     }, []);
     function getUsers() {
-        axios.get(`http://localhost:8888/api/users`).then(function(response) {
-          console.log(response.data);
-          setUsers(response.data);  
-        });
+        axios.get(`${API_HOST}api/users`, {
+            validateStatus:function (status) {
+                return status;
+            }
+        })
+            .then(function(response) {
+                console.log(response.data);
+                setUsers(response.data);  
+            });
     }
     const deleteUser = (userId) => {
-        axios.delete(`http://localhost:8888/api/users/${userId}/delete`).then(function(response) {
+        axios.delete(`${API_HOST}api/users/${userId}/delete`, {
+            validateStatus:function (status) {
+                return status;
+            }
+        })
+        .then(function(response) {
             console.log(response.data);
             getUsers();
         })
