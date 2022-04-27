@@ -48,7 +48,7 @@
         
         case "PUT":
            $user = json_decode( file_get_contents('php://input'));
-           $sql = "UPDATE users SET name= :name, email  =:email, role =:role WHERE user_id =:userId";
+           $sql = "UPDATE users SET name =:name, email =:email, role =:role WHERE user_id =:userId";
            $stmt = $db->prepare($sql);
            $stmt->bindParam(':userId', $user->user_id);
            $stmt->bindParam(':name', $user->name);

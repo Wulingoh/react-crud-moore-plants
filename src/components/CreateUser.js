@@ -1,6 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { API_HOST } from "../config";
+
 export default function ListUser() {
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState([]);
     const handleChange = (event) => {
         const name = event.target.name;
@@ -9,9 +13,21 @@ export default function ListUser() {
     }
     const handleSubmit =(event) => {
         event.preventDefault();
-        axios.post(`http://localhost:8888/api/index.php`, inputs).then(function(response) {
-         console.log(response.data);   
-        });
+        axios.post(`${API_HOST}api/users`, inputs)
+        .then(function(response) {
+         console.log(response.data);
+         navigate("/admin/users");
+        })
+        .catch((error) => {
+            if (error.response) {
+              console.log(error.response);
+              console.log("server responded");
+            } else if (error.request) {
+              console.log("network error");
+            } else {
+              console.log(error);
+            }
+          });
     }
 
     return (
