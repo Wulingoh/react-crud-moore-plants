@@ -7,7 +7,7 @@ export default function ListUser() {
         getUsers();
     }, []);
     function getUsers() {
-        axios.get(`http://localhost:8888/api/users/`).then(function(response) {
+        axios.get(`http://localhost:8888/api/users`).then(function(response) {
           console.log(response.data);
           setUsers(response.data);  
         });
@@ -35,13 +35,13 @@ export default function ListUser() {
                 <tbody>
                     {Users.map((user, key) => 
                         <tr key={key}>
-                            <td>{user.userId}</td>
+                            <td>{user.user_id}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
                             <td>{user.role}</td>
                             <td>
-                            <Link to={`users/${user.userId}/edit`} style={{marginRight: "10px"}}>Edit</Link>
-                            <button onClick={() =>deleteUser(user.userId)}>Delete</button>
+                            <Link to={`/admin/users/${user.user_id}/edit`} style={{marginRight: "10px"}}>Edit</Link>
+                            <button onClick={() =>deleteUser(user.user_id)}>Delete</button>
                             </td>
                         </tr>
                         )}

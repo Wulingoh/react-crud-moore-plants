@@ -12,17 +12,17 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="admin/">List Users</Link>
+              <Link to="/">List Users</Link>
             </li>
             <li>
-              <Link to="admin/user/create">Create Users</Link>
+              <Link to="/admin/users/create">Create Users</Link>
             </li>
           </ul>
         </nav>
         <Routes>
           <Route index element={<ListUser />} />
-          <Route path="admin/user/create" element={<CreateUser />} />
-          <Route path="admin/user/:id/edit" element={<EditUser />} />
+          <Route path="/admin/users/create" element={<CreateUser />} />
+          <Route path="/admin/users/:userId/edit" element={<EditUser />} />
         </Routes>
       </BrowserRouter>
     </div>

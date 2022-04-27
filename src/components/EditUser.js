@@ -10,7 +10,7 @@ export default function ListUser() {
     getUser();
   }, []);
   function getUser() {
-    axios.get(`http://localhost:8888/api/user/${userId}`).then(function (response) {
+    axios.get(`http://localhost:8888/api/users/${userId}`).then(function (response) {
       console.log(response.data);
       setInputs(response.data);
     });
@@ -23,7 +23,7 @@ export default function ListUser() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .put(`http:localhost:3000/api/user/${userId}/edit`, inputs)
+      .put(`http:localhost:8888/api/users/${userId}/edit`, inputs)
       .then(function (response) {
         console.log(response.data);
         navigate("/");
