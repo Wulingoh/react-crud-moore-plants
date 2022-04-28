@@ -1,7 +1,15 @@
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { API_HOST } from "../../config";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Title from './Title';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
 
 export default function ListUser() {
     const [Users, setUsers] = useState([]);
@@ -32,34 +40,38 @@ export default function ListUser() {
     }
 
     return (
-        <div>
-            <h1>List Users</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {Users.map((user, key) => 
-                        <tr key={key}>
-                            <td>{user.user_id}</td>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.role}</td>
-                            <td>
-                            <Link to={`/admin/users/${user.user_id}/edit`} style={{marginRight: "10px"}}>Edit</Link>
-                            <button onClick={() =>deleteUser(user.user_id)}>Delete</button>
-                            </td>
-                        </tr>
-                        )}
-                </tbody>
-            </table>
-        </div>
+        <React.Fragment>
+        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <Title>List Users</Title>
+        <Button variant="contained" component={Link } to={`/admin/users/create`}>Add New User</Button>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Role</TableCell>
+              <TableCell align="right">Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {Users.map((user, key) => (
+              <TableRow key={key}>
+                <TableCell>{user.user_id}</TableCell>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.role}</TableCell>
+                <TableCell align="right">
+                <Button variant="contained" component={Link } to={`/admin/users/${user.user_id}/edit`}>Edit</Button>
+                <button onClick={() =>deleteUser(user.user_id)}>Delete</button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        </Paper>
+        
+      </React.Fragment>
 
     );
 }
