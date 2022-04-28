@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { API_HOST } from "../config";
+import { API_HOST } from "../../config";
+import { TextField } from "@mui/material";
 
 export default function ListUser() {
     const navigate = useNavigate();
@@ -41,7 +42,7 @@ export default function ListUser() {
                                 <label>Name: </label>
                             </th>
                             <td>
-                                <input type="text" name="name" onChange={handleChange} />
+                                <TextField id="outlined-basic" name="name" label="Outlined" variant="outlined" onChange={handleChange} />
                             </td>
                         </tr>
                         <tr>

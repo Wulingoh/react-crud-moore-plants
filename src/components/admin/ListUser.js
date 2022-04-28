@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { API_HOST } from "../config";
+import { API_HOST } from "../../config";
 
 export default function ListUser() {
     const [Users, setUsers] = useState([]);

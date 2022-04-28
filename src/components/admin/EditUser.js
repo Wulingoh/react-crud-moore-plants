@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { API_HOST } from "../config";
+import { API_HOST } from "../../config";
 
 export default function ListUser() {
   const navigate = useNavigate();
