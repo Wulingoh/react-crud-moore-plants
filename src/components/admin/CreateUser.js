@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { API_HOST } from "../../config";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -45,7 +45,9 @@ export default function ListUser() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          marginBottom: 10
         }}
+        
       >
         <Typography component="h1" variant="h5">
           Create New User
@@ -95,6 +97,15 @@ export default function ListUser() {
             sx={{ mt: 3, mb: 2 }}
           >
             Create New User
+          </Button>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            component={Link } to={`/admin/users`}
+            sx={{ mt: 1, mb: 2 }}
+          >
+            Cancel
           </Button>
         </Box>
       </Box>
