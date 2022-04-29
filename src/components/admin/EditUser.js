@@ -60,7 +60,8 @@ export default function ListUser() {
               required
               fullWidth
               id="name"
-              label="First Name"
+              label="Full Name"
+              InputLabelProps={{ shrink: true }} 
               value={inputs.name}
               autoFocus
               onChange={handleChange}
@@ -72,6 +73,7 @@ export default function ListUser() {
               fullWidth
               id="email"
               label="Email Address"
+              InputLabelProps={{ shrink: true }}
               name="email"
               value={inputs.email} 
               autoComplete="email"
@@ -84,6 +86,7 @@ export default function ListUser() {
               fullWidth
               name="role"
               label="Role"
+              InputLabelProps={{ shrink: true }}
               type="text"
               id="role"
               value={inputs.role} 
