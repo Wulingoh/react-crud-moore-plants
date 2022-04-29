@@ -1,7 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { API_HOST } from "../../config";
+import { Controller, useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -11,16 +12,10 @@ import Paper from "@mui/material/Paper";
 
 export default function ListUser() {
   const navigate = useNavigate();
-  const [inputs, setInputs] = useState([]);
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const {handleSubmit, control } = useForm();
+  const onSubmit = (data) => {
     axios
-      .post(`${API_HOST}api/users`, inputs)
+      .post(`${API_HOST}api/users`, data)
       .then(function (response) {
         console.log(response.data);
         navigate("/admin/users");
@@ -52,48 +47,75 @@ export default function ListUser() {
         <Typography component="h1" variant="h5">
           Create New User
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField
-                autoComplete="name"
-                name="name"
-                required
-                fullWidth
-                id="name"
-                label="First Name"
-                autoFocus
-                onChange={handleChange}
-              />
+                <Controller
+                    name={"name"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        <TextField
+                            autoComplete="name"
+                            name="name"
+                            required
+                            fullWidth
+                            id="name"
+                            label="First Name"
+                            autoFocus
+                            error={error}
+                            onChange={onChange}
+                            value={value}
+                        />
+                    )}
+                />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                onChange={handleChange}
-              />
+            <Controller
+                    name={"email"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        <TextField
+                            autoComplete="email"
+                            name="email"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            error={error}
+                            onChange={onChange}
+                            value={value}
+                        />
+                    )}
+                />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="role"
-                label="Role"
-                type="text"
-                id="role"
-                autoComplete="role"
-                onChange={handleChange}
-              />
+            <Controller
+                    name={"role"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        <TextField
+                            autoComplete="role"
+                            name="role"
+                            required
+                            fullWidth
+                            id="role"
+                            label="Role"
+                            error={error}
+                            onChange={onChange}
+                            value={value}
+                        />
+                    )}
+                />
             </Grid>
           </Grid>
           <Button
             type="submit"
             fullWidth
             variant="contained"
+            onClick={handleSubmit(onSubmit)}
             sx={{ mt: 3, mb: 2 }}
           >
             Create New User
