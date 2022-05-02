@@ -26,6 +26,8 @@ import LayersIcon from '@mui/icons-material/Layers';
 import CreateUser from "./CreateUser";
 import EditUser from "./EditUser";
 import ListUser from "./ListUser";
+import ListProduct from './ListProduct';
+import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 
 const drawerWidth = 240;
 
@@ -92,6 +94,12 @@ const mainListItems = (
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Users" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/admin/products">
+      <ListItemIcon>
+        <LocalFloristIcon />
+      </ListItemIcon>
+      <ListItemText primary="Products" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
@@ -186,11 +194,12 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Routes>
-            <Route path="/users" element={<ListUser />} />
-            <Route path="/users/create" element={<CreateUser />} />
-            <Route path="/users/:userId/edit" element={<EditUser />} />
-          </Routes>
+            <Routes>
+              <Route path="/users" element={<ListUser />} />
+              <Route path="/users/create" element={<CreateUser />} />
+              <Route path="/users/:userId/edit" element={<EditUser />} />
+              <Route path="/products" element={<ListProduct />} />
+            </Routes>
           </Container>
         </Box>
       </Box>
