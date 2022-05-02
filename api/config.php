@@ -19,5 +19,10 @@ class DbConnect {
             echo "Database Error: " . $e->getMessage();
         }
     }
+
 }
+define('PRODUCT_IMG_DIR', '/Users/wulingoh/code/react-crud/public/images/');
+
+// width is scale on the fly
+define('PRODUCT_IMG_WIDTH', 500);
 ?>
