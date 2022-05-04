@@ -44,13 +44,13 @@ export default function ListProduct() {
         <React.Fragment>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <Title>List Products</Title>
-        {/* <Button variant="contained" component={Link } to={`/admin/product/create`}>Add New Product</Button> */}
+        <Button variant="contained" component={Link } to={`/admin/products/create`}>Add New Product</Button>
         <Table size="small">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell>Category</TableCell>
               <TableCell>Type</TableCell>
+              <TableCell>Category</TableCell>
               <TableCell>Title</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Price</TableCell>
@@ -62,8 +62,8 @@ export default function ListProduct() {
             {Products.map((product, key) => (
               <TableRow key={key}>
                 <TableCell>{product.product_id}</TableCell>
-                <TableCell>{product.categoryName}</TableCell>
                 <TableCell>{product.type}</TableCell>
+                <TableCell>{product.categoryName}</TableCell>
                 <TableCell>{product.title}</TableCell>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.price}</TableCell>
