@@ -25,7 +25,9 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import CreateUser from "./CreateUser";
 import CreateProduct from "./CreateProduct";
+import CreateCategory from "./CreateCategory";
 import EditUser from "./EditUser";
+import EditCategory from "./EditCategory";
 import ListUser from "./ListUser";
 import ListProduct from "./ListProduct";
 import ListCategory from "./ListCategory";
@@ -214,6 +216,8 @@ function DashboardContent() {
               <Route path="/products" element={<ListProduct />} />
               <Route path="/products/create" element={<CreateProduct />} />
               <Route path="/category" element={<ListCategory />} />
+              <Route path="/category/create" element={<CreateCategory />} />
+              <Route path="/category/:categoryId/edit" element={<EditCategory />} />
             </Routes>
           </Container>
         </Box>
