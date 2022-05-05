@@ -28,7 +28,9 @@ import CreateProduct from "./CreateProduct";
 import EditUser from "./EditUser";
 import ListUser from "./ListUser";
 import ListProduct from "./ListProduct";
+import ListCategory from "./ListCategory";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
+import CategoryIcon from '@mui/icons-material/Category';
 
 const drawerWidth = 240;
 
@@ -102,6 +104,12 @@ const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Products" />
     </ListItemButton>
+    <ListItemButton component={Link} to="/admin/category">
+      <ListItemIcon>
+        <CategoryIcon />
+      </ListItemIcon>
+      <ListItemText primary="Category" />
+    </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
@@ -117,7 +125,13 @@ const mainListItems = (
   </React.Fragment>
 );
 
-const mdTheme = createTheme();
+const mdTheme = createTheme({
+  typography: {
+    h6: {
+      fontFamily: 'Oxygen'
+    }
+  }
+});
 
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
@@ -199,6 +213,7 @@ function DashboardContent() {
               <Route path="/users/:userId/edit" element={<EditUser />} />
               <Route path="/products" element={<ListProduct />} />
               <Route path="/products/create" element={<CreateProduct />} />
+              <Route path="/category" element={<ListCategory />} />
             </Routes>
           </Container>
         </Box>
