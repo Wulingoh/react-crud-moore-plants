@@ -11,14 +11,14 @@
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
         case 'POST' :
-            $lighting = json_decode(file_get_contents('php://input'));
-            $sql = "INSERT INTO lighting_care(name, content) values(:name, :content) ";
+            $careLevel = json_decode(file_get_contents('php://input'));
+            $sql = "INSERT INTO care_level(name, content) values(:name, :content) ";
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(':name', $lighting->name);
-            $stmt->bindParam(':content', $lighting->content);
+            $stmt->bindParam(':name', $careLevel->name);
+            $stmt->bindParam(':content', $careLevel->content);
 
             if($stmt->execute()) {
-                $data = ['status' => 1, 'message' => "Lighting Care successfully created"];
+                $data = ['status' => 1, 'message' => "Care Level successfully created"];
                 
 
             } else {
@@ -28,32 +28,32 @@
             break;
         
         case 'GET':
-            $sql = "SELECT * FROM lighting_care";
+            $sql = "SELECT * FROM care_level";
             $path = explode('/', $_SERVER['REQUEST_URI']);
             if(isset($path[3]) && is_numeric($path[3])) {
-                $sql .= " WHERE lighting_id = :lightingId";
+                $sql .= " WHERE care_level_id = :careLevelId";
                 $stmt = $db->prepare($sql);
-                $stmt->bindParam(':lightingId', $path[3]);
+                $stmt->bindParam(':careLevelId', $path[3]);
                 $stmt->execute();
-                $lighting = $stmt->fetch(PDO::FETCH_ASSOC);
+                $careLevel = $stmt->fetch(PDO::FETCH_ASSOC);
             } else {
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
-                $lighting = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $careLevel = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
-            echo json_encode($lighting);
+            echo json_encode($careLevel);
             break;
         
         case "PUT":
-            $lighting = json_decode( file_get_contents('php://input'));
-            $sql = "UPDATE lighting_care SET lighting_id =:lightingId, name =:name , content =:content WHERE lighting_id =:lightingId";
+            $careLevel = json_decode( file_get_contents('php://input'));
+            $sql = "UPDATE care_level SET care_level_id =:careLevelId, name =:name , content =:content WHERE care_level_id =:careLevelId";
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(':lightingId', $lighting->lighting_id);
-            $stmt->bindParam(':name', $lighting->name);
-            $stmt->bindParam(':content', $lighting->content);
+            $stmt->bindParam(':careLevelId', $careLevel->care_level_id);
+            $stmt->bindParam(':name', $careLevel->name);
+            $stmt->bindParam(':content', $careLevel->content);
 
             if($stmt->execute()) {
-                $response = ['status' => 1, 'message' => 'Lighting Care updated successfully.'];   
+                $response = ['status' => 1, 'message' => 'Care Level updated successfully.'];   
             } else {
                 $response = ['status' => 0, 'message' => 'Failed to update record.'];
             }
@@ -61,12 +61,12 @@
             break;
 
         case "DELETE":
-            $sql = "DELETE FROM lighting_care WHERE lighting_id =:lightingId";
+            $sql = "DELETE FROM care_level WHERE care_level_id =:careLevelId";
             $path = explode('/', $_SERVER['REQUEST_URI']);
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(':lightingId', $path[3]);
+            $stmt->bindParam(':careLevelId', $path[3]);
             if($stmt->execute()) {
-                $response = ['status' => 1, 'message' => 'Lighting Care deleted successfully.'];   
+                $response = ['status' => 1, 'message' => 'Care Level deleted successfully.'];   
              } else {
                 $response = ['status' => 0, 'message' => 'Failed to delete record.'];
              }
