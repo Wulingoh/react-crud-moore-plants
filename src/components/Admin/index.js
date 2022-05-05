@@ -27,13 +27,16 @@ import CreateUser from "./CreateUser";
 import CreateProduct from "./CreateProduct";
 import CreateCategory from "./CreateCategory";
 import CreateLightingCare from "./CreateLightingCare";
+import CreateCareLevel from "./CreateCareLevel";
 import EditUser from "./EditUser";
 import EditCategory from "./EditCategory";
 import EditLightingCare from "./EditLightingCare";
+import EditCareLevel from "./EditCareLevel";
 import ListUser from "./ListUser";
 import ListProduct from "./ListProduct";
 import ListCategory from "./ListCategory";
 import ListLightingCare from "./ListLightingCare";
+import ListCareLevel from "./ListCareLevel";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import CategoryIcon from "@mui/icons-material/Category";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
@@ -121,6 +124,12 @@ const mainListItems = (
         <WbSunnyIcon />
       </ListItemIcon>
       <ListItemText primary="Lighting Care" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/admin/care_level">
+      <ListItemIcon>
+        <WbSunnyIcon />
+      </ListItemIcon>
+      <ListItemText primary="Care Level" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
@@ -236,6 +245,12 @@ function DashboardContent() {
               <Route
                 path="/lighting/:lightingId/edit"
                 element={<EditLightingCare />}
+              />
+              <Route path="/care_level" element={<ListCareLevel />} />
+              <Route path="/care_level/create" element={<CreateCareLevel />} />
+              <Route
+                path="/care_level/:careLevelId/edit"
+                element={<EditCareLevel />}
               />
             </Routes>
           </Container>
