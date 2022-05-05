@@ -405,6 +405,7 @@ export default function ListProduct() {
                     error={error}
                     onChange={onChange}
                     value={value}
+                    multiline
                   />
                 )}
               />

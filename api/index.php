@@ -12,6 +12,9 @@ switch ($path[2]) {
     case 'category' :
         require __DIR__ . '/category.php';
         break;
+    case 'lighting' :
+        require __DIR__ . '/lighting.php';
+        break;
     default:
         http_response_code(404);
         echo 'Not Found';
