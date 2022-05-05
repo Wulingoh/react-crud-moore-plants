@@ -26,13 +26,17 @@ import LayersIcon from "@mui/icons-material/Layers";
 import CreateUser from "./CreateUser";
 import CreateProduct from "./CreateProduct";
 import CreateCategory from "./CreateCategory";
+import CreateLightingCare from "./CreateLightingCare";
 import EditUser from "./EditUser";
 import EditCategory from "./EditCategory";
+import EditLightingCare from "./EditLightingCare";
 import ListUser from "./ListUser";
 import ListProduct from "./ListProduct";
 import ListCategory from "./ListCategory";
+import ListLightingCare from "./ListLightingCare";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
-import CategoryIcon from '@mui/icons-material/Category';
+import CategoryIcon from "@mui/icons-material/Category";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
 
 const drawerWidth = 240;
 
@@ -112,6 +116,12 @@ const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Category" />
     </ListItemButton>
+    <ListItemButton component={Link} to="/admin/lighting">
+      <ListItemIcon>
+        <WbSunnyIcon />
+      </ListItemIcon>
+      <ListItemText primary="Lighting Care" />
+    </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
@@ -130,9 +140,9 @@ const mainListItems = (
 const mdTheme = createTheme({
   typography: {
     h6: {
-      fontFamily: 'Oxygen'
-    }
-  }
+      fontFamily: "Oxygen",
+    },
+  },
 });
 
 function DashboardContent() {
@@ -217,7 +227,16 @@ function DashboardContent() {
               <Route path="/products/create" element={<CreateProduct />} />
               <Route path="/category" element={<ListCategory />} />
               <Route path="/category/create" element={<CreateCategory />} />
-              <Route path="/category/:categoryId/edit" element={<EditCategory />} />
+              <Route
+                path="/category/:categoryId/edit"
+                element={<EditCategory />}
+              />
+              <Route path="/lighting" element={<ListLightingCare />} />
+              <Route path="/lighting/create" element={<CreateLightingCare />} />
+              <Route
+                path="/lighting/:lightingId/edit"
+                element={<EditLightingCare />}
+              />
             </Routes>
           </Container>
         </Box>
