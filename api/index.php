@@ -9,6 +9,9 @@ switch ($path[2]) {
     case 'products' :
         require __DIR__ . '/products.php';
         break;
+    case 'category' :
+        require __DIR__ . '/category.php';
+        break;
     default:
         http_response_code(404);
         echo 'Not Found';
