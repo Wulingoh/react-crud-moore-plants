@@ -28,18 +28,23 @@ import CreateProduct from "./CreateProduct";
 import CreateCategory from "./CreateCategory";
 import CreateLightingCare from "./CreateLightingCare";
 import CreateCareLevel from "./CreateCareLevel";
+import CreateWatering from "./CreateWatering";
 import EditUser from "./EditUser";
 import EditCategory from "./EditCategory";
 import EditLightingCare from "./EditLightingCare";
 import EditCareLevel from "./EditCareLevel";
+import EditWatering from "./EditWatering";
 import ListUser from "./ListUser";
 import ListProduct from "./ListProduct";
 import ListCategory from "./ListCategory";
 import ListLightingCare from "./ListLightingCare";
 import ListCareLevel from "./ListCareLevel";
+import ListWatering from "./ListWatering";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import CategoryIcon from "@mui/icons-material/Category";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import WaterIcon from '@mui/icons-material/Water';
+import SpaIcon from '@mui/icons-material/Spa';
 
 const drawerWidth = 240;
 
@@ -127,9 +132,15 @@ const mainListItems = (
     </ListItemButton>
     <ListItemButton component={Link} to="/admin/care_level">
       <ListItemIcon>
-        <WbSunnyIcon />
+        <SpaIcon />
       </ListItemIcon>
       <ListItemText primary="Care Level" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/admin/watering">
+      <ListItemIcon>
+        <WaterIcon />
+      </ListItemIcon>
+      <ListItemText primary="Watering" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
@@ -251,6 +262,12 @@ function DashboardContent() {
               <Route
                 path="/care_level/:careLevelId/edit"
                 element={<EditCareLevel />}
+              />
+              <Route path="/watering" element={<ListWatering />} />
+              <Route path="/watering/create" element={<CreateWatering />} />
+              <Route
+                path="/watering/:wateringId/edit"
+                element={<EditWatering />}
               />
             </Routes>
           </Container>

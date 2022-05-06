@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Title from './Title';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
-import { Box } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 
 
 export default function ListLightingCare() {
@@ -49,26 +49,33 @@ export default function ListLightingCare() {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell style={{ width: 80 }} >ID</TableCell>
-              <TableCell style={{ width: 120 }}>Name</TableCell>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
               <TableCell >Content</TableCell>
-              <TableCell style={{ width: 200 }}  align="right">Actions</TableCell>
+              <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {LightingCares.map((lighting, key) => (
               <TableRow key={key}>
                 <TableCell>{lighting.lighting_id}</TableCell>
-                <TableCell>{lighting.name}</TableCell>
+                <TableCell>
+                  <Typography noWrap>
+                    {lighting.name}
+                  </Typography>
+                </TableCell>
                 <TableCell 
                   align='left'>{lighting.content}
                 </TableCell>
                 <TableCell align="right">
-                <Box>
-                  <Button variant="contained" component={Link } to={`/admin/lighting/${lighting.lighting_id}/edit`}>Edit</Button>
+                <Grid container spacing={1} direction="row" wrap="nowrap" justifyContent="flex-end">
+                  <Grid item>
+                    <Button variant="contained" component={Link } to={`/admin/lighting/${lighting.lighting_id}/edit`}>Edit</Button>
+                  </Grid>
+                  <Grid item>
                   <Button variant="outlined" onClick={() =>deleteLightingCare(lighting.lighting_id)} color="error">Delete</Button>
-                </Box>
-                
+                  </Grid>
+                </Grid>  
                 </TableCell>
               </TableRow>
             ))}
