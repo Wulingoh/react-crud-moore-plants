@@ -29,17 +29,20 @@ import CreateCategory from "./CreateCategory";
 import CreateLightingCare from "./CreateLightingCare";
 import CreateCareLevel from "./CreateCareLevel";
 import CreateWatering from "./CreateWatering";
+import CreateHumidity from "./CreateHumidity";
 import EditUser from "./EditUser";
 import EditCategory from "./EditCategory";
 import EditLightingCare from "./EditLightingCare";
 import EditCareLevel from "./EditCareLevel";
 import EditWatering from "./EditWatering";
+import EditHumidity from "./EditHumidity";
 import ListUser from "./ListUser";
 import ListProduct from "./ListProduct";
 import ListCategory from "./ListCategory";
 import ListLightingCare from "./ListLightingCare";
 import ListCareLevel from "./ListCareLevel";
 import ListWatering from "./ListWatering";
+import ListHumidity from "./ListHumidity";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import CategoryIcon from "@mui/icons-material/Category";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
@@ -141,6 +144,12 @@ const mainListItems = (
         <WaterIcon />
       </ListItemIcon>
       <ListItemText primary="Watering" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/admin/humidity">
+      <ListItemIcon>
+        <WaterIcon />
+      </ListItemIcon>
+      <ListItemText primary="Humidity" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
@@ -268,6 +277,12 @@ function DashboardContent() {
               <Route
                 path="/watering/:wateringId/edit"
                 element={<EditWatering />}
+              />
+              <Route path="/humidity" element={<ListHumidity />} />
+              <Route path="/humidity/create" element={<CreateHumidity />} />
+              <Route
+                path="/humidity/:humidityId/edit"
+                element={<EditHumidity />}
               />
             </Routes>
           </Container>

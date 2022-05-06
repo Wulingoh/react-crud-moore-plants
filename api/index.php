@@ -21,6 +21,9 @@ switch ($path[2]) {
     case 'watering' :
         require __DIR__ . '/watering.php';
         break;
+    case 'humidity' :
+        require __DIR__ . '/humidity.php';
+        break;
     default:
         http_response_code(404);
         echo 'Not Found';
