@@ -18,6 +18,9 @@ switch ($path[2]) {
     case 'care_level' :
         require __DIR__ . '/care_level.php';
         break;
+    case 'watering' :
+        require __DIR__ . '/watering.php';
+        break;
     default:
         http_response_code(404);
         echo 'Not Found';

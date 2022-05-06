@@ -12,73 +12,74 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import { Box, Grid, Typography } from "@mui/material";
 
-export default function ListCareLevel() {
-  const [CareLevels, setCareLevel] = useState([]);
+export default function ListWatering() {
+  const [Waters, setWater] = useState([]);
   useEffect(() => {
-    getCareLevels();
+    getWaters();
   }, []);
-  function getCareLevels() {
+  function getWaters() {
     axios
-      .get(`${API_HOST}api/care_level`, {
+      .get(`${API_HOST}api/watering`, {
         validateStatus: function (status) {
           return status;
         },
       })
       .then(function (response) {
         console.log(response.data);
-        setCareLevel(response.data);
+        setWater(response.data);
       });
   }
-  const deleteCareLevel = (careLevelId) => {
+  const deleteCareLevel = (wateringId) => {
     axios
-      .delete(`${API_HOST}api/care_level/${careLevelId}/delete`, {
+      .delete(`${API_HOST}api/watering/${wateringId}/delete`, {
         validateStatus: function (status) {
           return status;
         },
       })
       .then(function (response) {
         console.log(response.data);
-        getCareLevels();
+        getWaters();
       });
   };
 
   return (
     <React.Fragment>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <Title>List Care Level</Title>
+        <Title>List Watering</Title>
         <Button
           variant="contained"
           component={Link}
-          to={`/admin/care_level/create`}
+          to={`/admin/watering/create`}
         >
-          Add New Care Level
+          Add New Watering
         </Button>
         <Table size="small">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Content</TableCell>
-              <TableCell align="right">Action </TableCell>
+              <TableCell> Name</TableCell>
+              <TableCell >Content</TableCell>
+              <TableCell align="right">Action
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {CareLevels.map((careLevel, key) => (
+            {Waters.map((watering, key) => (
               <TableRow key={key}>
-                <TableCell>{careLevel.care_level_id}</TableCell>
+                <TableCell>{watering.watering_id}</TableCell>
                 <TableCell>
                     <Typography noWrap>
-                    {careLevel.name}
+                        {watering.name}
                     </Typography>
                 </TableCell>
-                <TableCell align="left">{careLevel.content}</TableCell>
+                <TableCell align="left">{watering.content}</TableCell>
                 <TableCell align="right">
                   <Grid container spacing={1} direction="row" justifyContent="flex-end" wrap="nowrap">
                     <Grid item>
                       <Button
                         variant="contained"
                         component={Link}
-                        to={`/admin/care_level/${careLevel.care_level_id}/edit`}
+                        to={`/admin/watering/${watering.watering_id}/edit`}
                       >
                         Edit
                       </Button>
@@ -86,7 +87,7 @@ export default function ListCareLevel() {
                     <Grid item>
                       <Button
                         variant="outlined"
-                        onClick={() => deleteCareLevel(careLevel.care_level_id)}
+                        onClick={() => deleteCareLevel(watering.watering_id)}
                         color="error"
                       >
                         Delete
