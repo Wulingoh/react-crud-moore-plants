@@ -11,22 +11,20 @@
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
         case 'POST' :
-            if ($_FILES['img']['tmp_name'] != "") {
-                $imgName = $_FILES['img']['name'];
-                $ext = strrchr($imgName, ".");
-                $newName = md5(rand() * time()) . $ext;
-                $imgPath = PRODUCT_IMG_DIR . $newName;
-                $tmpName = $_FILES['img']['tmp_name'];
-                createThumbnail($tmpName, $imgPath, PRODUCT_IMG_WIDTH);
-              } else {
-                $newName = "";
-              }
             $product = json_decode(file_get_contents('php://input'));
-            $sql = "INSERT INTO products(category_id, type, title, name, price, quantity, color, height, latin_name, lighting_care_id, care_level_id, watering_id, humidity_id, room_type, size, pot_material, content, created_at) values(:categoryId, :type, :title, :name, :price, :quantity, :color, :height, :latinName, :lightingCareId, :careLevelId, :wateringId, :humidityId, :roomType, :size, :potMaterial, :content) ";
+            $fileChunks = explode(";base64,", $product->img);
+            $fileType = explode("image/", $fileChunks[0]);
+            $imageType = $fileType[1];
+            $imageData = base64_decode($fileChunks[1]);
+            $imagePath = uniqid() . '.' . $imageType;
+            file_put_contents(PRODUCT_IMG_DIR . $imagePath, $imageData);
+
+            $sql = "INSERT INTO products(category_id, type, img, title, name, price, quantity, color, height, latin_name , lighting_care_id, care_level_id, watering_id, humidity_id, room_type, size, pot_material, content, created_at, updated_at) values(:categoryId, :type, :img, :title, :name, :price, :quantity, :color, :height, :latinName , :lightingCareId, :careLevelId, :wateringId, :humidityId, :roomType, :size, :potMaterial, :content, NOW(), NOW())";
+
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':categoryId', $product->category_id);
             $stmt->bindParam(':type', $product->type);
-            $stmt->bindParam(':newName', $product->img);
+            $stmt->bindParam(':img', $imagePath);
             $stmt->bindParam(':title', $product->title);
             $stmt->bindParam(':name', $product->name);
             $stmt->bindParam(':price', $product->price);
@@ -36,6 +34,7 @@
             $stmt->bindParam(':latinName', $product->latin_name);
             $stmt->bindParam(':lightingCareId', $product->lighting_care_id);
             $stmt->bindParam(':careLevelId', $product->care_level_id);
+            $stmt->bindParam(':wateringId', $product->watering_id);
             $stmt->bindParam(':humidityId', $product->humidity_id);
             $stmt->bindParam(':roomType', $product->room_type);
             $stmt->bindParam(':size', $product->size);
@@ -52,7 +51,7 @@
             break;
         
         case 'GET':
-            $sql = "SELECT products.product_id, category.name as categoryName, products.type, products.img, products.title, products.name, products.slug, products.price, products.quantity, products.color, products.height, products.latin_name, lighting_care.name as lightingName, care_level.name as careLevelName, watering.name as wateringName, humidity.name as humidityName, products.room_type, products.size, products.pot_material, products.content 
+            $sql = "SELECT products.product_id, category.name as categoryName, products.type, products.img, products.title, products.name, products.price, products.quantity, products.color, products.height, products.latin_name, lighting_care.name as lightingName, care_level.name as careLevelName, watering.name as wateringName, humidity.name as humidityName, products.room_type, products.size, products.pot_material, products.content 
             FROM products
             INNER JOIN category on products.category_id = category.category_id 
             INNER JOIN lighting_care on products.lighting_care_id = lighting_care.lighting_id 
@@ -75,25 +74,23 @@
             break;
         
         case "PUT":
-            if ($_FILES['img']['tmp_name'] != "") {
-                $imgName = $_FILES['img']['name'];
-                $ext = strrchr($imgName, ".");
-                $newName = md5(rand() * time()) . $ext;
-                $imgPath = PRODUCT_IMG_DIR . $newName;
-                $tmpName = $_FILES['img']['tmp_name'];
-                createThumbnail($tmpName, $imgPath, PRODUCT_IMG_WIDTH);
-              } else {
-                $newName = "";
-              }
             $product = json_decode( file_get_contents('php://input'));
-            $sql = "UPDATE products SET category_id =:categoryId, type =:type, name =:name, img =:newName, title =:title, price =:price, quantity =:quantity, color =:color, height =:height, latin_name =:latinName, lighting_care_id =:lightingCareId, care_level_id =:careLevelId, watering_id =:wateringId, humidity_id =:humidityId, room_type =:roomType, size =:size, pot_material =:potMaterial, content =:content WHERE product_id =:productId";
+            $fileChunks = explode(";base64,", $product->img);
+            $fileType = explode("image/", $fileChunks[0]);
+            $imageType = $fileType[1];
+            $imageData = base64_decode($fileChunks[1]);
+            $imagePath = uniqid() . '.' . $imageType;
+            file_put_contents(PRODUCT_IMG_DIR . $imagePath, $imageData);
+
+            $sql = "UPDATE products SET category_id =:categoryId, type =:type, name =:name, slug =:slug, img =:img, title =:title, price =:price, quantity =:quantity, color =:color, height =:height, latin_name =:latinName, lighting_care_id =:lightingCareId, care_level_id =:careLevelId, watering_id =:wateringId, humidity_id =:humidityId, room_type =:roomType, size =:size, pot_material =:potMaterial, content =:content, created_at =:NOW(), updated_at=:NOW() WHERE product_id =:productId";
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':productId', $product->product_id);
             $stmt->bindParam(':categoryId', $product->category_id);
-            $stmt->bindParam(':type', $product->category_id);
-            $stmt->bindParam(':newName', $product->img);
+            $stmt->bindParam(':type', $product->type);
+            $stmt->bindParam(':img', $imagePath);
             $stmt->bindParam(':title', $product->title);
             $stmt->bindParam(':name', $product->name);
+            $stmt->bindParam(':slug', $product->slug);
             $stmt->bindParam(':price', $product->price);
             $stmt->bindParam(':quantity', $product->quantity);
             $stmt->bindParam(':color', $product->color);
@@ -101,6 +98,7 @@
             $stmt->bindParam(':latinName', $product->latin_name);
             $stmt->bindParam(':lightingCareId', $product->lighting_care_id);
             $stmt->bindParam(':careLevelId', $product->care_level_id);
+            $stmt->bindParam(':wateringId', $product->watering_id);
             $stmt->bindParam(':humidityId', $product->humidity_id);
             $stmt->bindParam(':roomType', $product->room_type);
             $stmt->bindParam(':size', $product->size);
