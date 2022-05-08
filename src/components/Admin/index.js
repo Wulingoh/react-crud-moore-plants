@@ -31,6 +31,7 @@ import CreateCareLevel from "./CreateCareLevel";
 import CreateWatering from "./CreateWatering";
 import CreateHumidity from "./CreateHumidity";
 import EditUser from "./EditUser";
+import EditProduct from "./EditProduct";
 import EditCategory from "./EditCategory";
 import EditLightingCare from "./EditLightingCare";
 import EditCareLevel from "./EditCareLevel";
@@ -254,6 +255,7 @@ function DashboardContent() {
               <Route path="/users/:userId/edit" element={<EditUser />} />
               <Route path="/products" element={<ListProduct />} />
               <Route path="/products/create" element={<CreateProduct />} />
+              <Route path="/products/:productId/edit" element={<EditProduct />} />
               <Route path="/category" element={<ListCategory />} />
               <Route path="/category/create" element={<CreateCategory />} />
               <Route

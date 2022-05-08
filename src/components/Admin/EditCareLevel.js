@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { API_HOST } from "../../config";
 import TextField from "@mui/material/TextField";
@@ -11,29 +12,25 @@ import Paper from "@mui/material/Paper";
 
 export default function ListCareLevel() {
   const navigate = useNavigate();
-  const [inputs, setInputs] = useState([]);
   const { careLevelId } = useParams();
+  const { handleSubmit, control, reset } = useForm();
   useEffect(() => {
-    getCareLevel();
-  }, []);
-  function getCareLevel() {
-    axios.get(`${API_HOST}api/care_level/${careLevelId}`).then(function (response) {
-      console.log(response.data);
-      setInputs(response.data);
-    });
-  }
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
     axios
-      .put(`${API_HOST}api/care_level/${careLevelId}`, inputs)
+      .get(`${API_HOST}api/care_level/${careLevelId}`)
       .then(function (response) {
-        console.log(response.data);
-        navigate("/admin/care_level");
+        reset(response.data);
+      });
+  }, []);
+
+  const onSubmit = (data) => {
+    axios
+      .put(`${API_HOST}api/care_level/${careLevelId}`, data)
+      .then(function (response) {
+        if (response.data.status === 1) {
+          navigate("/admin/care_level");
+        } else {
+          alert("Failed to update");
+        }
       });
   };
   return (
@@ -51,41 +48,64 @@ export default function ListCareLevel() {
       <Typography component="h1" variant="h5">
         Edit Care Level
       </Typography>
-      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              autoComplete="name"
-              name="name"
-              required
-              fullWidth
-              id="name"
-              label="Name"
-              InputLabelProps={{ shrink: true }} 
-              value={inputs.name}
-              autoFocus
-              onChange={handleChange}
-            />
+      <Box component="form" noValidate sx={{ mt: 3 }}>
+      <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Controller
+                name={"name"}
+                control={control}
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <TextField
+                    autoComplete="name"
+                    name="name"
+                    required
+                    fullWidth
+                    id="name"
+                    label="Name"
+                    autoFocus
+                    error={error}
+                    onChange={onChange}
+                    value={value}
+                    InputLabelProps={{ shrink: true }}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Controller
+                name={"content"}
+                control={control}
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <TextField
+                    autoComplete="content"
+                    name="content"
+                    required
+                    fullWidth
+                    id="content"
+                    label="Content"
+                    error={error}
+                    onChange={onChange}
+                    value={value}
+                    multiline
+                    InputLabelProps={{ shrink: true }}
+                  />
+                )}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              id="content"
-              label="Content"
-              InputLabelProps={{ shrink: true }}
-              name="content"
-              value={inputs.content} 
-              autoComplete="content"
-              onChange={handleChange}
-              multiline
-            />
-          </Grid>
-        </Grid>
         <Button
           type="submit"
           fullWidth
           variant="contained"
+          onClick={handleSubmit(onSubmit)}
           sx={{ mt: 3, mb: 2 }}
         >
           Update Care Level
