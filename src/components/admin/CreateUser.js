@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 
 export default function ListUser() {
   const navigate = useNavigate();
-  const {handleSubmit, control } = useForm();
+  const { handleSubmit, control } = useForm();
   const onSubmit = (data) => {
     axios
       .post(`${API_HOST}api/users`, data)
@@ -40,9 +40,8 @@ export default function ListUser() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          marginBottom: 10
+          marginBottom: 10,
         }}
-        
       >
         <Typography component="h1" variant="h5">
           Create New User
@@ -50,65 +49,74 @@ export default function ListUser() {
         <Box component="form" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-                <Controller
-                    name={"name"}
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { onChange, value }, fieldState: { error } }) => (
-                        <TextField
-                            autoComplete="name"
-                            name="name"
-                            required
-                            fullWidth
-                            id="name"
-                            label="First Name"
-                            autoFocus
-                            error={error}
-                            onChange={onChange}
-                            value={value}
-                        />
-                    )}
-                />
+              <Controller
+                name={"name"}
+                control={control}
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <TextField
+                    autoComplete="name"
+                    name="name"
+                    required
+                    fullWidth
+                    id="name"
+                    label="First Name"
+                    autoFocus
+                    error={error}
+                    onChange={onChange}
+                    value={value}
+                  />
+                )}
+              />
             </Grid>
             <Grid item xs={12}>
-            <Controller
-                    name={"email"}
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { onChange, value }, fieldState: { error } }) => (
-                        <TextField
-                            autoComplete="email"
-                            name="email"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            error={error}
-                            onChange={onChange}
-                            value={value}
-                        />
-                    )}
-                />
+              <Controller
+                name={"email"}
+                control={control}
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <TextField
+                    autoComplete="email"
+                    name="email"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    error={error}
+                    onChange={onChange}
+                    value={value}
+                  />
+                )}
+              />
             </Grid>
             <Grid item xs={12}>
-            <Controller
-                    name={"role"}
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { onChange, value }, fieldState: { error } }) => (
-                        <TextField
-                            autoComplete="role"
-                            name="role"
-                            required
-                            fullWidth
-                            id="role"
-                            label="Role"
-                            error={error}
-                            onChange={onChange}
-                            value={value}
-                        />
-                    )}
-                />
+              <Controller
+                name={"role"}
+                control={control}
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <TextField
+                    autoComplete="role"
+                    name="role"
+                    required
+                    fullWidth
+                    id="role"
+                    label="Role"
+                    error={error}
+                    onChange={onChange}
+                    value={value}
+                  />
+                )}
+              />
             </Grid>
           </Grid>
           <Button
@@ -124,7 +132,8 @@ export default function ListUser() {
             type="submit"
             fullWidth
             variant="contained"
-            component={Link } to={`/admin/users`}
+            component={Link}
+            to={`/admin/users`}
             sx={{ mt: 1, mb: 2 }}
           >
             Cancel

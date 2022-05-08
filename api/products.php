@@ -51,7 +51,7 @@
             break;
         
         case 'GET':
-            $sql = "SELECT products.product_id, category.name as categoryName, products.type, products.img, products.title, products.name, products.price, products.quantity, products.color, products.height, products.latin_name, lighting_care.name as lightingName, care_level.name as careLevelName, watering.name as wateringName, humidity.name as humidityName, products.room_type, products.size, products.pot_material, products.content 
+            $sql = "SELECT products.product_id, products.category_id, category.name as categoryName, products.type, products.img, products.title, products.name, products.price, products.quantity, products.color, products.height, products.latin_name, products.lighting_care_id,lighting_care.name as lightingName, products.care_level_id, care_level.name as careLevelName, products.watering_id,watering.name as wateringName, products.humidity_id,humidity.name as humidityName, products.room_type, products.size, products.pot_material, products.content 
             FROM products
             INNER JOIN category on products.category_id = category.category_id 
             INNER JOIN lighting_care on products.lighting_care_id = lighting_care.lighting_id 
@@ -82,7 +82,7 @@
             $imagePath = uniqid() . '.' . $imageType;
             file_put_contents(PRODUCT_IMG_DIR . $imagePath, $imageData);
 
-            $sql = "UPDATE products SET category_id =:categoryId, type =:type, name =:name, slug =:slug, img =:img, title =:title, price =:price, quantity =:quantity, color =:color, height =:height, latin_name =:latinName, lighting_care_id =:lightingCareId, care_level_id =:careLevelId, watering_id =:wateringId, humidity_id =:humidityId, room_type =:roomType, size =:size, pot_material =:potMaterial, content =:content, created_at =:NOW(), updated_at=:NOW() WHERE product_id =:productId";
+            $sql = "UPDATE products SET category_id =:categoryId, type =:type, name =:name,img =:img, title =:title, price =:price, quantity =:quantity, color =:color, height =:height, latin_name =:latinName, lighting_care_id =:lightingCareId, care_level_id =:careLevelId, watering_id =:wateringId, humidity_id =:humidityId, room_type =:roomType, size =:size, pot_material =:potMaterial, content =:content, created_at =:NOW(), updated_at=:NOW() WHERE product_id =:productId";
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':productId', $product->product_id);
             $stmt->bindParam(':categoryId', $product->category_id);
@@ -90,7 +90,6 @@
             $stmt->bindParam(':img', $imagePath);
             $stmt->bindParam(':title', $product->title);
             $stmt->bindParam(':name', $product->name);
-            $stmt->bindParam(':slug', $product->slug);
             $stmt->bindParam(':price', $product->price);
             $stmt->bindParam(':quantity', $product->quantity);
             $stmt->bindParam(':color', $product->color);

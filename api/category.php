@@ -49,7 +49,7 @@
             $sql = "UPDATE category SET category_id =:categoryId, type =:type, name =:name WHERE category_id =:categoryId";
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':categoryId', $category->category_id);
-            $stmt->bindParam(':type', $category->category_id);
+            $stmt->bindParam(':type', $category->type);
             $stmt->bindParam(':name', $category->name);
 
             if($stmt->execute()) {
