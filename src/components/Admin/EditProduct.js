@@ -38,14 +38,14 @@ export default function ListProduct() {
   const careLevelsList = useCareLevelList();
   const wateringList = useWateringList();
   const humidityList = useHumidityList();
-  const { handleSubmit, control, reset, setValue } = useForm();
+  const { handleSubmit, control, reset, setValue, getValues } = useForm();
   const { productId } = useParams();
   const onFileChange = (e) => {
     const files = e.target.files
     const fileReader = new FileReader();
     fileReader.readAsDataURL(files[0]);
     fileReader.onload = (event) => {
-      setValue('img', event.target.result);
+      setValue('updated_img', event.target.result);
     }
   }
 
@@ -483,10 +483,8 @@ export default function ListProduct() {
             </Grid>
             <Grid item xs={12}>
               <Controller
-                name={"img"}
+                name={"updated_img"}
                 control={control}
-                defaultValue
-                rules={{ required: true }}
                 render={({ field: { value }, fieldState: { error } }) => (
                   <FormControl fullWidth>
                     <label htmlFor="contained-button-file">
@@ -501,7 +499,7 @@ export default function ListProduct() {
                         Upload Image
                       </Button>
                     </label>
-                    {value && <img src={value} width="500" alt="" />}
+                     <img src={value ? value : `${API_HOST}public/images/${getValues().img}`} width="500" alt="" />
                   </FormControl>
                 )}
               />
