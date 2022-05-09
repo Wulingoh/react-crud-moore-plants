@@ -74,15 +74,18 @@
             break;
         
         case "PUT":
-            $product = json_decode( file_get_contents('php://input'));
-            $fileChunks = explode(";base64,", $product->img);
-            $fileType = explode("image/", $fileChunks[0]);
-            $imageType = $fileType[1];
-            $imageData = base64_decode($fileChunks[1]);
-            $imagePath = uniqid() . '.' . $imageType;
-            file_put_contents(PRODUCT_IMG_DIR . $imagePath, $imageData);
+            $product = json_decode(file_get_contents('php://input'));
+            $imagePath = $product->img;
+            if (isset($product->updated_img)) {
+                $fileChunks = explode(";base64,", $product->updated_img);
+                $fileType = explode("image/", $fileChunks[0]);
+                $imageType = $fileType[1];
+                $imageData = base64_decode($fileChunks[1]);
+                $imagePath = uniqid() . '.' . $imageType;
+                file_put_contents(PRODUCT_IMG_DIR . $imagePath, $imageData);
+            }
 
-            $sql = "UPDATE products SET category_id =:categoryId, type =:type, name =:name,img =:img, title =:title, price =:price, quantity =:quantity, color =:color, height =:height, latin_name =:latinName, lighting_care_id =:lightingCareId, care_level_id =:careLevelId, watering_id =:wateringId, humidity_id =:humidityId, room_type =:roomType, size =:size, pot_material =:potMaterial, content =:content, created_at =:NOW(), updated_at=:NOW() WHERE product_id =:productId";
+            $sql = "UPDATE products SET category_id =:categoryId, type =:type, name =:name,img =:img, title =:title, price =:price, quantity =:quantity, color =:color, height =:height, latin_name =:latinName, lighting_care_id =:lightingCareId, care_level_id =:careLevelId, watering_id =:wateringId, humidity_id =:humidityId, room_type =:roomType, size =:size, pot_material =:potMaterial, content =:content, updated_at=NOW() WHERE product_id =:productId";
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':productId', $product->product_id);
             $stmt->bindParam(':categoryId', $product->category_id);
