@@ -3,7 +3,8 @@
 $path = explode('/', $_SERVER['REQUEST_URI']);
 
 if ($path[1] == 'api') {
-    switch ($path[2]) {
+    $resource = explode('?', $path[2])[0];
+    switch ($resource) {
         case 'users' :
             require __DIR__ . '/users.php';
             break;
@@ -24,6 +25,9 @@ if ($path[1] == 'api') {
             break;
         case 'humidity' :
             require __DIR__ . '/humidity.php';
+            break;
+        case 'gallery_img' :
+            require __DIR__ . '/gallery_img.php';
             break;
         default:
             http_response_code(404);
