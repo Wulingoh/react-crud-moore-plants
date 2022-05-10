@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Title from './Title';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import { Grid } from "@mui/material";
 
 
 export default function ListCategory() {
@@ -61,8 +62,32 @@ export default function ListCategory() {
                 <TableCell>{category.type}</TableCell>
                 <TableCell>{category.name}</TableCell>
                 <TableCell align="right">
-                <Button variant="contained" component={Link } to={`/admin/category/${category.category_id}/edit`}>Edit</Button>
-                <button onClick={() =>deleteCategory(category.category_id)}>Delete</button>
+                <Grid
+                    container
+                    spacing={1}
+                    direction="row"
+                    wrap="nowrap"
+                    justifyContent="flex-end"
+                  >
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        component={Link}
+                        to={`/admin/category/${category.category_id}/edit`}
+                      >
+                        Edit
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        variant="outlined"
+                        onClick={() => deleteCategory(category.category_id)}
+                        color="error"
+                      >
+                        Delete
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </TableCell>
               </TableRow>
             ))}
