@@ -37,7 +37,7 @@
             break;
         
         case 'GET':
-            $sql = "SELECT * FROM gallery_img ";
+            $sql = "SELECT gallery_img.*, products.name as product_name FROM gallery_img INNER JOIN products ON gallery_img.product_id = products.product_id";
             $path = explode('/', $_SERVER['REQUEST_URI']);
             if(isset($path[3]) && is_numeric($path[3])) {
                 $sql .= " WHERE gallery_img_id = :galleryImgId";
@@ -45,6 +45,12 @@
                 $stmt->bindParam(':galleryImgId', $path[3]);
                 $stmt->execute();
                 $products = $stmt->fetch(PDO::FETCH_ASSOC);
+            } elseif ($_GET['product_id']) {
+                $sql .= " WHERE gallery_img.product_id = :productId";
+                $stmt = $db->prepare($sql);
+                $stmt->bindParam(':productId', $_GET['product_id']);
+                $stmt->execute();
+                $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             } else {
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
