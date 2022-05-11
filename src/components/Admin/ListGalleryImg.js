@@ -2,17 +2,22 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { API_HOST } from "../../config";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
+
 import Title from "./Title";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 const Input = styled("input")({
-    display: "none",
-  });
+  display: "none",
+});
 
 export default function ListGalleryImg() {
   const { productId } = useParams();
@@ -33,18 +38,21 @@ export default function ListGalleryImg() {
       });
   }
   const onFileChange = (e) => {
-    const files = e.target.files
+    const files = e.target.files;
     const fileReader = new FileReader();
     fileReader.readAsDataURL(files[0]);
     fileReader.onload = (event) => {
       axios
-        .post(`${API_HOST}api/gallery_img`, {product_id: productId, img: event.target.result})
+        .post(`${API_HOST}api/gallery_img`, {
+          product_id: productId,
+          img: event.target.result,
+        })
         .then(function (response) {
           console.log(response.data);
           getGalleryImages();
-        })
-    }
-  }
+        });
+    };
+  };
   const deleteGalleryImg = (galleryImgId) => {
     axios
       .delete(`${API_HOST}api/gallery_img/${galleryImgId}/delete`, {
@@ -67,26 +75,44 @@ export default function ListGalleryImg() {
           type="file"
           onChange={onFileChange}
         />
-        <Button variant="outlined" component="span" fullWidth>
+        <Button variant="outlined" component="span" size="medium">
           Upload Image
         </Button>
       </label>
-
-      <ImageList sx={{ width: 500, height: 450 }}>
-        {galleryImages.map((item) => (
-          <ImageListItem key={item.img}>
-            <img
-              src={`${API_HOST}public/images/${item.img}`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <ImageListItemBar
-              title={item.title}
-              position="below"
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
+      <Box m={3}>
+        <Grid container item spacing={3}>
+          {galleryImages.map((item) => (
+            <Grid item>
+              <Card>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={`${API_HOST}public/images/${item.img}`}
+                  alt={item.title}
+                  loading="lazy"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {item.product_name}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={() =>
+                      deleteGalleryImg(item.gallery_img_id)
+                    }
+                    color="error"
+                  >
+                    Delete
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Paper>
   );
 }
