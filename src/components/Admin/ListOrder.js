@@ -57,7 +57,8 @@ export default function ListOrder() {
               <TableCell>Email</TableCell>
               <TableCell>Status</TableCell>
               <TableCell>Total</TableCell>
-              <TableCell>Created At</TableCell>
+              <TableCell>Created</TableCell>
+              <TableCell>Updated</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -69,7 +70,8 @@ export default function ListOrder() {
                 <TableCell>{order.email}</TableCell>
                 <TableCell>{order.status}</TableCell>
                 <TableCell>{order.total}</TableCell>
-                <TableCell>{format(new Date( order.created_at), 'dd-MM-yyyy' )}</TableCell>
+                <TableCell>{format(new Date( order.created_at), 'dd MMM, yyyy' )}</TableCell>
+                <TableCell>{format(new Date( order.updated_at), 'dd MMM, yyyy' )}</TableCell>
                 <TableCell align="right">
                   <Grid
                     container
