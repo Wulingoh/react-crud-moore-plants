@@ -5,6 +5,9 @@ $path = explode('/', $_SERVER['REQUEST_URI']);
 if ($path[1] == 'api') {
     $resource = explode('?', $path[2])[0];
     switch ($resource) {
+        case 'orders' :
+            require __DIR__ . '/orders.php';
+            break;
         case 'users' :
             require __DIR__ . '/users.php';
             break;
