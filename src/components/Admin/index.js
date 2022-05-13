@@ -30,6 +30,7 @@ import CreateLightingCare from "./CreateLightingCare";
 import CreateCareLevel from "./CreateCareLevel";
 import CreateWatering from "./CreateWatering";
 import CreateHumidity from "./CreateHumidity";
+import EditOrder from "./EditOrder";
 import EditUser from "./EditUser";
 import EditProduct from "./EditProduct";
 import EditCategory from "./EditCategory";
@@ -37,6 +38,7 @@ import EditLightingCare from "./EditLightingCare";
 import EditCareLevel from "./EditCareLevel";
 import EditWatering from "./EditWatering";
 import EditHumidity from "./EditHumidity";
+import ListOrder from "./ListOrder";
 import ListUser from "./ListUser";
 import ListProduct from "./ListProduct";
 import ListGalleryImg from "./ListGalleryImg";
@@ -105,7 +107,7 @@ const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/admin/orders">
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
@@ -251,6 +253,8 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Routes>
+              <Route path="/orders" element={<ListOrder />} />
+              <Route path="/orders/:orderId/edit" element={<EditOrder />} />
               <Route path="/users" element={<ListUser />} />
               <Route path="/users/create" element={<CreateUser />} />
               <Route path="/users/:userId/edit" element={<EditUser />} />
