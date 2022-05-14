@@ -1,50 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { API_HOST } from "../../config";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Title from './Title';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Title from "./Title";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
 import { Grid } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 
 export default function ListUser() {
-    const [Users, setUsers] = useState([]);
-    useEffect(() => {
+  const [Users, setUsers] = useState([]);
+  useEffect(() => {
+    getUsers();
+  }, []);
+  function getUsers() {
+    axios
+      .get(`${API_HOST}api/users`, {
+        validateStatus: function (status) {
+          return status;
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setUsers(response.data);
+      });
+  }
+  const deleteUser = (userId) => {
+    axios
+      .delete(`${API_HOST}api/users/${userId}/delete`, {
+        validateStatus: function (status) {
+          return status;
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
         getUsers();
-    }, []);
-    function getUsers() {
-        axios.get(`${API_HOST}api/users`, {
-            validateStatus:function (status) {
-                return status;
-            }
-        })
-            .then(function(response) {
-                console.log(response.data);
-                setUsers(response.data);  
-            });
-    }
-    const deleteUser = (userId) => {
-        axios.delete(`${API_HOST}api/users/${userId}/delete`, {
-            validateStatus:function (status) {
-                return status;
-            }
-        })
-        .then(function(response) {
-            console.log(response.data);
-            getUsers();
-        })
-    }
+      });
+  };
 
-    return (
-        <React.Fragment>
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+  return (
+    <React.Fragment>
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <Title>List Users</Title>
-        <Button variant="contained" component={Link } to={`/admin/users/create`}>Add New User</Button>
+        <Button variant="contained" component={Link} to={`/admin/users/create`}>
+          Add New User
+        </Button>
         <Table size="small">
           <TableHead>
             <TableRow>
@@ -63,7 +69,7 @@ export default function ListUser() {
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.role}</TableCell>
                 <TableCell align="right">
-                <Grid
+                  <Grid
                     container
                     spacing={1}
                     direction="row"
@@ -80,13 +86,14 @@ export default function ListUser() {
                       </Button>
                     </Grid>
                     <Grid item>
-                      <Button
+                      <IconButton
                         variant="outlined"
+                        size="small"
                         onClick={() => deleteUser(user.user_id)}
                         color="error"
                       >
-                        Delete
-                      </Button>
+                        <DeleteIcon />
+                      </IconButton>
                     </Grid>
                   </Grid>
                 </TableCell>
@@ -94,9 +101,7 @@ export default function ListUser() {
             ))}
           </TableBody>
         </Table>
-        </Paper>
-        
-      </React.Fragment>
-
-    );
+      </Paper>
+    </React.Fragment>
+  );
 }

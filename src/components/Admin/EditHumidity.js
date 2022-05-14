@@ -3,6 +3,7 @@ import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { API_HOST } from "../../config";
+import { HumidityForm } from "./CreateHumidity";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -28,7 +29,7 @@ export default function ListHumidity() {
         if (response.data.status === 1) {
           navigate("/admin/humidity");
         } else {
-          alert('Failed to update');
+          alert("Failed to update");
         }
       });
   };
@@ -47,58 +48,7 @@ export default function ListHumidity() {
           Edit Humidity
         </Typography>
         <Box component="form" noValidate sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Controller
-                name={"name"}
-                control={control}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="name"
-                    name="name"
-                    required
-                    fullWidth
-                    id="name"
-                    label="Name"
-                    autoFocus
-                    error={error}
-                    onChange={onChange}
-                    value={value}
-                    InputLabelProps={{ shrink: true }} 
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Controller
-                name={"content"}
-                control={control}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="content"
-                    name="content"
-                    required
-                    fullWidth
-                    id="content"
-                    label="Content"
-                    error={error}
-                    onChange={onChange}
-                    value={value}
-                    multiline
-                    InputLabelProps={{ shrink: true }} 
-                  />
-                )}
-              />
-            </Grid>
-          </Grid>
+          <HumidityForm control={control} />
           <Button
             type="submit"
             fullWidth

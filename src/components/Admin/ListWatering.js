@@ -11,6 +11,8 @@ import Title from "./Title";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import { Box, Grid, Typography } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 
 export default function ListWatering() {
   const [Waters, setWater] = useState([]);
@@ -58,9 +60,8 @@ export default function ListWatering() {
             <TableRow>
               <TableCell>ID</TableCell>
               <TableCell> Name</TableCell>
-              <TableCell >Content</TableCell>
-              <TableCell align="right">Action
-              </TableCell>
+              <TableCell>Content</TableCell>
+              <TableCell align="right">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -68,13 +69,17 @@ export default function ListWatering() {
               <TableRow key={key}>
                 <TableCell>{watering.watering_id}</TableCell>
                 <TableCell>
-                    <Typography noWrap>
-                        {watering.name}
-                    </Typography>
+                  <Typography noWrap>{watering.name}</Typography>
                 </TableCell>
                 <TableCell align="left">{watering.content}</TableCell>
                 <TableCell align="right">
-                  <Grid container spacing={1} direction="row" justifyContent="flex-end" wrap="nowrap">
+                  <Grid
+                    container
+                    spacing={1}
+                    direction="row"
+                    justifyContent="flex-end"
+                    wrap="nowrap"
+                  >
                     <Grid item>
                       <Button
                         variant="contained"
@@ -85,13 +90,14 @@ export default function ListWatering() {
                       </Button>
                     </Grid>
                     <Grid item>
-                      <Button
+                      <IconButton
                         variant="outlined"
+                        size="small"
                         onClick={() => deleteCareLevel(watering.watering_id)}
                         color="error"
                       >
-                        Delete
-                      </Button>
+                        <DeleteIcon />
+                      </IconButton>
                     </Grid>
                   </Grid>
                 </TableCell>

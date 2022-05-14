@@ -47,55 +47,7 @@ export default function ListCategory() {
           Create New Category
         </Typography>
         <Box component="form" noValidate sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Controller
-                name={"type"}
-                control={control}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="type"
-                    name="type"
-                    required
-                    fullWidth
-                    id="type"
-                    label="Type"
-                    autoFocus
-                    error={error}
-                    onChange={onChange}
-                    value={value}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Controller
-                name={"name"}
-                control={control}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="name"
-                    name="name"
-                    required
-                    fullWidth
-                    id="name"
-                    label="Name"
-                    error={error}
-                    onChange={onChange}
-                    value={value}
-                  />
-                )}
-              />
-            </Grid>
-          </Grid>
+          <CategoryForm control={control} />
           <Button
             type="submit"
             fullWidth
@@ -120,3 +72,59 @@ export default function ListCategory() {
     </Paper>
   );
 }
+
+export const CategoryForm = ({control}) => {
+  return (
+      <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Controller
+                name={"type"}
+                control={control}
+                defaultValue=""
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <TextField
+                    autoComplete="type"
+                    name="type"
+                    required
+                    fullWidth
+                    id="type"
+                    label="Type"
+                    autoFocus
+                    error={error}
+                    onChange={onChange}
+                    value={value}
+                  />
+                )}
+              />
+            </Grid>
+        <Grid item xs={12}>
+              <Controller
+                name={"name"}
+                control={control}
+                defaultValue=""
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <TextField
+                    autoComplete="name"
+                    name="name"
+                    required
+                    fullWidth
+                    id="name"
+                    label="Name"
+                    error={error}
+                    onChange={onChange}
+                    value={value}
+                  />
+                )}
+              />
+            </Grid>
+      </Grid>
+  );
+};
