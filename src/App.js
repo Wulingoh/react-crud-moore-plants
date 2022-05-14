@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Home from "./components/Home";
 import Admin from "./components/Admin";
 import '@fontsource/oxygen/300.css';
 import '@fontsource/oxygen/400.css';
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/admin/*" element={<Admin />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </div>

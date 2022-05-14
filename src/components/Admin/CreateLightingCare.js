@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import TextareaAutosize from '@mui/material/TextareaAutosize';
+import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 export default function ListLightingCare() {
   const navigate = useNavigate();
@@ -48,56 +48,7 @@ export default function ListLightingCare() {
           Create New Lighting Care
         </Typography>
         <Box component="form" noValidate sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Controller
-                name={"name"}
-                control={control}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="name"
-                    name="name"
-                    required
-                    fullWidth
-                    id="name"
-                    label="Name"
-                    autoFocus
-                    error={error}
-                    onChange={onChange}
-                    value={value}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Controller
-                name={"content"}
-                control={control}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="content"
-                    name="content"
-                    required
-                    fullWidth
-                    id="content"
-                    label="Content"
-                    error={error}
-                    onChange={onChange}
-                    value={value}
-                    multiline
-                  />
-                )}
-              />
-            </Grid>
-          </Grid>
+          <LightingCareForm control={control} />
           <Button
             type="submit"
             fullWidth
@@ -122,3 +73,54 @@ export default function ListLightingCare() {
     </Paper>
   );
 }
+
+export const LightingCareForm = ({ control }) => {
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Controller
+          name={"name"}
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              autoComplete="name"
+              name="name"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              autoFocus
+              error={error}
+              onChange={onChange}
+              value={value}
+            />
+          )}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Controller
+          name={"content"}
+          control={control}
+          defaultValue=""
+          rules={{ required: true }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              autoComplete="content"
+              name="content"
+              required
+              fullWidth
+              id="content"
+              label="Content"
+              error={error}
+              onChange={onChange}
+              value={value}
+              multiline
+            />
+          )}
+        />
+      </Grid>
+    </Grid>
+  );
+};

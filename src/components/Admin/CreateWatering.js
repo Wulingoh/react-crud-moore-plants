@@ -47,56 +47,7 @@ export default function ListWatering() {
           Create New Watering
         </Typography>
         <Box component="form" noValidate sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Controller
-                name={"name"}
-                control={control}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="name"
-                    name="name"
-                    required
-                    fullWidth
-                    id="name"
-                    label="Name"
-                    autoFocus
-                    error={error}
-                    onChange={onChange}
-                    value={value}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Controller
-                name={"content"}
-                control={control}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="content"
-                    name="content"
-                    required
-                    fullWidth
-                    id="content"
-                    label="Content"
-                    error={error}
-                    onChange={onChange}
-                    value={value}
-                    multiline
-                  />
-                )}
-              />
-            </Grid>
-          </Grid>
+          <WateringForm control={control} />
           <Button
             type="submit"
             fullWidth
@@ -121,3 +72,54 @@ export default function ListWatering() {
     </Paper>
   );
 }
+
+export const WateringForm = ({control}) => {
+  return (
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Controller
+            name={"name"}
+            control={control}
+            rules={{ required: true }}
+            defaultValue=""
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextField
+                autoComplete="name"
+                name="name"
+                required
+                fullWidth
+                id="name"
+                label="Name"
+                autoFocus
+                error={error}
+                onChange={onChange}
+                value={value}
+              />
+            )}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Controller
+            name={"content"}
+            control={control}
+            defaultValue=""
+            rules={{ required: true }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextField
+                autoComplete="content"
+                name="content"
+                required
+                fullWidth
+                id="content"
+                label="Content"
+                error={error}
+                onChange={onChange}
+                value={value}
+                multiline
+              />
+            )}
+          />
+        </Grid>
+      </Grid>
+  );
+};

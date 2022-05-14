@@ -81,7 +81,7 @@ export const CareLevelForm = ({control}) => {
             name={"name"}
             control={control}
             rules={{ required: true }}
-            defaultValue
+            defaultValue = ""
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <TextField
                 autoComplete="name"
@@ -102,7 +102,7 @@ export const CareLevelForm = ({control}) => {
           <Controller
             name={"content"}
             control={control}
-            defaultValue
+            defaultValue = ""
             rules={{ required: true }}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <TextField
