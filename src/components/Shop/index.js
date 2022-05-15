@@ -1,8 +1,8 @@
 import React from 'react';
 import ResponsiveAppBar from './ResponsiveAppBar';
- 
-function Home (){
+
+function Shop (){
     return <ResponsiveAppBar />
 }
- 
-export default Home;
+
+export default Shop;
