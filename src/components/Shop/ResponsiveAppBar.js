@@ -15,15 +15,16 @@ import AdbIcon from "@mui/icons-material/Adb";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import LoginIcon from "@mui/icons-material/Login";
 import { ReactComponent as MoorePlantLogo } from "../Images/moorePlantLogo1.svg";
+import { Route, Link} from "react-router-dom";
 
 const pages = [
-  "Home",
-  "Plant",
-  "Pot",
-  "How To Green",
-  "Story",
-  "Shop",
-  "Contact",
+  ["Home", ""],
+  ["Plant", "/plants"],
+  ["Pot", "/pots"],
+  ["How To Green", "/howToGreen"],
+  ["Story", "/about"],
+  ["Shop", "/shop"],
+  ["Contact", "/contact"]
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -83,9 +84,9 @@ const ResponsiveAppBar = () => {
                 display: { xs: "block", md: "none" }
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map(([title, path]) => (
+                <MenuItem key={path} onClick={handleCloseNavMenu} component={Link} to={path}>
+                  <Typography textAlign="center">{title}</Typography>
                 </MenuItem>
               ))}
               <MenuItem>
@@ -114,13 +115,14 @@ const ResponsiveAppBar = () => {
               justifyContent: "center",
             }}
           >
-            {pages.map((page) => (
+            {pages.map(([title, path]) => (
               <Button
-                key={page}
+                key={path}
                 onClick={handleCloseNavMenu}
+                component={Link} to={path}
                 sx={{ my: 2, color: "#323232", display: "block" }}
               >
-                {page}
+                {title}
               </Button>
             ))}
           </Box>
