@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/admin/*" element={<Admin />} />
-          <Route index element={<Shop />} />
+          <Route path="/*" element={<Shop />} />
         </Routes>
       </BrowserRouter>
     </div>
