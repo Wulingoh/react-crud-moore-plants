@@ -16,6 +16,7 @@ import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import LoginIcon from "@mui/icons-material/Login";
 import { ReactComponent as MoorePlantLogo } from "../Images/moorePlantLogo1.svg";
 import { Route, Link} from "react-router-dom";
+import Plants from "./Plants";
 
 const pages = [
   ["Home", ""],
