@@ -24,7 +24,6 @@ const pages = [
   ["Pot", "/pots"],
   ["How To Green", "/howToGreen"],
   ["Story", "/about"],
-  ["Shop", "/shop"],
   ["Contact", "/contact"]
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];

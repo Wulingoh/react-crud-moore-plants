@@ -13,14 +13,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { PlantsAccordion } from "./PlantsAccordion";
+import { PotsAccordion } from "./PotsAccordion";
 import Grid from "@mui/material/Grid";
 import ReplayIcon from '@mui/icons-material/Replay';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 300;
 
-export const SideBarFilter = () => {
+export const SideBarPotFilter = () => {
   return (
     <Box sx={{ display: "flex" }}>
       <Drawer
@@ -52,7 +52,7 @@ export const SideBarFilter = () => {
           </Grid>
         </Grid>
         <Box sx={{ overflow: "auto"}}>
-          <PlantsAccordion />
+          <PotsAccordion />
         </Box>
       </Drawer>
     </Box>
