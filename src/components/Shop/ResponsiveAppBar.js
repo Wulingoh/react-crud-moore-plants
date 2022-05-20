@@ -11,7 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import LoginIcon from "@mui/icons-material/Login";
 import { ReactComponent as MoorePlantLogo } from "../Images/moorePlantLogo1.svg";
@@ -137,6 +137,15 @@ const ResponsiveAppBar = () => {
                 <ShoppingBagIcon />
               </IconButton>
             </Tooltip>
+            <Tooltip title="Open settings">
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{ p: 0, marginRight: "10px" }}
+              >
+                <AppRegistrationIcon />
+              </IconButton>
+            </Tooltip>
+            
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <LoginIcon />
