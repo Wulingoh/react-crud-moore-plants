@@ -32,7 +32,7 @@ function Copyright() {
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-export default function Pots() {
+export const Pots = () => {
   return (
     <>
       <SideBarPotFilter position="relative"></SideBarPotFilter>
@@ -134,4 +134,5 @@ export default function Pots() {
       {/* End footer */}
     </>
   );
-}
+};
+export default Pots;

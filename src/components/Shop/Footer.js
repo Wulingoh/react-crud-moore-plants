@@ -3,6 +3,8 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import { Typography } from "@mui/material";
+import Link from "@mui/material/Link";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -17,7 +19,25 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function FormRow() {
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+const FormRow = () => {
   return (
     <React.Fragment>
       <Grid item xs={4}>
@@ -63,7 +83,7 @@ function FormRow() {
   );
 }
 
-export default function FullWidthGrid() {
+export const Footer = () => {
   return (
     <Box
       sx={{
@@ -71,12 +91,16 @@ export default function FullWidthGrid() {
         paddingLeft: "0",
         paddingRight: "0",
         backgroundColor: "#718879",
+        boxShadow: "none",
+        borderRadius: 0,
       }}
     >
       <Container maxWidth="xl">
         <Grid container spacing={0}>
           <Grid item xs={12} md={12} marginLeft="15px">
-            <Item sx={{ textAlign: "start" }}>
+            <Item
+              sx={{ boxShadow: "none", borderRadius: 0, textAlign: "start" }}
+            >
               <MoorePlantLogo />
             </Item>
           </Grid>
@@ -129,6 +153,8 @@ export default function FullWidthGrid() {
           </Grid>
         </Grid>
       </Container>
+      <Copyright sx={{ mt: 2, mb: 5 }} />
     </Box>
   );
-}
+};
+export default Footer;
