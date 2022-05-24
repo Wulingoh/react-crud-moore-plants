@@ -1,0 +1,5 @@
+{
+    "require": {
+        "ory/kratos-client-php": "v0.9.0-alpha.3"
+    }
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { API_HOST } from "../../config";
 import {format} from 'date-fns'
 import Table from "@mui/material/Table";
@@ -16,6 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 
 export default function ListOrder() {
+  const navigate = useNavigate();
   const [Orders, setOrders] = useState([]);
    useEffect(() => {
     getOrders();
@@ -28,9 +29,13 @@ export default function ListOrder() {
         },
       })
       .then(function (response) {
-        console.log(response.data);
-        setOrders(response.data);
-      });
+        if (response.status === 401) {
+          navigate("/login")
+        } else {
+          console.log(response.data);
+          setOrders(response.data);
+        }
+      })
   }
   const deleteOrder = (orderId) => {
     axios
