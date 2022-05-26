@@ -1,5 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
+import axios from "axios";
+import { API_HOST } from "../../config";
 import { Controller, useForm } from "react-hook-form";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -21,13 +23,23 @@ import GoogleIcon from '@mui/icons-material/Google';
 export const SignUp = () => {
   const navigate = useNavigate();
   const { handleSubmit, control, errors} = useForm();
-  const onSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const onSubmit = (data) => {
+    axios
+      .post(`${API_HOST}api/auth/register`, data)
+      .then(function (response) {
+        console.log(response.data);
+        navigate("/login");
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log("server responded");
+        } else if (error.request) {
+          console.log("network error");
+        } else {
+          console.log(error);
+        }
+      });
   };
 
   return (
@@ -142,7 +154,7 @@ export const SignUp = () => {
                     fullWidth
                     type="password"
                     id="password"
-                    label="Create a password"
+                    label="Confirm Password"
                     autoFocus
                     error={error}
                     onChange={onChange}

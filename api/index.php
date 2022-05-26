@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_STRICT);
+ini_set('display_errors', 1);
 
 $path = explode('/', $_SERVER['REQUEST_URI']);
 
@@ -31,6 +33,9 @@ if ($path[1] == 'api') {
             break;
         case 'gallery_img' :
             require __DIR__ . '/gallery_img.php';
+            break;
+        case 'auth':
+            require __DIR__ . '/auth/index.php';
             break;
         default:
             http_response_code(404);
