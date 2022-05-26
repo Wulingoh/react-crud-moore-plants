@@ -92,7 +92,7 @@ export const Login = () => {
                     name="email"
                     required
                     fullWidth
-                    id="name"
+                    id="email"
                     label="Enter your email"
                     autoFocus
                     error={error}
