@@ -29,8 +29,13 @@ export const Login = () => {
     axios
       .post(`${API_HOST}api/auth/login`, data)
       .then(function (response) {
-        console.log(response.data);
-        navigate("/plants", {replace:true});
+        console.log(response.data.role);
+        if(response.data.role === "Admin") {
+          navigate("/admin");
+        } else {
+          navigate("/plants", {replace:true});
+        }
+
       })
       .catch((error) => {
         if (error.response) {

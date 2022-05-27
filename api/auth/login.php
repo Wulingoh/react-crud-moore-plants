@@ -31,11 +31,7 @@ if ($stmt = $db->prepare($sql)) {
                 $_SESSION['name'] = $name;
                 $_SESSION['role'] = $role;
 
-                // if($role == "admin") {
-                //     header('Location: admin/index.php');
-                // }
-
-                returnJsonHttpResponse(true, "You have successfully logged in!"); 
+                returnJsonHttpResponse(true, array('role' => $role)); 
             } else {
                 returnJsonHttpResponse(false, "The password you entered was not valid!");
             }
