@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Controller, useForm } from "react-hook-form";
+import axios from 'axios';
+import { API_HOST } from '../../config';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -21,15 +23,25 @@ import { Stack } from '@mui/material';
 
 
 export const Login = () => {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const { handleSubmit, control, errors } = useForm();
-  const onSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const onSubmit = (data) => {
+    axios
+      .post(`${API_HOST}api/auth/login`, data)
+      .then(function (response) {
+        console.log(response.data);
+        navigate("/plants", {replace:true});
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log("server responded");
+        } else if (error.request) {
+          console.log("network error");
+        } else {
+          console.log(error);
+        }
+      });
   };
 
   return (
