@@ -50,14 +50,14 @@ export default function ListProduct() {
   }
 
   useEffect(() => {
-    axios.get(`${API_HOST}api/products/${productId}`).then(function (response) {
+    axios.get(`/api/admin/products/${productId}`).then(function (response) {
       reset(response.data);
     });
   }, [productId, reset]);
 
   const onSubmit = (data) => {
     axios
-      .put(`${API_HOST}api/products/${productId}`, data)
+      .put(`/api/admin/products/${productId}`, data)
       .then(function (response) {
         if (response.data.status === 1) {
           navigate("/admin/products");
@@ -499,7 +499,7 @@ export default function ListProduct() {
                         Upload Image
                       </Button>
                     </label>
-                     <img src={value ? value : `${API_HOST}public/images/${getValues().img}`} width="500" alt="" />
+                     <img src={value ? value : `public/images/${getValues().img}`} width="500" alt="" />
                   </FormControl>
                 )}
               />

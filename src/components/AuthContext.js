@@ -56,7 +56,7 @@ export const AuthProvider = ({
       .signUp({ email, name, password })
       .then((newUser) => {
         setUser(newUser);
-        navigate("/");
+        navigate("/login");
       })
       .catch((newError) => setError(newError))
       .finally(() => setLoading(false));

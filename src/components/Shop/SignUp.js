@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { API_HOST } from "../../config";
 import { Controller, useForm } from "react-hook-form";
+import useAuth from "../AuthContext";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -21,11 +22,12 @@ import GoogleIcon from '@mui/icons-material/Google';
 
 
 export const SignUp = () => {
+  const { user, signUp } = useAuth()
   const navigate = useNavigate();
   const { handleSubmit, control, errors} = useForm();
   const onSubmit = (data) => {
     axios
-      .post(`${API_HOST}api/auth/register`, data)
+      .post(`${API_HOST}api/auth/signup`, data)
       .then(function (response) {
         console.log(response.data);
         navigate("/login");

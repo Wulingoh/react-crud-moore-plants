@@ -1,11 +1,4 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Headers: *');
-    header("Access-Control-Allow-Methods: *");
-
-    include("config.php");
     $link = new DbConnect();
     $db = $link->connect();
     $method = $_SERVER['REQUEST_METHOD'];
@@ -30,10 +23,10 @@
         case 'GET':
             $sql = "SELECT * FROM lighting_care";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[3])) {
+            if(isset($path[3]) && is_numeric($path[4])) {
                 $sql .= " WHERE lighting_id = :lightingId";
                 $stmt = $db->prepare($sql);
-                $stmt->bindParam(':lightingId', $path[3]);
+                $stmt->bindParam(':lightingId', $path[4]);
                 $stmt->execute();
                 $lighting = $stmt->fetch(PDO::FETCH_ASSOC);
             } else {
@@ -64,7 +57,7 @@
             $sql = "DELETE FROM lighting_care WHERE lighting_id =:lightingId";
             $path = explode('/', $_SERVER['REQUEST_URI']);
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(':lightingId', $path[3]);
+            $stmt->bindParam(':lightingId', $path[4]);
             if($stmt->execute()) {
                 $response = ['status' => 1, 'message' => 'Lighting Care deleted successfully.'];   
              } else {

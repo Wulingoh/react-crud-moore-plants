@@ -1,12 +1,4 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Headers: *');
-    header("Access-Control-Allow-Methods: *");
-
-    include("config.php");
-    $link = new DbConnect();
     $db = $link->connect();
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
@@ -30,10 +22,10 @@
         case 'GET':
             $sql = "SELECT * FROM watering";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[3])) {
+            if(isset($path[3]) && is_numeric($path[4])) {
                 $sql .= " WHERE watering_id = :wateringId";
                 $stmt = $db->prepare($sql);
-                $stmt->bindParam(':wateringId', $path[3]);
+                $stmt->bindParam(':wateringId', $path[4]);
                 $stmt->execute();
                 $watering = $stmt->fetch(PDO::FETCH_ASSOC);
             } else {
@@ -64,7 +56,7 @@
             $sql = "DELETE FROM watering WHERE watering_id =:wateringId";
             $path = explode('/', $_SERVER['REQUEST_URI']);
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(':wateringId', $path[3]);
+            $stmt->bindParam(':wateringId', $path[4]);
             if($stmt->execute()) {
                 $response = ['status' => 1, 'message' => 'Watering deleted successfully.'];   
              } else {

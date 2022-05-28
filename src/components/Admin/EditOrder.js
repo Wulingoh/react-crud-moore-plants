@@ -30,14 +30,14 @@ export default function ListProduct() {
   const { orderId } = useParams();
 
   useEffect(() => {
-    axios.get(`${API_HOST}api/orders/${orderId}`).then(function (response) {
+    axios.get(`/api/admin/orders/${orderId}`).then(function (response) {
       reset(response.data);
     });
   }, [orderId, reset]);
 
   const onSubmit = (data) => {
     axios
-      .put(`${API_HOST}api/orders/${orderId}`, data)
+      .put(`/api/admin/orders/${orderId}`, data)
       .then(function (response) {
         if (response.data.status === 1) {
           navigate("/admin/orders");

@@ -1,6 +1,4 @@
 <?php
-
-include __DIR__ . "/../config.php";
 include "json_responses.php";
 $link = new DbConnect();
 $db = $link->Connect();

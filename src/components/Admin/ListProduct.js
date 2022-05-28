@@ -21,7 +21,7 @@ export default function ListProduct() {
   }, []);
   function getProducts() {
     axios
-      .get(`${API_HOST}api/products`, {
+      .get(`/api/admin/products`, {
         validateStatus: function (status) {
           return status;
         },
@@ -33,7 +33,7 @@ export default function ListProduct() {
   }
   const deleteProduct = (productId) => {
     axios
-      .delete(`${API_HOST}api/products/${productId}/delete`, {
+      .delete(`/api/admin/products/${productId}/delete`, {
         validateStatus: function (status) {
           return status;
         },
@@ -79,7 +79,7 @@ export default function ListProduct() {
                 <TableCell>{product.price}</TableCell>
                 <TableCell>
                   <img
-                    src={`${API_HOST}public/images/${product.img}`}
+                    src={`/public/images/${product.img}`}
                     width="150"
                     alt=""
                   />

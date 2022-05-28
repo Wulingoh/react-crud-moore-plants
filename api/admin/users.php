@@ -1,11 +1,4 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Headers: *');
-    header("Access-Control-Allow-Methods: *");
-
-    include("config.php");
     $link = new DbConnect();
     $db = $link->connect();
     $method = $_SERVER['REQUEST_METHOD'];
@@ -32,10 +25,10 @@
         case 'GET':
             $sql = "SELECT * FROM users";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[3])) {
+            if(isset($path[3]) && is_numeric($path[4])) {
                 $sql .= " WHERE user_id = :userId";
                 $stmt = $db->prepare($sql);
-                $stmt->bindParam(':userId', $path[3]);
+                $stmt->bindParam(':userId', $path[4]);
                 $stmt->execute();
                 $users = $stmt->fetch(PDO::FETCH_ASSOC);
             } else {
@@ -66,7 +59,7 @@
             $sql = "DELETE FROM users WHERE user_id =:userId";
             $path = explode('/', $_SERVER['REQUEST_URI']);
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(':userId', $path[3]);
+            $stmt->bindParam(':userId', $path[4]);
             if($stmt->execute()) {
                 $response = ['status' => 1, 'message' => 'Record deleted successfully.'];   
              } else {

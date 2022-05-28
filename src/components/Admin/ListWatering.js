@@ -21,7 +21,7 @@ export default function ListWatering() {
   }, []);
   function getWaters() {
     axios
-      .get(`${API_HOST}api/watering`, {
+      .get(`/api/admin/watering`, {
         validateStatus: function (status) {
           return status;
         },
@@ -33,7 +33,7 @@ export default function ListWatering() {
   }
   const deleteCareLevel = (wateringId) => {
     axios
-      .delete(`${API_HOST}api/watering/${wateringId}/delete`, {
+      .delete(`/api/admin/watering/${wateringId}/delete`, {
         validateStatus: function (status) {
           return status;
         },

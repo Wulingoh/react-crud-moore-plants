@@ -49,7 +49,7 @@ export default function ListProduct() {
   }
   const onSubmit = (data) => {
     axios
-      .post(`${API_HOST}api/products`, data)
+      .post(`/api/admin/products`, data)
       .then(function (response) {
         console.log(response.data);
         navigate("/admin/products");

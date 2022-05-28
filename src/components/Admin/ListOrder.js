@@ -22,7 +22,7 @@ export default function ListOrder() {
   }, []);
   function getOrders() {
     axios
-      .get(`${API_HOST}api/orders`, {
+      .get(`/api/admin/orders`, {
         validateStatus: function (status) {
           return status;
         },
@@ -34,7 +34,7 @@ export default function ListOrder() {
   }
   const deleteOrder = (orderId) => {
     axios
-      .delete(`${API_HOST}api/orders/${orderId}/delete`, {
+      .delete(`/api/admin/orders/${orderId}/delete`, {
         validateStatus: function (status) {
           return status;
         },

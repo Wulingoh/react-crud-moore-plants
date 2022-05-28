@@ -15,7 +15,7 @@ export default function ListHumidity() {
   const { handleSubmit, control } = useForm();
   const onSubmit = (data) => {
     axios
-      .post(`${API_HOST}api/humidity`, data)
+      .post(`/api/admin/humidity`, data)
       .then(function (response) {
         console.log(response.data);
         navigate("/admin/humidity");

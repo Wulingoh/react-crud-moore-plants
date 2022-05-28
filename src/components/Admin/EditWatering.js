@@ -17,7 +17,7 @@ export default function ListWatering() {
   const { handleSubmit, control, reset } = useForm();
   useEffect(() => {
     axios
-      .get(`${API_HOST}api/watering/${wateringId}`)
+      .get(`/api/admin/watering/${wateringId}`)
       .then(function (response) {
         reset(response.data);
       });
@@ -25,7 +25,7 @@ export default function ListWatering() {
 
   const onSubmit = (data) => {
     axios
-      .put(`${API_HOST}api/watering/${wateringId}`, data)
+      .put(`/api/admin/watering/${wateringId}`, data)
       .then(function (response) {
         if (response.data.status === 1) {
           navigate("/admin/watering");

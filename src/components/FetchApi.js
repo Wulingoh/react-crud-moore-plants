@@ -121,7 +121,7 @@ export const getCurrentUser = async() => {
 }
 
 export const signUp = async (params) => {
-  const response = await axios.post("/api/auth/register", { user: params });
+  const response = await axios.post("/api/auth/signup", { user: params });
 
   return response.data;
 }

@@ -16,7 +16,7 @@ export default function ListLightingCare() {
   const { handleSubmit, control } = useForm();
   const onSubmit = (data) => {
     axios
-      .post(`${API_HOST}api/lighting`, data)
+      .post(`/api/admin/lighting`, data)
       .then(function (response) {
         console.log(response.data);
         navigate("/admin/lighting");

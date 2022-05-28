@@ -15,7 +15,7 @@ export default function ListCareLevel() {
   const { handleSubmit, control } = useForm();
   const onSubmit = (data) => {
     axios
-      .post(`${API_HOST}api/care_level`, data)
+      .post(`/api/admin/care_level`, data)
       .then(function (response) {
         console.log(response.data);
         navigate("/admin/care_level");

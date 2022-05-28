@@ -17,7 +17,7 @@ export default function ListLightingCare() {
   const { handleSubmit, control, reset } = useForm();
   useEffect(() => {
     axios
-      .get(`${API_HOST}api/lighting/${lightingId}`)
+      .get(`/api/admin/lighting/${lightingId}`)
       .then(function (response) {
         reset(response.data);
       });
@@ -25,7 +25,7 @@ export default function ListLightingCare() {
 
   const onSubmit = (data) => {
     axios
-      .put(`${API_HOST}api/lighting/${lightingId}`, data)
+      .put(`/api/admin/lighting/${lightingId}`, data)
       .then(function (response) {
         if (response.data.status === 1) {
           navigate("/admin/lighting");

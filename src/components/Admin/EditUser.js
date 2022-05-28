@@ -16,13 +16,13 @@ export default function ListUser() {
   const { userId } = useParams();
   const { handleSubmit, control, reset } = useForm();
   useEffect(() => {
-    axios.get(`${API_HOST}api/users/${userId}`).then(function (response) {
+    axios.get(`/api/admin/users/${userId}`).then(function (response) {
       reset(response.data);
     });
   }, []);
 
   const onSubmit = (data) => {
-    axios.put(`${API_HOST}api/users/${userId}`, data).then(function (response) {
+    axios.put(`/api/admin/users/${userId}`, data).then(function (response) {
       if (response.data.status === 1) {
         navigate("/admin/users");
       } else {

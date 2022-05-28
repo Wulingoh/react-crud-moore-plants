@@ -15,7 +15,7 @@ export default function ListUser() {
   const { handleSubmit, control } = useForm();
   const onSubmit = (data) => {
     axios
-      .post(`${API_HOST}api/users`, data)
+      .post(`/api/admin/users`, data)
       .then(function (response) {
         console.log(response.data);
         navigate("/admin/users");
