@@ -1,4 +1,5 @@
 <?php
+    $link = new DbConnect();
     $db = $link->connect();
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
@@ -22,7 +23,7 @@
         case 'GET':
             $sql = "SELECT * FROM watering";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[4])) {
+            if(isset($path[4]) && is_numeric($path[4])) {
                 $sql .= " WHERE watering_id = :wateringId";
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':wateringId', $path[4]);

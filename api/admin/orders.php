@@ -36,7 +36,7 @@
         case 'GET':
             $sql = "SELECT * FROM orders";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[4])) {
+            if(isset($path[4]) && is_numeric($path[4])) {
                 $sql .= " WHERE order_id = :orderId";
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':orderId', $path[3]);

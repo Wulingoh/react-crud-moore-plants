@@ -23,7 +23,7 @@
         case 'GET':
             $sql = "SELECT * FROM lighting_care";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[4])) {
+            if(isset($path[4]) && is_numeric($path[4])) {
                 $sql .= " WHERE lighting_id = :lightingId";
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':lightingId', $path[4]);

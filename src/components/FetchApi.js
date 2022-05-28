@@ -101,8 +101,8 @@ return humidityList;
 }
 
 
-export const login = async (params) => {
-  const response = await axios.post("/api/auth/login", { session: params });
+export const login = async (data) => {
+  const response = await axios.post("/api/auth/login", data);
 
   return response.data;
 }
@@ -120,8 +120,8 @@ export const getCurrentUser = async() => {
   return response.data;
 }
 
-export const signUp = async (params) => {
-  const response = await axios.post("/api/auth/signup", { user: params });
+export const signUp = async (data) => {
+  const response = await axios.post("/api/auth/signup", data);
 
   return response.data;
 }

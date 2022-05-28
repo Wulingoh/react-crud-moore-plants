@@ -32,7 +32,7 @@
         case 'GET':
             $sql = "SELECT gallery_img.*, products.name as product_name FROM gallery_img INNER JOIN products ON gallery_img.product_id = products.product_id";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[4])) {
+            if(isset($path[4]) && is_numeric($path[4])) {
                 $sql .= " WHERE gallery_img_id = :galleryImgId";
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':galleryImgId', $path[4]);

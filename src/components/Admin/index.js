@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import useAuth from "../AuthContext";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -52,6 +53,7 @@ import CategoryIcon from "@mui/icons-material/Category";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import WaterIcon from '@mui/icons-material/Water';
 import SpaIcon from '@mui/icons-material/Spa';
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const drawerWidth = 240;
 
@@ -179,6 +181,7 @@ const mdTheme = createTheme({
 });
 
 function DashboardContent() {
+  const { user, logout } = useAuth()
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -218,6 +221,11 @@ function DashboardContent() {
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton color="inherit" onClick={logout}>
+              <Badge color="secondary">
+                <LogoutIcon />
               </Badge>
             </IconButton>
           </Toolbar>
@@ -260,8 +268,14 @@ function DashboardContent() {
               <Route path="/users/:userId/edit" element={<EditUser />} />
               <Route path="/products" element={<ListProduct />} />
               <Route path="/products/create" element={<CreateProduct />} />
-              <Route path="/products/:productId/edit" element={<EditProduct />} />
-              <Route path="/products/:productId/gallery_img" element={<ListGalleryImg />} />
+              <Route
+                path="/products/:productId/edit"
+                element={<EditProduct />}
+              />
+              <Route
+                path="/products/:productId/gallery_img"
+                element={<ListGalleryImg />}
+              />
               <Route path="/category" element={<ListCategory />} />
               <Route path="/category/create" element={<CreateCategory />} />
               <Route

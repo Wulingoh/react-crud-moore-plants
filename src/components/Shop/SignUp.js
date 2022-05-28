@@ -21,28 +21,12 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 
 
+
 export const SignUp = () => {
   const { user, signUp } = useAuth()
   const navigate = useNavigate();
   const { handleSubmit, control, errors} = useForm();
-  const onSubmit = (data) => {
-    axios
-      .post(`${API_HOST}api/auth/signup`, data)
-      .then(function (response) {
-        console.log(response.data);
-        navigate("/login");
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log("server responded");
-        } else if (error.request) {
-          console.log("network error");
-        } else {
-          console.log(error);
-        }
-      });
-  };
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -176,7 +160,7 @@ export const SignUp = () => {
             type="submit"
             fullWidth
             variant="contained"
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(signUp)}
             sx={{ mt: 1, mb: 2 }}
           >
             Create account
@@ -185,7 +169,7 @@ export const SignUp = () => {
             type="submit"
             fullWidth
             variant="contained"
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(signUp)}
             sx={{ mt: 1, mb: 2 }}
             startIcon={<GoogleIcon />}
           >
@@ -195,7 +179,7 @@ export const SignUp = () => {
             type="submit"
             fullWidth
             variant="contained"
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(signUp)}
             sx={{ mt: 1, mb: 2 }}
             startIcon={<FacebookIcon />}
           >

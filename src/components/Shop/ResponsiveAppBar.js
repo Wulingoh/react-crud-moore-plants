@@ -31,7 +31,7 @@ const pages = [
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = () => {
-  const { user, logout } = useAuth()
+  const { user, logout, signUp } = useAuth()
   const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -143,7 +143,7 @@ const ResponsiveAppBar = () => {
             </Tooltip>
             <Tooltip title="Open settings">
               <IconButton
-                onClick={handleOpenUserMenu}
+                onClick={() => navigate('/signup')}
                 sx={{ p: 0, marginRight: "10px" }}
               >
                 <AppRegistrationIcon />

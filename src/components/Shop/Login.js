@@ -27,7 +27,7 @@ export const Login = () => {
   const { handleSubmit, control, errors } = useForm();
   const onSubmit = (data) => {
     axios
-      .post(`${API_HOST}api/auth/login`, data)
+      .post(`/api/auth/login`, data)
       .then(function (response) {
         console.log(response.data.role);
         if(response.data.role === "Admin") {
