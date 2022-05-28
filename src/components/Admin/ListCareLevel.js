@@ -19,7 +19,7 @@ export default function ListCareLevel() {
   }, []);
   function getCareLevels() {
     axios
-      .get(`${API_HOST}api/care_level`, {
+      .get(`/api/admin/care_level`, {
         validateStatus: function (status) {
           return status;
         },
@@ -31,7 +31,7 @@ export default function ListCareLevel() {
   }
   const deleteCareLevel = (careLevelId) => {
     axios
-      .delete(`${API_HOST}api/care_level/${careLevelId}/delete`, {
+      .delete(`/api/admin/care_level/${careLevelId}/delete`, {
         validateStatus: function (status) {
           return status;
         },

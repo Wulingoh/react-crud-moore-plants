@@ -21,7 +21,7 @@ export default function ListCategory() {
   }, []);
   function getCategories() {
     axios
-      .get(`${API_HOST}api/category`, {
+      .get(`/api/admin/category`, {
         validateStatus: function (status) {
           return status;
         },
@@ -33,7 +33,7 @@ export default function ListCategory() {
   }
   const deleteCategory = (categoryId) => {
     axios
-      .delete(`${API_HOST}api/category/${categoryId}/delete`, {
+      .delete(`/api/admin/category/${categoryId}/delete`, {
         validateStatus: function (status) {
           return status;
         },

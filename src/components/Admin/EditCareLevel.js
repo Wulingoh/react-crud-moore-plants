@@ -17,7 +17,7 @@ export default function ListCareLevel() {
   const { handleSubmit, control, reset } = useForm();
   useEffect(() => {
     axios
-      .get(`${API_HOST}api/care_level/${careLevelId}`)
+      .get(`/api/admin/care_level/${careLevelId}`)
       .then(function (response) {
         reset(response.data);
       });
@@ -25,7 +25,7 @@ export default function ListCareLevel() {
 
   const onSubmit = (data) => {
     axios
-      .put(`${API_HOST}api/care_level/${careLevelId}`, data)
+      .put(`/api/admin/care_level/${careLevelId}`, data)
       .then(function (response) {
         if (response.data.status === 1) {
           navigate("/admin/care_level");

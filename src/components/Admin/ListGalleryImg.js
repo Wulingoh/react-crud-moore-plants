@@ -27,7 +27,7 @@ export default function ListGalleryImg() {
   }, []);
   function getGalleryImages() {
     axios
-      .get(`${API_HOST}api/gallery_img?product_id=${productId}`, {
+      .get(`/api/admin/gallery_img?product_id=${productId}`, {
         validateStatus: function (status) {
           return status;
         },
@@ -43,7 +43,7 @@ export default function ListGalleryImg() {
     fileReader.readAsDataURL(files[0]);
     fileReader.onload = (event) => {
       axios
-        .post(`${API_HOST}api/gallery_img`, {
+        .post(`api/admin/gallery_img`, {
           product_id: productId,
           img: event.target.result,
         })
@@ -55,7 +55,7 @@ export default function ListGalleryImg() {
   };
   const deleteGalleryImg = (galleryImgId) => {
     axios
-      .delete(`${API_HOST}api/gallery_img/${galleryImgId}/delete`, {
+      .delete(`api/admin/gallery_img/${galleryImgId}/delete`, {
         validateStatus: function (status) {
           return status;
         },

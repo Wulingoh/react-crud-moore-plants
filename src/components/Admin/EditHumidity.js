@@ -17,14 +17,14 @@ export default function ListHumidity() {
   const { handleSubmit, control, reset } = useForm();
   useEffect(() => {
     axios
-      .get(`${API_HOST}api/humidity/${humidityId}`)
+      .get(`/api/admin/humidity/${humidityId}`)
       .then(function (response) {
         reset(response.data);
       });
   }, []);
   const onSubmit = (data) => {
     axios
-      .put(`${API_HOST}api/humidity/${humidityId}`, data)
+      .put(`/api/admin/humidity/${humidityId}`, data)
       .then(function (response) {
         if (response.data.status === 1) {
           navigate("/admin/humidity");

@@ -21,7 +21,7 @@ export default function ListLightingCare() {
         getLightingCares();
     }, []);
     function getLightingCares() {
-        axios.get(`${API_HOST}api/lighting`, {
+        axios.get(`/api/admin/lighting`, {
             validateStatus:function (status) {
                 return status;
             }
@@ -32,7 +32,7 @@ export default function ListLightingCare() {
             });
     }
     const deleteLightingCare = (lightingId) => {
-        axios.delete(`${API_HOST}api/lighting/${lightingId}/delete`, {
+        axios.delete(`/api/admin/lighting/${lightingId}/delete`, {
             validateStatus:function (status) {
                 return status;
             }

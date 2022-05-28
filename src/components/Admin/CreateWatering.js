@@ -15,7 +15,7 @@ export default function ListWatering() {
   const { handleSubmit, control } = useForm();
   const onSubmit = (data) => {
     axios
-      .post(`${API_HOST}api/watering`, data)
+      .post(`/api/admin/watering`, data)
       .then(function (response) {
         console.log(response.data);
         navigate("/admin/watering");

@@ -21,7 +21,7 @@ export default function ListHumidity() {
   }, []);
   function getHumidities() {
     axios
-      .get(`${API_HOST}api/humidity`, {
+      .get(`/api/admin/humidity`, {
         validateStatus: function (status) {
           return status;
         },
@@ -33,7 +33,7 @@ export default function ListHumidity() {
   }
   const deleteHumidity = (humidityId) => {
     axios
-      .delete(`${API_HOST}api/humidity/${humidityId}/delete`, {
+      .delete(`/api/admin/humidity/${humidityId}/delete`, {
         validateStatus: function (status) {
           return status;
         },

@@ -15,7 +15,7 @@ export default function ListCategory() {
   const { handleSubmit, control } = useForm();
   const onSubmit = (data) => {
     axios
-      .post(`${API_HOST}api/category`, data)
+      .post(`/api/admin/category`, data)
       .then(function (response) {
         console.log(response.data);
         navigate("/admin/category");

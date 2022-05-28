@@ -1,11 +1,4 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Headers: *');
-    header("Access-Control-Allow-Methods: *");
-
-    include("config.php");
     $link = new DbConnect();
     $db = $link->connect();
     $method = $_SERVER['REQUEST_METHOD'];
@@ -30,10 +23,10 @@
         case 'GET':
             $sql = "SELECT * FROM humidity";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[3])) {
+            if(isset($path[3]) && is_numeric($path[4])) {
                 $sql .= " WHERE humidity_id = :humidityId";
                 $stmt = $db->prepare($sql);
-                $stmt->bindParam(':humidityId', $path[3]);
+                $stmt->bindParam(':humidityId', $path[4]);
                 $stmt->execute();
                 $humidity = $stmt->fetch(PDO::FETCH_ASSOC);
             } else {
@@ -64,7 +57,7 @@
             $sql = "DELETE FROM humidity WHERE humidity_id =:humidityId";
             $path = explode('/', $_SERVER['REQUEST_URI']);
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(':humidityId', $path[3]);
+            $stmt->bindParam(':humidityId', $path[4]);
             if($stmt->execute()) {
                 $response = ['status' => 1, 'message' => 'Humidity deleted successfully.'];   
              } else {

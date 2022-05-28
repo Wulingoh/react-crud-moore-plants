@@ -21,7 +21,7 @@ export default function ListUser() {
   }, []);
   function getUsers() {
     axios
-      .get(`${API_HOST}api/users`, {
+      .get(`/api/admin/users`, {
         validateStatus: function (status) {
           return status;
         },
@@ -33,7 +33,7 @@ export default function ListUser() {
   }
   const deleteUser = (userId) => {
     axios
-      .delete(`${API_HOST}api/users/${userId}/delete`, {
+      .delete(`/api/admin/users/${userId}/delete`, {
         validateStatus: function (status) {
           return status;
         },
