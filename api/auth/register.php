@@ -8,16 +8,16 @@ $db = $link->Connect();
 $data = json_decode(file_get_contents('php://input'));
 
 if (empty($data->name)) {
-    returnJsonHttpResponse(false, "Please your full name!");
+    returnJsonHttpResponse(422, "Please your full name!");
 }
 if (empty($data->password)) {
-    returnJsonHttpResponse(false, "Please enter your password!");
+    returnJsonHttpResponse(422, "Please enter your password!");
 }
 
 if (empty($data->email)) {
-    returnJsonHttpResponse(false, "Please enter your email!");
+    returnJsonHttpResponse(422, "Please enter your email!");
 } elseif (!filter_var($data->email, FILTER_VALIDATE_EMAIL)) {
-    returnJsonHttpResponse(false, "Please enter a validate email!");
+    returnJsonHttpResponse(422, "Please enter a validate email!");
 }
 
 $sql = "SELECT * FROM users WHERE email = :email";
@@ -27,7 +27,7 @@ $stmt->bindParam(':email', $data->email);
 $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
-    returnJsonHttpResponse(false, "This email already exists!");
+    returnJsonHttpResponse(422, "This email already exists!");
 } else {
     $sql = "INSERT INTO users(name, email, password_hash, role) values (:name, :email, :passwordHash, 'customer')";
     $passwordHash = password_hash($data->password, PASSWORD_DEFAULT);
@@ -39,5 +39,5 @@ if ($stmt->rowCount() > 0) {
 
     $stmt->execute();
 
-    returnJsonHttpResponse(true, "You have successfully registered.");
+    returnJsonHttpResponse(200, "You have successfully registered.");
 }

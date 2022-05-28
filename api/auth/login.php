@@ -25,20 +25,20 @@ if ($stmt = $db->prepare($sql)) {
                 // Verification success! User has logged-in!
                 // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
                 session_regenerate_id();
-                $_SESSION['loggedin'] = TRUE;
-                $_SESSION['id'] = $userId;
+                $_SESSION['loggedIn'] = true;
+                $_SESSION['userId'] = $userId;
                 $_SESSION['email'] = $email;
                 $_SESSION['name'] = $name;
                 $_SESSION['role'] = $role;
 
-                returnJsonHttpResponse(true, array('role' => $role)); 
+                returnJsonHttpResponse(200, array('role' => $role)); 
             } else {
-                returnJsonHttpResponse(false, "The password you entered was not valid!");
+                returnJsonHttpResponse(422, "The password you entered was not valid!");
             }
         }
-    } 
+    }
     else {
-        returnJsonHttpResponse(false, "No account found with that email address!");
+        returnJsonHttpResponse(404, "No account found with that email address!");
     }
 }
 ?>
