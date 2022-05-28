@@ -52,7 +52,7 @@
             INNER JOIN watering on products.watering_id = watering.watering_id 
             INNER JOIN humidity on products.humidity_id = humidity.humidity_id ";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[4])) {
+            if(isset($path[4]) && is_numeric($path[4])) {
                 $sql .= " WHERE product_id = :productId";
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':productId', $path[4]);

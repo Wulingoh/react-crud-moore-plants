@@ -23,7 +23,7 @@
         case 'GET':
             $sql = "SELECT * FROM humidity";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[4])) {
+            if(isset($path[4]) && is_numeric($path[4])) {
                 $sql .= " WHERE humidity_id = :humidityId";
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':humidityId', $path[4]);

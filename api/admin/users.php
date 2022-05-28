@@ -25,7 +25,7 @@
         case 'GET':
             $sql = "SELECT * FROM users";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[4])) {
+            if(isset($path[4]) && is_numeric($path[4])) {
                 $sql .= " WHERE user_id = :userId";
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':userId', $path[4]);

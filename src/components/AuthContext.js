@@ -49,11 +49,11 @@ export const AuthProvider = ({
       .finally(() => setLoading(false));
   }
 
-  function signUp(email, name, password) {
+  function signUp(data) {
     setLoading(true);
 
     userApi
-      .signUp({ email, name, password })
+      .signUp(data)
       .then((newUser) => {
         setUser(newUser);
         navigate("/login");

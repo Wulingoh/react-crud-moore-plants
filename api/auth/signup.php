@@ -37,5 +37,14 @@ if ($stmt->rowCount() > 0) {
 
     $stmt->execute();
 
-    returnJsonHttpResponse(200, "You have successfully registered.");
+    session_regenerate_id();
+    $_SESSION['loggedIn'] = TRUE;
+    $_SESSION['userId'] = $db->lastInsertId();
+    $_SESSION['email'] = $email;
+    $_SESSION['name'] = $name;
+    $_SESSION['role'] = $role;
+
+
+
+    returnJsonHttpResponse(200, "You have successfully registered and logged in.");
 }
