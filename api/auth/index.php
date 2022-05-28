@@ -10,8 +10,14 @@ switch ($resource) {
     case 'login':
         require __DIR__ . '/login.php';
         break;
+    case 'logout':
+        require __DIR__ . '/logout.php';
+        break;
     case 'register':
         require __DIR__ . '/register.php';
+        break;
+    case 'session':
+        require __DIR__ . '/session.php';
         break;
 
     default:

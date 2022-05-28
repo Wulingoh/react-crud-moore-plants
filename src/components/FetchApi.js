@@ -99,3 +99,29 @@ export const useHumidityList = _ => {
 
 return humidityList;
 }
+
+
+export const login = async (params) => {
+  const response = await axios.post("/api/auth/login", { session: params });
+
+  return response.data;
+}
+
+export const logout = async() => {
+  const response = await axios.post("/api/auth/logout");
+
+  return response.data;
+}
+
+
+export const getCurrentUser = async() => {
+  const response = await axios.get("/api/auth/session");
+
+  return response.data;
+}
+
+export const signUp = async (params) => {
+  const response = await axios.post("/api/auth/register", { user: params });
+
+  return response.data;
+}

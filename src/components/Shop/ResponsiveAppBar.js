@@ -14,9 +14,11 @@ import MenuItem from "@mui/material/MenuItem";
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { ReactComponent as MoorePlantLogo } from "../Images/moorePlantLogo1.svg";
-import { Route, Link} from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Plants from "./Plants";
+import useAuth from "../AuthContext";
 
 const pages = [
   ["Home", ""],
@@ -29,6 +31,8 @@ const pages = [
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = () => {
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -146,11 +150,18 @@ const ResponsiveAppBar = () => {
               </IconButton>
             </Tooltip>
             
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            {user ? (
+            <Tooltip title="Logout">
+              <IconButton onClick={logout} sx={{ p: 0 }}>
+                <LogoutIcon />
+              </IconButton>
+            </Tooltip>) : (
+            <Tooltip title="Login">
+              <IconButton onClick={() => navigate('/login')} sx={{ p: 0 }}>
                 <LoginIcon />
               </IconButton>
-            </Tooltip>
+            </Tooltip>)}
+  
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
