@@ -40,9 +40,9 @@ if ($stmt->rowCount() > 0) {
     session_regenerate_id();
     $_SESSION['loggedIn'] = TRUE;
     $_SESSION['userId'] = $db->lastInsertId();
-    $_SESSION['email'] = $email;
-    $_SESSION['name'] = $name;
-    $_SESSION['role'] = $role;
+    $_SESSION['email'] = $data->email;
+    $_SESSION['name'] = $data->name;
+    $_SESSION['role'] = "customer";
 
 
 
