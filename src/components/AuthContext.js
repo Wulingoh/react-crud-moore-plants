@@ -36,14 +36,18 @@ export const AuthProvider = ({
       .finally(() => setLoadingInitial(false));
   }, []);
 
-  function login(email, password) {
+  function login(data) {
     setLoading(true);
 
     userApi
-      .login({ email, password })
+      .login(data)
       .then((newUser) => {
         setUser(newUser);
-        navigate("/");
+        if(newUser.role === "Admin") {
+          navigate("/admin");
+        } else {
+          navigate("/plants", {replace:true});
+        }
       })
       .catch((newError) => setError(newError))
       .finally(() => setLoading(false));
