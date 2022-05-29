@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Controller, useForm } from "react-hook-form";
 import axios from 'axios';
 import { API_HOST } from '../../config';
+import useAuth from "../AuthContext";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -23,31 +24,10 @@ import { Stack } from '@mui/material';
 
 
 export const Login = () => {
+  const { user, login } = useAuth()
   const navigate = useNavigate();
   const { handleSubmit, control, errors } = useForm();
-  const onSubmit = (data) => {
-    axios
-      .post(`/api/auth/login`, data)
-      .then(function (response) {
-        console.log(response.data.role);
-        if(response.data.role === "Admin") {
-          navigate("/admin");
-        } else {
-          navigate("/plants", {replace:true});
-        }
 
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log("server responded");
-        } else if (error.request) {
-          console.log("network error");
-        } else {
-          console.log(error);
-        }
-      });
-  };
 
   return (
     <Container component="main" maxWidth="sm">
@@ -72,7 +52,7 @@ export const Login = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={handleSubmit(onSubmit)}
+                onClick={handleSubmit(login)}
                 sx={{ mt: 1, mb: 2 }}
                 startIcon={<GoogleIcon />}
               >
@@ -84,7 +64,7 @@ export const Login = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={handleSubmit(onSubmit)}
+                onClick={handleSubmit(login)}
                 sx={{ mt: 1, mb: 2 }}
                 startIcon={<FacebookIcon />}
               >
@@ -150,7 +130,7 @@ export const Login = () => {
             type="submit"
             fullWidth
             variant="contained"
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(login)}
             sx={{ mt: 1, mb: 2 }}
           >
             Sign In
