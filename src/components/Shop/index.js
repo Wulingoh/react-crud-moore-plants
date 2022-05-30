@@ -23,7 +23,6 @@ function Shop() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <ResponsiveAppBar />
-      <Box>
         <Routes>
           <Route index element={"Index"} />
           <Route path="/products/:productId" element={"Product"} />
@@ -35,7 +34,6 @@ function Shop() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
         </Routes>
-      </Box>
       <Footer />
     </ThemeProvider>
   );

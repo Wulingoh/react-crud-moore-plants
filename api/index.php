@@ -15,6 +15,9 @@ if ($path[1] == 'api') {
         case 'auth':
             require __DIR__ . '/auth/index.php';
             break;
+        case 'customer':
+            require __DIR__ . '/customer/index.php';
+            break;
         default:
             http_response_code(404);
             echo 'Not Found';

@@ -43,7 +43,7 @@ export default function ListGalleryImg() {
     fileReader.readAsDataURL(files[0]);
     fileReader.onload = (event) => {
       axios
-        .post(`api/admin/gallery_img`, {
+        .post(`/api/admin/gallery_img`, {
           product_id: productId,
           img: event.target.result,
         })
@@ -55,7 +55,7 @@ export default function ListGalleryImg() {
   };
   const deleteGalleryImg = (galleryImgId) => {
     axios
-      .delete(`api/admin/gallery_img/${galleryImgId}/delete`, {
+      .delete(`/api/admin/gallery_img/${galleryImgId}/delete`, {
         validateStatus: function (status) {
           return status;
         },
@@ -87,7 +87,7 @@ export default function ListGalleryImg() {
                 <CardMedia
                   component="img"
                   height="140"
-                  image={`${API_HOST}public/images/${item.img}`}
+                  image={`/public/images/${item.img}`}
                   alt={item.title}
                   loading="lazy"
                 />

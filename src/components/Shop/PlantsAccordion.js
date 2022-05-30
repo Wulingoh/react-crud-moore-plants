@@ -5,10 +5,20 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Checkbox from "@mui/material/Checkbox";
+import Slider from "@mui/material/Slider";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
+function valuetext(value) {
+  return `${value}°C`;
+}
+
 export const PlantsAccordion = () => {
+  const [value, setValue] = React.useState([20, 37]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <div>
       <Accordion>
@@ -32,7 +42,7 @@ export const PlantsAccordion = () => {
             />
             <FormControlLabel
               control={<Checkbox />}
-              label="Happy in light & shade"
+              label="Happy in light &amp; shade"
               labelPlacement="start"
               sx={{
                 flexDirection: "row-reverse",
@@ -100,10 +110,13 @@ export const PlantsAccordion = () => {
           <Typography>Price</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <Slider
+            getAriaLabel={() => "Temperature range"}
+            value={value}
+            onChange={handleChange}
+            valueLabelDisplay="auto"
+            getAriaValueText={valuetext}
+          />
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -304,7 +317,7 @@ export const PlantsAccordion = () => {
           <Typography>Safety</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <FormGroup>
+          <FormGroup>
             <FormControlLabel
               control={<Checkbox />}
               label="Child & Pet Safe"
