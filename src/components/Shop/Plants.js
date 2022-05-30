@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import CameraIcon from "@mui/icons-material/PhotoCamera";
@@ -17,122 +18,99 @@ import Link from "@mui/material/Link";
 
 import { SideBarFilter } from "./SideBarFilter";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export const Plants = () => {
+  const [Products, setProducts] = useState([]);
+  useEffect(() => {
+    getProducts();
+  }, []);
+  function getProducts() {
+    axios
+      .get(`/api/customer/products`, {
+        validateStatus: function (status) {
+          return status;
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setProducts(response.data);
+      });
+  }
   return (
-    <>
-      <SideBarFilter position="relative"></SideBarFilter>
-      <main style={{ marginLeft: 300 }}>
-        {/* Hero unit */}
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Indoor Plants
-            </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
-            </Typography>
-            <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-            >
-              <Button variant="contained">Main call to action</Button>
-              <Button variant="outlined">Secondary action</Button>
-            </Stack>
-          </Container>
-        </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    sx={{
-                      // 16:9
-                      pt: "56.25%",
-                    }}
-                    image="https://source.unsplash.com/random"
-                    alt="random"
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small">View</Button>
-                    <Button size="small">Edit</Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+    <main style={{ backgroundColor: "#F3F7F3" }}>
+      <Box
+        sx={{
+          bgcolor: "#F3F7F3",
+          pt: "10px",
+          pb: "10px",
+        }}
+      >
+        <Container maxWidth="sm">
+          <Typography
+            component="h1"
+            variant="h3"
+            align="center"
+            color="text.primary"
+            gutterBottom
+          >
+            Indoor Plants
+          </Typography>
         </Container>
-      </main>
-      {/* Footer */}
-      <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Something here to give the footer a purpose!
-        </Typography>
-        <Copyright />
       </Box>
-      {/* End footer */}
-    </>
+      <Grid container>
+        <Grid item xs={12} sm={3}>
+          <SideBarFilter></SideBarFilter>
+        </Grid>
+        <Grid item xs={12} sm={9} >
+          <Container sx={{ pb: "20px" }} maxWidth="lg">
+            {/* End hero unit */}
+            <Grid container spacing={3}>
+              {Products.map((product, key) => (
+                <Grid item key={key} xs={12} sm={6} md={4}>
+                  <Card
+                    sx={{
+                      height: "100%",
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      marginTop: 0,
+                      marginLeft: 0,
+                    }}
+                  >
+                    <CardMedia
+                      component="img"
+                      sx={{
+                        // 16:9
+                        pt: "0px",
+                      }}
+                      src={`/public/images/${product.img}`}
+                      width="150"
+                      alt="random"
+                    />
+                    <CardContent sx={{ flexGrow: 1 }}>
+                      <Typography gutterBottom variant="h6" component="h2">
+                        {product.title}
+                      </Typography>
+                      <Typography>{product.price}</Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        fullWidth
+                        size="small"
+                        component={Link}
+                        to={`/customer/products/${product.product_id}`}
+                      >
+                        ADD TO BAG
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        </Grid>
+      </Grid>
+    </main>
   );
 };
 export default Plants;
