@@ -7,7 +7,7 @@ export const useCategoryList = _ => {
     const [categories, setCategories] = useState([]);
 
     const getAllCategories = () => {
-        axios.get(`${API_HOST}api/category`)
+        axios.get(`/api/admin/category`)
             .then(function(response) {
                 const allCategories = response.data;
                 setCategories(allCategories);  
@@ -27,7 +27,7 @@ export const useLightingCareList = _ => {
     const [lightingCares, setLightingCares] = useState([]);
 
     const getAllLightingCares = () => {
-        axios.get(`${API_HOST}api/lighting`)
+        axios.get(`/api/admin/lighting`)
             .then(function(response) {
                 const allLightingCares = response.data;
                 setLightingCares(allLightingCares);  
@@ -47,7 +47,7 @@ export const useCareLevelList = _ => {
     const [careLevels, setCareLevels] = useState([]);
 
     const getAllCareLevels = () => {
-        axios.get(`${API_HOST}api/care_level`)
+        axios.get(`/api/admin/care_level`)
             .then(function(response) {
                 const allCareLevels = response.data;
                 setCareLevels(allCareLevels);  
@@ -67,7 +67,7 @@ export const useWateringList = _ => {
     const [wateringList, setWateringList] = useState([]);
 
     const getWateringList = () => {
-        axios.get(`${API_HOST}api/watering`)
+        axios.get(`/api/admin/watering`)
             .then(function(response) {
                 setWateringList(response.data);  
             })
@@ -86,7 +86,7 @@ export const useHumidityList = _ => {
     const [humidityList, setHumidityList] = useState([]);
 
     const getHumidityList = () => {
-        axios.get(`${API_HOST}api/humidity`)
+        axios.get(`/api/admin/humidity`)
             .then(function(response) {
                 setHumidityList(response.data);  
             })
