@@ -5,6 +5,8 @@ import { Route, Routes, Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Plants from "./Plants";
 import Pots from "./Pots";
+import HowToGreen from "./HowToGreen";
+import Story from "./Story";
 import Contact from "./Contact";
 import SignUp from "./SignUp";
 import Login from "./Login";
@@ -29,8 +31,8 @@ function Shop() {
           <Route path="/products/:productId" element={"Product"} />
           <Route path="/plants" element={<Plants />} />
           <Route path="/pots" element={<Pots />} />
-          <Route path="/howToGreen" element={"How To Green"} />
-          <Route path="/about" element={"Story"} />
+          <Route path="/howToGreen" element={<HowToGreen />} />
+          <Route path="/about" element={<Story />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
