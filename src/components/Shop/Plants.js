@@ -15,7 +15,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
-
+import OrderBy from "./OrderBy";
+import TotalRowCount from "./TotalRowCount";
 import { SideBarFilter } from "./SideBarFilter";
 
 
@@ -62,7 +63,16 @@ export const Plants = () => {
         </Grid>
         <Grid item xs={12} sm={9} >
           <Container sx={{ pb: "20px" }} maxWidth="lg">
-            {/* End hero unit */}
+            <Grid container>
+                <Grid item xs>
+                  <TotalRowCount products={products}></TotalRowCount>
+                </Grid>
+                <Grid item xs={6}>
+                </Grid>
+                <Grid item xs>
+                  <OrderBy params={params} setParams={setParams}></OrderBy>
+                </Grid>
+            </Grid>
             <Grid container spacing={3}>
               {products.map((product, key) => (
                 <Grid item key={key} xs={12} sm={6} md={4}>

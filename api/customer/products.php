@@ -28,12 +28,6 @@
                 $stmt->execute();
                 $products = $stmt->fetch(PDO::FETCH_ASSOC);
             } else {
-                // $orderBy = "vehicles.price ASC";
-                // if (isset($_GET["orderBy"])) {
-                //     $orderByOption = array("vehicles.price ASC", "vehicles.price DESC", "vehicles.created_at DESC", "vehicles.mileage DESC", "vehicles.mileage ASC");
-                //     $orderByKey = array_search($_GET["orderBy"], $orderByOption);
-                //     $orderBy = $orderByOption[$orderByKey];
-                // }
                 $sql .= " WHERE 1";
                 if(isset($_GET["lightingCareId"]) && $_GET["lightingCareId"]){
                     $sql .= " AND products.lighting_care_id IN (".escape_array($db, $_GET["lightingCareId"]).")";
@@ -59,6 +53,16 @@
                 if(isset($_GET["heightLt"]) && $_GET["heightLt"]){
                     $sql .= " AND products.height < :heightLt";
                 }
+                // if (count($filter) == 0) {
+                //     $filter[] = "1=1";
+                // }
+                $orderBy = "products.title ASC";
+                if (isset($_GET["orderBy"])) {
+                    $orderByOption = array("products.title ASC","products.price ASC", "products.price DESC", "products.created_at DESC");
+                    $orderByKey = array_search($_GET["orderBy"], $orderByOption);
+                    $orderBy = $orderByOption[$orderByKey];
+                }
+                $sql .= " ORDER BY ".$orderBy;
                 $stmt = $db->prepare($sql);
                 if(isset($_GET["priceGte"]) && $_GET["priceGte"]){
                     $stmt->bindParam(':priceGte', $_GET['priceGte']);
