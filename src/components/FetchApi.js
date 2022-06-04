@@ -125,3 +125,61 @@ export const signUp = async (data) => {
 
   return response.data;
 }
+
+export const useLightingCareShopList =_ =>{
+
+    const [lightingCare, setLightingCare] = useState([]);
+
+    const getAllLightingCare = () => {
+        axios.get(`/api/customer/lighting`)
+            .then(function(response) {
+                const allLightingCare = response.data;
+                setLightingCare(allLightingCare);  
+            })
+            .catch(error => console.error(`Error: ${error}`));
+    }
+    useEffect(() => {
+        getAllLightingCare();
+    }, []);
+return lightingCare;
+}
+
+export const useCareLevelShopList = _ => {
+
+    const [careLevels, setCareLevels] = useState([]);
+
+    const getAllCareLevels = () => {
+        axios.get(`/api/customer/care_level`)
+            .then(function(response) {
+                const allCareLevels = response.data;
+                setCareLevels(allCareLevels);  
+            })
+            .catch(error => console.error(`Error: ${error}`));
+    }
+
+    useEffect(() => {
+        getAllCareLevels();
+    }, []);
+
+return careLevels;
+}
+
+export const useCategoryShopList = _ => {
+
+    const [category, setCategory] = useState([]);
+
+    const getAllCategories = () => {
+        axios.get(`/api/customer/category`)
+            .then(function(response) {
+                const allCategories = response.data;
+                setCategory(allCategories);  
+            })
+            .catch(error => console.error(`Error: ${error}`));
+    }
+
+    useEffect(() => {
+        getAllCategories();
+    }, []);
+
+return category;
+}

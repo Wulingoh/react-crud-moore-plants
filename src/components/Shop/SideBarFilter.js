@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import ReplayIcon from "@mui/icons-material/Replay";
 import Button from "@mui/material/Button";
 
-export const SideBarFilter = () => {
+export const SideBarFilter = (props) => {
   return (
     <Box>
       <Grid container spacing={2} sx={{ marginBottom: "20px" }}>
@@ -16,13 +16,13 @@ export const SideBarFilter = () => {
           </Typography>
         </Grid>
         <Grid item xs={6} md={4} sx={{ justifyContent: "flex-end" }}>
-          <Button size="small" endIcon={<ReplayIcon />}>
+          <Button size="small" endIcon={<ReplayIcon />} onClick={() => props.setParams({})}>
             Reset
           </Button>
         </Grid>
       </Grid>
       <Box sx={{ overflow: "auto" }}>
-        <PlantsAccordion />
+        <PlantsAccordion {...props} />
       </Box>
     </Box>
   );
