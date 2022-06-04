@@ -20,22 +20,21 @@ import { SideBarFilter } from "./SideBarFilter";
 
 
 export const Plants = () => {
-  const [Products, setProducts] = useState([]);
+  const [params, setParams] = useState({});
+  const [products, setProducts] = useState([]);
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [params]);
   function getProducts() {
     axios
-      .get(`/api/customer/products`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
+      .get(`/api/customer/products?${new URLSearchParams(params).toString()}`)
       .then(function (response) {
         console.log(response.data);
         setProducts(response.data);
       });
   }
+
+
   return (
     <main style={{ backgroundColor: "#F3F7F3" }}>
       <Box
@@ -59,13 +58,13 @@ export const Plants = () => {
       </Box>
       <Grid container>
         <Grid item xs={12} sm={3}>
-          <SideBarFilter></SideBarFilter>
+          <SideBarFilter params={params} setParams={setParams}></SideBarFilter>
         </Grid>
         <Grid item xs={12} sm={9} >
           <Container sx={{ pb: "20px" }} maxWidth="lg">
             {/* End hero unit */}
             <Grid container spacing={3}>
-              {Products.map((product, key) => (
+              {products.map((product, key) => (
                 <Grid item key={key} xs={12} sm={6} md={4}>
                   <Card
                     sx={{
