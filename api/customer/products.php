@@ -53,9 +53,7 @@
                 if(isset($_GET["heightLt"]) && $_GET["heightLt"]){
                     $sql .= " AND products.height < :heightLt";
                 }
-                // if (count($filter) == 0) {
-                //     $filter[] = "1=1";
-                // }
+
                 $orderBy = "products.title ASC";
                 if (isset($_GET["orderBy"])) {
                     $orderByOption = array("products.title ASC","products.price ASC", "products.price DESC", "products.created_at DESC");

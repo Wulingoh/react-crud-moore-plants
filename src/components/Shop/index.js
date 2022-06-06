@@ -10,6 +10,7 @@ import Story from "./Story";
 import Contact from "./Contact";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import PlantDetails from "./PlantDetails"
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -28,7 +29,7 @@ function Shop() {
       <ResponsiveAppBar />
         <Routes>
           <Route index element={"Index"} />
-          <Route path="/products/:productId" element={"Product"} />
+          <Route path="/plants/:productId" element={<PlantDetails />} />
           <Route path="/plants" element={<Plants />} />
           <Route path="/pots" element={<Pots />} />
           <Route path="/howToGreen" element={<HowToGreen />} />
