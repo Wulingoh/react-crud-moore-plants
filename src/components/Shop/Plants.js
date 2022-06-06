@@ -118,7 +118,7 @@ export const Plants = () => {
                         component={Link}
                         to={`/customer/products/${product.product_id}`}
                       >
-                        ADD TO BAG
+                        VIEW DETAIL
                       </Button>
                     </CardActions>
                   </Card>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import { API_HOST } from "../config";
+import { useParams } from 'react-router-dom';
 
 export const useCategoryList = _ => {
 
@@ -182,4 +183,25 @@ export const useCategoryShopList = _ => {
     }, []);
 
 return category;
+}
+
+export const useGalleryImgShopList = _ => {
+
+    const [galleryImg, setGalleryImg] = useState([]);
+    const { productId } = useParams();
+
+    const getAllGalleryImg = () => {
+        axios.get(`/api/customer/gallery_img?product_id=${productId}`)
+            .then(function(response) {
+                const allGalleryImg = response.data;
+                setGalleryImg(allGalleryImg);  
+            })
+            .catch(error => console.error(`Error: ${error}`));
+    }
+
+    useEffect(() => {
+        getAllGalleryImg();
+    }, []);
+
+return galleryImg;
 }

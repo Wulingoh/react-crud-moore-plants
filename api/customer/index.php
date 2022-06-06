@@ -21,6 +21,9 @@ switch ($resource) {
     case 'category':
         require __DIR__ . '/category.php';
         break;
+    case 'gallery_img':
+        require __DIR__ . '/gallery_img.php';
+        break;
 
     default:
         http_response_code(404);
