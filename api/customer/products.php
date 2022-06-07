@@ -13,7 +13,7 @@
 
     switch($method){
         case 'GET':
-            $sql = "SELECT products.product_id, products.category_id, category.name as categoryName, products.type, products.img, products.title, products.name, products.price, products.quantity, products.color, products.height, products.latin_name, products.lighting_care_id,lighting_care.name as lightingName, products.care_level_id, care_level.name as careLevelName, products.watering_id,watering.name as wateringName, products.humidity_id,humidity.name as humidityName, products.room_type, products.size, products.pot_material, products.content 
+            $sql = "SELECT products.product_id, products.category_id, category.name as categoryName, products.type, products.img, products.title, products.name, products.price, products.quantity, products.color, products.height, products.latin_name, products.lighting_care_id,lighting_care.name as lightingName, products.care_level_id, care_level.name as careLevelName, products.watering_id,watering.name as wateringName, products.humidity_id,humidity.name as humidityName, products.room_type, products.size, products.pot_material, products.content, products.facts
             FROM products
             INNER JOIN category on products.category_id = category.category_id 
             INNER JOIN lighting_care on products.lighting_care_id = lighting_care.lighting_id 
@@ -27,6 +27,7 @@
                 $stmt->bindParam(':productId', $path[4]);
                 $stmt->execute();
                 $products = $stmt->fetch(PDO::FETCH_ASSOC);
+                $products['facts'] = $products['facts'] ? json_decode($products['facts']) : [];
             } else {
                 $sql .= " WHERE 1";
                 if(isset($_GET["lightingCareId"]) && $_GET["lightingCareId"]){
@@ -76,6 +77,9 @@
                 }
                 $stmt->execute();
                 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($products as $product) {
+                    $product['facts'] = $product['facts'] ? json_decode($product['facts']) : [];
+                }
             }
             echo json_encode($products);
             break;

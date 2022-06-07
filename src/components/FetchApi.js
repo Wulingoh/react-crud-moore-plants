@@ -205,3 +205,25 @@ export const useGalleryImgShopList = _ => {
 
 return galleryImg;
 }
+
+export const useProductDetailsShopList = _ => {
+
+    const [product, setProduct] = useState({});
+    const { productId } = useParams();
+
+    const getProductDetails = () => {
+        axios.get(`/api/customer/products/${productId}`)
+            .then(function(response) {
+                const allProductDetails = response.data;
+                setProduct(allProductDetails);
+            })
+            .catch(error => console.error(`Error: ${error}`));
+    }
+
+    useEffect(() => {
+        getProductDetails();
+    }, []);
+
+return product;
+}
+

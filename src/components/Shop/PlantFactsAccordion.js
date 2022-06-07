@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useProductDetailsShopList } from "../FetchApi";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -8,11 +9,15 @@ import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined";
+import OpacityOutlinedIcon from "@mui/icons-material/OpacityOutlined";
+import ThermostatOutlinedIcon from "@mui/icons-material/ThermostatOutlined";
+import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import { Container } from "@mui/material";
 
 export const PlantFactsAccordion = () => {
+  const productDetails = useProductDetailsShopList();
   return (
-    <div>
+    <div style={{ marginBottom: "50px"}}>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -48,11 +53,11 @@ export const PlantFactsAccordion = () => {
                 <Container>
                   <Grid container>
                     <Grid item xs={3}>
-                      <SentimentSatisfiedOutlinedIcon />
+                      <OpacityOutlinedIcon />
                     </Grid>
                     <Grid item xs={9}>
                       <Typography sx={{ fontFamily: "Raleway" }}>
-                        Happy
+                        {productDetails.wateringName}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -62,11 +67,11 @@ export const PlantFactsAccordion = () => {
                 <Container>
                   <Grid container>
                     <Grid item xs={3}>
-                      <SentimentSatisfiedOutlinedIcon />
+                      <WbSunnyOutlinedIcon />
                     </Grid>
                     <Grid item xs={9}>
                       <Typography sx={{ fontFamily: "Raleway" }}>
-                        Happy
+                        {productDetails.lightingName}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -76,11 +81,11 @@ export const PlantFactsAccordion = () => {
                 <Container>
                   <Grid container>
                     <Grid item xs={3}>
-                      <SentimentSatisfiedOutlinedIcon />
+                      <ThermostatOutlinedIcon />
                     </Grid>
                     <Grid item xs={9}>
                       <Typography sx={{ fontFamily: "Raleway" }}>
-                        Happy
+                        {productDetails.humidityName}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -115,6 +120,7 @@ export const PlantFactsAccordion = () => {
               marginRight: "10px",
             }}
           >
+            {productDetails.facts?.map((fact) => (
             <Grid container spacing={3}>
               <Grid
                 item
@@ -125,45 +131,20 @@ export const PlantFactsAccordion = () => {
                 <Container>
                   <Grid container>
                     <Grid item xs={3}>
-                      <SentimentSatisfiedOutlinedIcon />
-                    </Grid>
-                    <Grid item xs={9}>
                       <Typography sx={{ fontFamily: "Raleway" }}>
-                        Happy
+                        {fact.title}
                       </Typography>
                     </Grid>
-                  </Grid>
-                </Container>
-              </Grid>
-              <Grid item md={4} sm={12}>
-                <Container>
-                  <Grid container>
-                    <Grid item xs={3}>
-                      <SentimentSatisfiedOutlinedIcon />
-                    </Grid>
                     <Grid item xs={9}>
                       <Typography sx={{ fontFamily: "Raleway" }}>
-                        Happy
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Container>
-              </Grid>
-              <Grid item md={4} sm={12}>
-                <Container>
-                  <Grid container>
-                    <Grid item xs={3}>
-                      <SentimentSatisfiedOutlinedIcon />
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Typography sx={{ fontFamily: "Raleway" }}>
-                        Happy
+                        {fact.description}
                       </Typography>
                     </Grid>
                   </Grid>
                 </Container>
               </Grid>
             </Grid>
+              ))}
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -192,49 +173,21 @@ export const PlantFactsAccordion = () => {
               marginRight: "10px",
             }}
           >
-            <Grid container spacing={3}>
+            <Grid container spacing={1}>
               <Grid
                 item
-                md={4}
+                md={12}
                 sm={12}
                 sx={{ display: "flex", alignItems: "center" }}
               >
                 <Container>
                   <Grid container>
-                    <Grid item xs={3}>
-                      <SentimentSatisfiedOutlinedIcon />
+                    <Grid item xs={2}>
+                      <FactCheckOutlinedIcon />
                     </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={10}>
                       <Typography sx={{ fontFamily: "Raleway" }}>
-                        Happy
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Container>
-              </Grid>
-              <Grid item md={4} sm={12}>
-                <Container>
-                  <Grid container>
-                    <Grid item xs={3}>
-                      <SentimentSatisfiedOutlinedIcon />
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Typography sx={{ fontFamily: "Raleway" }}>
-                        Happy
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Container>
-              </Grid>
-              <Grid item md={4} sm={12}>
-                <Container>
-                  <Grid container>
-                    <Grid item xs={3}>
-                      <SentimentSatisfiedOutlinedIcon />
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Typography sx={{ fontFamily: "Raleway" }}>
-                        Happy
+                        {productDetails.content}
                       </Typography>
                     </Grid>
                   </Grid>

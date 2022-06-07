@@ -15,7 +15,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 
 export default function ListProduct() {
-  const [Products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   useEffect(() => {
     getProducts();
   }, []);
@@ -69,7 +69,7 @@ export default function ListProduct() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {Products.map((product, key) => (
+            {products.map((product, key) => (
               <TableRow key={key}>
                 <TableCell>{product.product_id}</TableCell>
                 <TableCell>{product.type}</TableCell>
