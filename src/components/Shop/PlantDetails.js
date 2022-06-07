@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import useMediaQuery from '@mui/material/useMediaQuery';
 import PlantFactsAccordion from "./PlantFactsAccordion";
+import { PlantFactsDesktop } from "./PlantFactsDesktop";
+import { useProductDetailsShopList } from "../FetchApi";
 import ProductCarousel from "./ProductCarousel";
 import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
@@ -16,6 +19,7 @@ import { Stack } from "@mui/material";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined";
 
+
 const Img = styled("img")({
   margin: "auto",
   display: "block",
@@ -23,7 +27,11 @@ const Img = styled("img")({
   maxHeight: "100%",
 });
 
+
+
 export const PlantDetails = () => {
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const productDetails = useProductDetailsShopList();
   return (
     <main style={{ backgroundColor: "#F3F7F3", marginBottom: "20px" }}>
       <Box
@@ -47,27 +55,27 @@ export const PlantDetails = () => {
             <Container>
               <Stack spacing={2}>
                 <Typography sx={{ textAlign: "start", fontFamily: "Raleway" }}>
-                  Title:
+                Title: {productDetails.title}
                 </Typography>
                 <Typography sx={{ textAlign: "start", fontFamily: "Raleway" }}>
-                  Price $
+                Price: ${productDetails.price}
                 </Typography>
                 <Typography sx={{ textAlign: "start", fontFamily: "Raleway" }}>
-                  Height(cm):
+                Height: {productDetails.height}cm
                 </Typography>
                 <Typography sx={{ textAlign: "start", fontFamily: "Raleway" }}>
-                  Latin Name:
+                Latin Name: {productDetails.latin_name}
                 </Typography>
               </Stack>
-              <Grid container>
+              <Grid container sx={{marginTop: "20px"}}>
                 <Grid item xs={6}>
                   <Grid container>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} sx={{paddingRight:"40px"}}>
                       <WbSunnyOutlinedIcon />
                     </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={9} sx={{paddingRight:"40px"}}>
                       <Typography sx={{ fontFamily: "Raleway" }}>
-                        Happy
+                        {productDetails.lightingName}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -77,15 +85,15 @@ export const PlantDetails = () => {
                     <Grid item xs={3}>
                       <SentimentSatisfiedOutlinedIcon />
                     </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={9} sx={{paddingRight:"40px"}}>
                       <Typography sx={{ fontFamily: "Raleway" }}>
-                        Happy
+                      {productDetails.careLevelName}
                       </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid container>
+              <Grid container sx={{marginTop:"20px"}}>
                 <Grid item xs={12}>
                   <Button
                     fullWidth
@@ -101,184 +109,7 @@ export const PlantDetails = () => {
           </Grid>
         </Grid>
       </Box>
-      <PlantFactsAccordion />
-      <Box>
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Raleway" }}>Plant Like</Typography>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box
-        sx={{
-          marginBottom: "20px",
-          marginTop: "30px",
-          marginLeft: "10px",
-          marginRight: "10px",
-        }}
-      >
-        <Grid container spacing={3}>
-          <Grid
-            item
-            md={4}
-            sm={12}
-            sx={{ display: "flex", alignItems: "center" }}
-          >
-            <Container>
-              <Grid container>
-                <Grid item xs={3}>
-                  <SentimentSatisfiedOutlinedIcon />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>Happy</Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          </Grid>
-          <Grid item md={4} sm={12}>
-            <Container>
-              <Grid container>
-                <Grid item xs={3}>
-                  <SentimentSatisfiedOutlinedIcon />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>Happy</Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          </Grid>
-          <Grid item md={4} sm={12}>
-            <Container>
-              <Grid container>
-                <Grid item xs={3}>
-                  <SentimentSatisfiedOutlinedIcon />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>Happy</Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box>
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Raleway" }}>Quick Facts</Typography>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box
-        sx={{
-          marginBottom: "20px",
-          marginTop: "30px",
-          marginLeft: "10px",
-          marginRight: "10px",
-        }}
-      >
-        <Grid container spacing={3}>
-          <Grid
-            item
-            md={4}
-            sm={12}
-            sx={{ display: "flex", alignItems: "center" }}
-          >
-            <Container>
-              <Grid container>
-                <Grid item xs={3}>
-                  <SentimentSatisfiedOutlinedIcon />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>Happy</Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          </Grid>
-          <Grid item md={4} sm={12}>
-            <Container>
-              <Grid container>
-                <Grid item xs={3}>
-                  <SentimentSatisfiedOutlinedIcon />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>Happy</Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          </Grid>
-          <Grid item md={4} sm={12}>
-            <Container>
-              <Grid container>
-                <Grid item xs={3}>
-                  <SentimentSatisfiedOutlinedIcon />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>Happy</Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box>
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Raleway" }}>About Plant</Typography>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box
-        sx={{
-          marginBottom: "20px",
-          marginTop: "30px",
-          marginLeft: "10px",
-          marginRight: "10px",
-        }}
-      >
-        <Grid container spacing={3}>
-          <Grid
-            item
-            md={4}
-            sm={12}
-            sx={{ display: "flex", alignItems: "center" }}
-          >
-            <Container>
-              <Grid container>
-                <Grid item xs={3}>
-                  <SentimentSatisfiedOutlinedIcon />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>Happy</Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          </Grid>
-          <Grid item md={4} sm={12}>
-            <Container>
-              <Grid container>
-                <Grid item xs={3}>
-                  <SentimentSatisfiedOutlinedIcon />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>Happy</Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          </Grid>
-          <Grid item md={4} sm={12}>
-            <Container>
-              <Grid container>
-                <Grid item xs={3}>
-                  <SentimentSatisfiedOutlinedIcon />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>Happy</Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          </Grid>
-        </Grid>
-      </Box>
+      {isMobile ? <PlantFactsAccordion /> : <PlantFactsDesktop />}
       <Box sx={{ marginBottom: "50px" }}>
         <PromiseFooter />
       </Box>

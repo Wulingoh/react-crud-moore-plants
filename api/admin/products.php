@@ -12,7 +12,7 @@
             $imagePath = uniqid() . '.' . $imageType;
             file_put_contents(PRODUCT_IMG_DIR . $imagePath, $imageData);
 
-            $sql = "INSERT INTO products(category_id, type, img, title, name, price, quantity, color, height, latin_name , lighting_care_id, care_level_id, watering_id, humidity_id, room_type, size, pot_material, content, created_at, updated_at) values(:categoryId, :type, :img, :title, :name, :price, :quantity, :color, :height, :latinName , :lightingCareId, :careLevelId, :wateringId, :humidityId, :roomType, :size, :potMaterial, :content, NOW(), NOW())";
+            $sql = "INSERT INTO products(category_id, type, img, title, name, price, quantity, color, height, latin_name , lighting_care_id, care_level_id, watering_id, humidity_id, room_type, size, pot_material, content, facts, created_at, updated_at) values(:categoryId, :type, :img, :title, :name, :price, :quantity, :color, :height, :latinName , :lightingCareId, :careLevelId, :wateringId, :humidityId, :roomType, :size, :potMaterial, :content, :facts, NOW(), NOW())";
 
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':categoryId', $product->category_id);
@@ -33,6 +33,7 @@
             $stmt->bindParam(':size', $product->size);
             $stmt->bindParam(':potMaterial', $product->pot_material);
             $stmt->bindParam(':content', $product->content);
+            $stmt->bindParam(':facts', json_encode($product->facts));
             if($stmt->execute()) {
                 $data = ['status' => 1, 'message' => "Product successfully created"];
                 
@@ -44,7 +45,7 @@
             break;
         
         case 'GET':
-            $sql = "SELECT products.product_id, products.category_id, category.name as categoryName, products.type, products.img, products.title, products.name, products.price, products.quantity, products.color, products.height, products.latin_name, products.lighting_care_id,lighting_care.name as lightingName, products.care_level_id, care_level.name as careLevelName, products.watering_id,watering.name as wateringName, products.humidity_id,humidity.name as humidityName, products.room_type, products.size, products.pot_material, products.content 
+            $sql = "SELECT products.product_id, products.category_id, category.name as categoryName, products.type, products.img, products.title, products.name, products.price, products.quantity, products.color, products.height, products.latin_name, products.lighting_care_id,lighting_care.name as lightingName, products.care_level_id, care_level.name as careLevelName, products.watering_id,watering.name as wateringName, products.humidity_id,humidity.name as humidityName, products.room_type, products.size, products.pot_material, products.content, products.facts 
             FROM products
             INNER JOIN category on products.category_id = category.category_id 
             INNER JOIN lighting_care on products.lighting_care_id = lighting_care.lighting_id 
@@ -58,11 +59,15 @@
                 $stmt->bindParam(':productId', $path[4]);
                 $stmt->execute();
                 $products = $stmt->fetch(PDO::FETCH_ASSOC);
+                $products['facts'] = $products['facts'] ? json_decode($products['facts']) : [];
             } else {
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
                 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            }
+                foreach ($products as $product) {
+                    $product['facts'] = $product['facts'] ? json_decode($product['facts']) : [];
+                }
+            } 
             echo json_encode($products);
             break;
         
@@ -77,8 +82,7 @@
                 $imagePath = uniqid() . '.' . $imageType;
                 file_put_contents(PRODUCT_IMG_DIR . $imagePath, $imageData);
             }
-
-            $sql = "UPDATE products SET category_id =:categoryId, type =:type, name =:name,img =:img, title =:title, price =:price, quantity =:quantity, color =:color, height =:height, latin_name =:latinName, lighting_care_id =:lightingCareId, care_level_id =:careLevelId, watering_id =:wateringId, humidity_id =:humidityId, room_type =:roomType, size =:size, pot_material =:potMaterial, content =:content, updated_at=NOW() WHERE product_id =:productId";
+            $sql = "UPDATE products SET category_id =:categoryId, type =:type, name =:name,img =:img, title =:title, price =:price, quantity =:quantity, color =:color, height =:height, latin_name =:latinName, lighting_care_id =:lightingCareId, care_level_id =:careLevelId, watering_id =:wateringId, humidity_id =:humidityId, room_type =:roomType, size =:size, pot_material =:potMaterial, content =:content, facts = :facts, updated_at=NOW() WHERE product_id =:productId";
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':productId', $product->product_id);
             $stmt->bindParam(':categoryId', $product->category_id);
@@ -99,6 +103,7 @@
             $stmt->bindParam(':size', $product->size);
             $stmt->bindParam(':potMaterial', $product->pot_material);
             $stmt->bindParam(':content', $product->content);
+            $stmt->bindParam(':facts', json_encode($product->facts));
             if($stmt->execute()) {
                 $response = ['status' => 1, 'message' => 'Product updated successfully.'];   
             } else {
