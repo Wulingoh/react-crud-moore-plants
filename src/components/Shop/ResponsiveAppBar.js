@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
@@ -19,6 +18,8 @@ import { ReactComponent as MoorePlantLogo } from "../Images/moorePlantLogo1.svg"
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Plants from "./Plants";
 import useAuth from "../AuthContext";
+import { Badge } from "@mui/material";
+import { useCart } from './CartContext'
 
 const pages = [
   ["Home", ""],
@@ -33,8 +34,10 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const ResponsiveAppBar = () => {
   const { user, logout, signUp } = useAuth()
   const navigate = useNavigate()
+  const [isToggle, setToggle] = useState(false);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { itemCount } = useCart()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -59,7 +62,13 @@ const ResponsiveAppBar = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MoorePlantLogo sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }, justifyContent:'flex-end' }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+              justifyContent: "flex-end",
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -85,11 +94,16 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" }
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map(([title, path]) => (
-                <MenuItem key={path} onClick={handleCloseNavMenu} component={Link} to={path}>
+                <MenuItem
+                  key={path}
+                  onClick={handleCloseNavMenu}
+                  component={Link}
+                  to={path}
+                >
                   <Typography textAlign="center">{title}</Typography>
                 </MenuItem>
               ))}
@@ -123,7 +137,8 @@ const ResponsiveAppBar = () => {
               <Button
                 key={path}
                 onClick={handleCloseNavMenu}
-                component={Link} to={path}
+                component={Link}
+                to={path}
                 sx={{ my: 2, color: "#323232", display: "block" }}
               >
                 {title}
@@ -131,37 +146,44 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0,
-              display: { xs: "none", md: "flex" }}}>
-            <Tooltip title="Open settings">
+          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+            <Tooltip title="Shopping Cart">
               <IconButton
-                onClick={handleOpenUserMenu}
+                isToggle={isToggle}
+                setToggle={setToggle}
+                // cart={context.carts}
+                // removeProductFromCart={context.removeProductFromCart}
+                // clearCart={context.clearCart}
                 sx={{ p: 0, marginRight: "10px" }}
               >
-                <ShoppingBagIcon />
+                <Badge color="secondary" badgeContent={itemCount}>
+                  <ShoppingBagIcon />
+                </Badge>
               </IconButton>
             </Tooltip>
             <Tooltip title="Open settings">
               <IconButton
-                onClick={() => navigate('/signup')}
+                onClick={() => navigate("/signup")}
                 sx={{ p: 0, marginRight: "10px" }}
               >
                 <AppRegistrationIcon />
               </IconButton>
             </Tooltip>
-            
+
             {user ? (
-            <Tooltip title="Logout">
-              <IconButton onClick={logout} sx={{ p: 0 }}>
-                <LogoutIcon />
-              </IconButton>
-            </Tooltip>) : (
-            <Tooltip title="Login">
-              <IconButton onClick={() => navigate('/login')} sx={{ p: 0 }}>
-                <LoginIcon />
-              </IconButton>
-            </Tooltip>)}
-  
+              <Tooltip title="Logout">
+                <IconButton onClick={logout} sx={{ p: 0 }}>
+                  <LogoutIcon />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title="Login">
+                <IconButton onClick={() => navigate("/login")} sx={{ p: 0 }}>
+                  <LoginIcon />
+                </IconButton>
+              </Tooltip>
+            )}
+
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"

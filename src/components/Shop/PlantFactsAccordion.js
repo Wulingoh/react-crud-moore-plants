@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
+import { Stack } from "@mui/material";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined";
 import OpacityOutlinedIcon from "@mui/icons-material/OpacityOutlined";
@@ -17,7 +18,7 @@ import { Container } from "@mui/material";
 export const PlantFactsAccordion = () => {
   const productDetails = useProductDetailsShopList();
   return (
-    <div style={{ marginBottom: "50px"}}>
+    <div style={{ marginBottom: "50px" }}>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -116,35 +117,31 @@ export const PlantFactsAccordion = () => {
             sx={{
               marginBottom: "20px",
               marginTop: "30px",
-              marginLeft: "10px",
-              marginRight: "10px",
             }}
           >
             {productDetails.facts?.map((fact) => (
-            <Grid container spacing={3}>
-              <Grid
-                item
-                md={4}
-                sm={12}
-                sx={{ display: "flex", alignItems: "center" }}
-              >
-                <Container>
-                  <Grid container>
-                    <Grid item xs={3}>
+              <Grid container spacing={3}>
+                <Grid
+                  item
+                  md={4}
+                  sm={12}
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <Stack direction="row" spacing={2}>
+                    <Box item sx={{marginBottom:"10px", marginRight:"10px"}}>
                       <Typography sx={{ fontFamily: "Raleway" }}>
-                        {fact.title}
+                        {fact.title}:
                       </Typography>
-                    </Grid>
-                    <Grid item xs={9}>
+                    </Box>
+                    <Box item sx={{justifyItems:"10px"}}>
                       <Typography sx={{ fontFamily: "Raleway" }}>
                         {fact.description}
                       </Typography>
-                    </Grid>
-                  </Grid>
-                </Container>
+                    </Box>
+                  </Stack>
+                </Grid>
               </Grid>
-            </Grid>
-              ))}
+            ))}
           </Box>
         </AccordionDetails>
       </Accordion>

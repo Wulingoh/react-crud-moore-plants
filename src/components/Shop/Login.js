@@ -1,14 +1,9 @@
 import * as React from 'react';
 import { Controller, useForm } from "react-hook-form";
-import axios from 'axios';
-import { API_HOST } from '../../config';
 import useAuth from "../AuthContext";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -16,18 +11,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
-import SvgIcon from '@mui/material/SvgIcon';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Stack } from '@mui/material';
   
-
-
 export const Login = () => {
   const { user, login } = useAuth()
   const navigate = useNavigate();
   const { handleSubmit, control, errors } = useForm();
-
 
   return (
     <Container component="main" maxWidth="sm">

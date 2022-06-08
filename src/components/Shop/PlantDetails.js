@@ -18,7 +18,7 @@ import Divider from "@mui/material/Divider";
 import { Stack } from "@mui/material";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined";
-
+import { useCart } from './CartContext';
 
 const Img = styled("img")({
   margin: "auto",
@@ -27,11 +27,11 @@ const Img = styled("img")({
   maxHeight: "100%",
 });
 
-
-
 export const PlantDetails = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
   const productDetails = useProductDetailsShopList();
+  const { addProduct } = useCart()
+
   return (
     <main style={{ backgroundColor: "#F3F7F3", marginBottom: "20px" }}>
       <Box
@@ -98,8 +98,7 @@ export const PlantDetails = () => {
                   <Button
                     fullWidth
                     size="small"
-                    component={Link}
-                    to={`/customer/products/`}
+                    onClick={() => addProduct(productDetails)}
                   >
                     ADD PLANT TO BAG
                   </Button>
