@@ -13,7 +13,6 @@ import PlantDetails from "./PlantDetails";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CartProvider } from "./CartContext";
-import { CartDrawer } from "./CartDrawer"
 
 const theme = createTheme({
   pallette: {
@@ -29,7 +28,6 @@ function Shop() {
       <CssBaseline />
       <CartProvider>
         <ResponsiveAppBar />
-        <CartDrawer />
         <Routes>
           <Route index element={"Index"} />
           <Route path="/plants/:productId" element={<PlantDetails />} />
