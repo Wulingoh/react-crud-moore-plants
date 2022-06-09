@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { API_HOST } from "../../config";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useFieldArray } from "react-hook-form";
 import { 
   useCategoryList, 
   useLightingCareList, 
@@ -26,6 +26,7 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Input = styled("input")({
   display: "none",
@@ -34,6 +35,7 @@ const Input = styled("input")({
 export default function ListProduct() {
   const navigate = useNavigate();
   const { handleSubmit, setValue, control } = useForm();
+  const { fields, remove, append } = useFieldArray({ control, name: "facts" });
   const categoryList = useCategoryList();
   const lightingCaresList = useLightingCareList();
   const careLevelsList = useCareLevelList();
@@ -442,6 +444,75 @@ export default function ListProduct() {
                   />
                 )}
               />
+            </Grid>
+            <Grid item xs={12}>
+              {fields.map((item, k) => (
+                <Grid container key={item.id} spacing={3}>
+                  <Grid item xs={12} md={6}>
+                    <Controller
+                      name={`facts.${k}.title`}
+                      control={control}
+                      rules={{ required: true }}
+                      render={({
+                        field: { onChange, value },
+                        fieldState: { error },
+                      }) => (
+                        <TextField
+                          name="title"
+                          required
+                          fullWidth
+                          label="Title"
+                          error={error}
+                          onChange={onChange}
+                          value={value}
+                          InputLabelProps={{ shrink: true }}
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Controller
+                      name={`facts.${k}.description`}
+                      control={control}
+                      rules={{ required: true }}
+                      render={({
+                        field: { onChange, value },
+                        fieldState: { error },
+                      }) => (
+                        <TextField
+                          name="description"
+                          required
+                          fullWidth
+                          label="Description"
+                          error={error}
+                          onChange={onChange}
+                          value={value}
+                          InputLabelProps={{ shrink: true }}
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <IconButton color="error" type="button" onClick={() => remove(k)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+              ))}
+              <Button
+                variant="outlined" 
+                component="span" 
+                fullWidth
+                type="button"
+                onClick={() =>
+                  append({
+                    title: "",
+                    description: "",
+                  })
+                }
+              >
+                Add Quick Facts
+              </Button>
             </Grid>
             <Grid item xs={12}>
               <Controller
