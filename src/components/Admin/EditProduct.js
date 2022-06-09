@@ -550,7 +550,7 @@ export default function ListProduct() {
                   })
                 }
               >
-                Append
+                Add Quick Facts
               </Button>
             </Grid>
             <Grid item xs={12}>
