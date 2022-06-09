@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
+import Drawer from '@mui/material/Drawer';
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -16,10 +17,12 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { ReactComponent as MoorePlantLogo } from "../Images/moorePlantLogo1.svg";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Plants from "./Plants";
 import useAuth from "../AuthContext";
 import { Badge } from "@mui/material";
-import { useCart } from './CartContext'
+import { useCart } from './CartContext';
+import {Cart } from './Cart'
 
 const pages = [
   ["Home", ""],
@@ -34,7 +37,7 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const ResponsiveAppBar = () => {
   const { user, logout, signUp } = useAuth()
   const navigate = useNavigate()
-  const [isToggle, setToggle] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { itemCount } = useCart()
@@ -149,11 +152,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
             <Tooltip title="Shopping Cart">
               <IconButton
-                isToggle={isToggle}
-                setToggle={setToggle}
-                // cart={context.carts}
-                // removeProductFromCart={context.removeProductFromCart}
-                // clearCart={context.clearCart}
+                onClick={() => setCartOpen(!cartOpen)}
                 sx={{ p: 0, marginRight: "10px" }}
               >
                 <Badge color="secondary" badgeContent={itemCount}>
@@ -161,6 +160,13 @@ const ResponsiveAppBar = () => {
                 </Badge>
               </IconButton>
             </Tooltip>
+            <Drawer
+              anchor={"right"}
+              open={cartOpen}
+              onClose={() => setCartOpen(false)}
+            >
+              <Cart onClose={() => setCartOpen(false)}/>
+            </Drawer>
             <Tooltip title="Open settings">
               <IconButton
                 onClick={() => navigate("/signup")}
