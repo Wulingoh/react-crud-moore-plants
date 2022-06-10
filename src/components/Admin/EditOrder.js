@@ -79,11 +79,11 @@ export default function ListProduct() {
                 defaultValue
                 render={({ field }) => (
                   <FormControl fullWidth>
-                    <InputLabel id="status">Size</InputLabel>
+                    <InputLabel id="status">Status</InputLabel>
                     <Select {...field} fullWidth label="Status">
                       <MenuItem value=""></MenuItem>
-                      <MenuItem value="pending">Pending</MenuItem>
-                      <MenuItem value="paid">Paid</MenuItem>
+                      <MenuItem value="Pending">Pending</MenuItem>
+                      <MenuItem value="Paid">Paid</MenuItem>
                     </Select>
                   </FormControl>
                 )}
@@ -166,7 +166,6 @@ export default function ListProduct() {
               <Controller
                 name={"mobile"}
                 control={control}
-                rules={{ required: true }}
                 render={({
                   field: { onChange, value },
                   fieldState: { error },
@@ -191,7 +190,6 @@ export default function ListProduct() {
               <Controller
                 name={"line_1"}
                 control={control}
-                rules={{ required: true }}
                 render={({
                   field: { onChange, value },
                   fieldState: { error },
@@ -216,7 +214,6 @@ export default function ListProduct() {
               <Controller
                 name={"line_2"}
                 control={control}
-                rules={{ required: true }}
                 render={({
                   field: { onChange, value },
                   fieldState: { error },
@@ -242,7 +239,6 @@ export default function ListProduct() {
               <Controller
                 name={"city"}
                 control={control}
-                rules={{ required: true }}
                 render={({
                   field: { onChange, value },
                   fieldState: { error },
@@ -264,20 +260,19 @@ export default function ListProduct() {
             </Grid>
             <Grid item xs={12} md={6}>
               <Controller
-                name={"region"}
+                name={"postcode"}
                 control={control}
-                rules={{ required: true }}
                 render={({
                   field: { onChange, value },
                   fieldState: { error },
                 }) => (
                   <TextField
-                    autoComplete="region"
-                    name="region"
+                    autoComplete="postcode"
+                    name="postcode"
                     required
                     fullWidth
-                    id="region"
-                    label="Region"
+                    id="postcode"
+                    label="Postcode"
                     error={error}
                     onChange={onChange}
                     value={value}
@@ -291,7 +286,6 @@ export default function ListProduct() {
               <Controller
                 name={"country"}
                 control={control}
-                rules={{ required: true }}
                 render={({
                   field: { onChange, value },
                   fieldState: { error },

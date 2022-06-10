@@ -7,9 +7,9 @@ export const sumItems = cartItems => {
     Storage(cartItems);
     let itemCount = cartItems.reduce((total, product) => total + product.quantity, 0);
     let subtotal = cartItems.reduce((total, product) => total + product.price * product.quantity, 0);
-    let delivery = 5
-    let total = subtotal + delivery
-    return { itemCount, delivery, subtotal, total }
+    let shipping = 5
+    let total = subtotal + shipping
+    return { itemCount, shipping, subtotal, total }
 }
 
 export const CartReducer = (state, action) => {
