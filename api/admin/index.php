@@ -1,6 +1,4 @@
 <?php
-include "../auth/json_responses.php";
-
 if(!isset($_SESSION['role']) || $_SESSION['role'] != 'Admin'){
     returnJsonHttpResponse(401, "Unauthorised logged in");
 } else {

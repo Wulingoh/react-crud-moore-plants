@@ -22,7 +22,7 @@ const drawerWidth = 100;
 
 
 export const Cart = ({ onClose }) => {
-  const { delivery, total, subtotal, cartItems, itemCount, clearCart, checkout, handleCheckout } = useCart();
+  const { shipping, total, subtotal, cartItems, itemCount, clearCart, checkout, handleCheckout } = useCart();
 
   return (
     <Box>
@@ -74,7 +74,7 @@ export const Cart = ({ onClose }) => {
                   <Typography>Delivery</Typography>
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography>${delivery.toFixed(2)}</Typography>
+                  <Typography>${shipping.toFixed(2)}</Typography>
                 </Grid>
                 <Grid item xs={6}>
                   <Typography>Total</Typography>

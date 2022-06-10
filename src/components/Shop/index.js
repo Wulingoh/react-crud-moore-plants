@@ -13,6 +13,8 @@ import PlantDetails from "./PlantDetails";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CartProvider } from "./CartContext";
+import { Checkout } from "./Checkout";
+import { PayPalScriptProvider} from "@paypal/react-paypal-js";
 
 const theme = createTheme({
   pallette: {
@@ -22,24 +24,33 @@ const theme = createTheme({
   },
 });
 
+const initialOptions = {
+  "client-id": "AYnbH-SXr1qUHbI737-ugl-6GqRAijHay5N7sWqnxGv6bUgVBDd-fEVgO7CiHL2a4sbIlry8UStBR_jC",
+  currency: "NZD",
+  intent: "capture"
+};
+
 function Shop() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <CartProvider>
-        <ResponsiveAppBar />
-        <Routes>
-          <Route index element={"Index"} />
-          <Route path="/plants/:productId" element={<PlantDetails />} />
-          <Route path="/plants" element={<Plants />} />
-          <Route path="/pots" element={<Pots />} />
-          <Route path="/howToGreen" element={<HowToGreen />} />
-          <Route path="/about" element={<Story />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-        <Footer />
+        <PayPalScriptProvider options={initialOptions}>
+          <ResponsiveAppBar />
+          <Routes>
+            <Route index element={"Index"} />
+            <Route path="/plants/:productId" element={<PlantDetails />} />
+            <Route path="/plants" element={<Plants />} />
+            <Route path="/pots" element={<Pots />} />
+            <Route path="/howToGreen" element={<HowToGreen />} />
+            <Route path="/about" element={<Story />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+          <Footer />
+        </PayPalScriptProvider>
       </CartProvider>
     </ThemeProvider>
   );
