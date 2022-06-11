@@ -9,6 +9,8 @@ import Story from "./Story";
 import Contact from "./Contact";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
 import PlantDetails from "./PlantDetails";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -25,7 +27,7 @@ const theme = createTheme({
 });
 
 const initialOptions = {
-  "client-id": "AYnbH-SXr1qUHbI737-ugl-6GqRAijHay5N7sWqnxGv6bUgVBDd-fEVgO7CiHL2a4sbIlry8UStBR_jC",
+  "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
   currency: "NZD",
   intent: "capture"
 };
@@ -47,6 +49,8 @@ function Shop() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/resetPassword/:token" element={<ResetPassword />} />
             <Route path="/checkout" element={<Checkout />} />
           </Routes>
           <Footer />

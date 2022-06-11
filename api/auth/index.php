@@ -18,6 +18,13 @@ switch ($resource) {
     case 'session':
         require __DIR__ . '/session.php';
         break;
+    case 'forgotPassword':
+        require __DIR__ . '/forgotPassword.php';
+        break;
+    case 'resetPassword':
+        require __DIR__ . '/resetPassword.php';
+        break;
+    
 
     default:
         http_response_code(404);
