@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AppBar from "@mui/material/AppBar";
+import { Link } from "react-router-dom";
 import usePagination from "./Pagination";
 import Button from "@mui/material/Button";
-import CameraIcon from "@mui/icons-material/PhotoCamera";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
 import OrderBy from "./OrderBy";
 import TotalRowCount from "./TotalRowCount";
 import { SideBarFilter } from "./SideBarFilter";
+import { useCart } from './CartContext';
 
 export const Plants = () => {
   const [params, setParams] = useState({});
+  const { addProduct } = useCart()
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getProducts();
@@ -116,10 +115,19 @@ export const Plants = () => {
                         fullWidth
                         size="small"
                         component={Link}
-                        to={`/customer/products/${product.product_id}`}
+                        to={`/plants/${product.product_id}`}
                       >
                         VIEW DETAIL
                       </Button>
+                    </CardActions>
+                    <CardActions>
+                      <Button
+                      fullWidth
+                      size="small"
+                      onClick={() => addProduct(product)}
+                    >
+                      ADD PLANT TO BAG
+                    </Button>
                     </CardActions>
                   </Card>
                 </Grid>

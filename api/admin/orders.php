@@ -12,11 +12,13 @@
                 $stmt->bindParam(':orderId', $path[4]);
                 $stmt->execute();
                 $orders = $stmt->fetch(PDO::FETCH_ASSOC);
-                $sqlOrderProduct = "SELECT * FROM order_products WHERE order_products.order_id = :orderId";
+                $sqlOrderProduct = "SELECT order_products.order_id, order_products.product_id, products.name as orderProductName, order_id, order_products.price, order_products.quantity, order_products.created_at, order_products.updated_at FROM order_products 
+                INNER JOIN products on order_products.product_id = products.product_id 
+                WHERE order_products.order_id = :orderId";
                 $stmt = $db->prepare($sqlOrderProduct);
                 $stmt->bindParam(':orderId',  $path[4]);
                 $stmt->execute();
-                $orders["items"] = $stmt->fetch(PDO::FETCH_ASSOC);
+                $orders["items"] = $stmt->fetchAll(PDO::FETCH_ASSOC);
             } else {
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
