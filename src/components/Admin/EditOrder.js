@@ -13,12 +13,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { FormControl } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+import ListOrder from "./ListOrder";
 
 const Input = styled("input")({
   display: "none",
@@ -326,7 +326,7 @@ export default function ListProduct() {
                     error={error}
                     onChange={(e) => {
                       onChange(e);
-                      updateTotal()
+                      updateTotal();
                     }}
                     value={value}
                     InputLabelProps={{ shrink: true }}
@@ -386,7 +386,7 @@ export default function ListProduct() {
                     error={error}
                     onChange={(e) => {
                       onChange(e);
-                      updateTotal()
+                      updateTotal();
                     }}
                     value={value}
                     InputLabelProps={{ shrink: true }}
@@ -448,6 +448,23 @@ export default function ListProduct() {
                     InputLabelProps={{ shrink: true }}
                     multiline
                   />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Controller
+                name={"items"}
+                control={control}
+                render={({ field: { value } }) => (
+                  <List dense>
+                    {value?.map((item) => (
+                      <ListItem key={item.order_product_id}>
+                        <ListItemText primary="Product Name" secondary={item.orderProductName} />
+                        <ListItemText primary="Price" secondary={item.price} />
+                        <ListItemText primary="Quantity" secondary={item.quantity} />
+                      </ListItem>
+                    ))}
+                  </List>
                 )}
               />
             </Grid>
