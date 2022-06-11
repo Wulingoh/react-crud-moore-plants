@@ -46,7 +46,7 @@ export const AuthProvider = ({
         if(newUser.role === "Admin") {
           navigate("/admin");
         } else {
-          navigate("/plants", {replace:true});
+          navigate("/checkout", {replace:true});
         }
       })
       .catch((newError) => setError(newError))
