@@ -9,5 +9,5 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
         "role" => $_SESSION["role"]
     ));
 } else {
-    returnJsonHttpResponse(401, "Unauthorised log in!");
+    returnJsonHttpResponse(404, "Session not found!");
 }

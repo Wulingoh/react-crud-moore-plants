@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Box from '@mui/material/Box';
 import { useNavigate, Link } from 'react-router-dom';
+import useAuth from "../AuthContext";
 import Drawer from '@mui/material/Drawer';
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import Button from '@mui/material/Button';
@@ -18,12 +19,20 @@ import { useCart } from './CartContext'
 import { CartItem } from './CartItem'
 import CartProducts from './CartProducts';
 
-const drawerWidth = 100;
-
 
 export const Cart = ({ onClose }) => {
+  const { user } = useAuth()
   const { shipping, total, subtotal, cartItems, itemCount, clearCart, checkout, handleCheckout } = useCart();
   const navigate = useNavigate();
+  const onCheckout = () => {
+    onClose();
+    if (user) {
+      handleCheckout();
+    } else {
+      navigate(`/signup`);
+    }
+  }
+
 
   return (
     <Box>
@@ -101,10 +110,10 @@ export const Cart = ({ onClose }) => {
               <Button
                 fullWidth
                 size="small"
-                onClick={handleCheckout}
+                onClick={onCheckout}
               >
-                <ArrowForwardIosIcon />
                 Checkout
+                <ArrowForwardIosIcon />
               </Button>
             </Grid>
           </Grid>
