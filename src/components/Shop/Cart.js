@@ -1,14 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useAuth from "../AuthContext";
-import Drawer from '@mui/material/Drawer';
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import {Grid, Paper, Stack} from '@mui/material';
 import { IconButton } from '@mui/material';
 import CloseIcon from "@mui/icons-material/Close";
@@ -16,23 +10,21 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Typography from '@mui/material/Typography';
 import { useCart } from './CartContext'
-import { CartItem } from './CartItem'
 import CartProducts from './CartProducts';
-
+import { PayPal } from "./PayPal";
 
 export const Cart = ({ onClose }) => {
   const { user } = useAuth()
-  const { shipping, total, subtotal, cartItems, itemCount, clearCart, checkout, handleCheckout } = useCart();
+  const { shipping, total, subtotal, cartItems } = useCart();
   const navigate = useNavigate();
   const onCheckout = () => {
     onClose();
     if (user) {
-      handleCheckout();
+      navigate('/checkout');
     } else {
       navigate(`/signup`);
     }
   }
-
 
   return (
     <Box>
@@ -55,16 +47,6 @@ export const Cart = ({ onClose }) => {
               <Grid container>
                 <Grid item>
                   <Typography>Your cart is empty</Typography>
-                </Grid>
-              </Grid>
-            )}
-            {checkout && (
-              <Grid container>
-                <Grid item>
-                  <Typography>Checkout successfully</Typography>
-                  <Link to="/" className="btn btn-outline-success btn-sm">
-                    BUY MORE
-                  </Link>
                 </Grid>
               </Grid>
             )}
@@ -116,6 +98,9 @@ export const Cart = ({ onClose }) => {
                 <ArrowForwardIosIcon />
               </Button>
             </Grid>
+            {!!user && <Grid item xs={12}>
+              <PayPal />
+            </Grid>}
           </Grid>
         </Box>
       </Paper>
