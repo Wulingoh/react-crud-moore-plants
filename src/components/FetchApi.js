@@ -126,6 +126,17 @@ export const signUp = async (data) => {
 
   return response.data;
 }
+export const forgotPassword = async (data) => {
+    const response = await axios.post("/api/auth/forgotPassword", data);
+  
+    return response.data;
+  }
+
+export const resetPassword = async (data) => {
+    const response = await axios.post("/api/auth/resetPassword", data);
+
+    return response.data;
+  };
 
 export const useLightingCareShopList =_ =>{
 

@@ -70,6 +70,7 @@ export const AuthProvider = ({
     userApi.logout().then(() => setUser(undefined));
   }
 
+
   // Make the provider update only when it should
   const memoedValue = useMemo(
     () => ({

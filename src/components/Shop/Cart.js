@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Drawer from '@mui/material/Drawer';
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import Button from '@mui/material/Button';
@@ -23,6 +23,7 @@ const drawerWidth = 100;
 
 export const Cart = ({ onClose }) => {
   const { shipping, total, subtotal, cartItems, itemCount, clearCart, checkout, handleCheckout } = useCart();
+  const navigate = useNavigate();
 
   return (
     <Box>
@@ -90,6 +91,7 @@ export const Cart = ({ onClose }) => {
               <Button
                 fullWidth
                 size="small"
+                onClick={onClose}
               >
                 <ArrowBackIosIcon />
                 Keep Browsing
