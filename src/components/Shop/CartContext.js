@@ -26,7 +26,7 @@ export const CartProvider = ({
         dispatch({type: 'ADD_ITEM', payload})
     }
 
-    const removeProduct = payload => {
+    const removeItem = payload => {
         dispatch({type: 'REMOVE_ITEM', payload})
     }
 
@@ -35,7 +35,7 @@ export const CartProvider = ({
     }
 
     const contextValues = {
-        removeProduct,
+        removeItem,
         addProduct,
         increase,
         decrease,

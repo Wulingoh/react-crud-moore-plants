@@ -29,7 +29,7 @@
                 $products = $stmt->fetch(PDO::FETCH_ASSOC);
                 $products['facts'] = $products['facts'] ? json_decode($products['facts']) : [];
             } else {
-                $sql .= " WHERE 1";
+                $sql .= " WHERE deleted_at IS NULL";
                 if(isset($_GET["lightingCareId"]) && $_GET["lightingCareId"]){
                     $sql .= " AND products.lighting_care_id IN (".escape_array($db, $_GET["lightingCareId"]).")";
                 }
