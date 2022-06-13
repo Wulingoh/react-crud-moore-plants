@@ -20,14 +20,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { FormControl } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import DeleteIcon from '@mui/icons-material/Delete';
-
 
 const Input = styled("input")({
   display: "none",
@@ -92,12 +88,11 @@ export default function ListProduct() {
               <Controller
                 name={"type"}
                 control={control}
-                defaultValue
                 rules={{ required: true }}
                 render={({ field, fieldState: { error } }) => (
                   <FormControl error={error} fullWidth>
                     <InputLabel id="type">Type</InputLabel>
-                    <Select {...field} label="Type">
+                    <Select {...field} value={field.value || ""} label="Type">
                       <MenuItem value="Plant">Plant</MenuItem>
                       <MenuItem value="Pot">Pot</MenuItem>
                     </Select>
@@ -109,12 +104,11 @@ export default function ListProduct() {
               <Controller
                 name={"category_id"}
                 control={control}
-                defaultValue
-                rules={{ required: true }}
+                rules={{ validate: value => (value || getValues().type === "Pot")}}
                 render={({ field, fieldState: { error } }) => (
                   <FormControl error={error} fullWidth>
                     <InputLabel id="category">Category</InputLabel>
-                    <Select {...field} fullWidth label="Category">
+                    <Select {...field} value={field.value || ""} fullWidth label="Category">
                       {categoryList.map((category) => (
                         <MenuItem
                           key={category.category_id}
@@ -145,9 +139,9 @@ export default function ListProduct() {
                     id="name"
                     label="Name"
                     autoFocus
-                    error={error}
+                    error={!!error}
                     onChange={onChange}
-                    value={value}
+                    value={value || ""}
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -169,9 +163,9 @@ export default function ListProduct() {
                     fullWidth
                     id="title"
                     label="Title"
-                    error={error}
+                    error={!!error}
                     onChange={onChange}
-                    value={value}
+                    value={value || ""}
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -194,9 +188,9 @@ export default function ListProduct() {
                     id="price"
                     label="Price"
                     placeholder="Price"
-                    error={error}
+                    error={!!error}
                     onChange={onChange}
-                    value={value}
+                    value={value || ""}
                     InputLabelProps={{ shrink: true }}
                     InputProps={{
                       type: "number",
@@ -226,9 +220,9 @@ export default function ListProduct() {
                     label="Quantity"
                     type="number"
                     placeholder="1234"
-                    error={error}
+                    error={!!error}
                     onChange={onChange}
-                    value={value}
+                    value={value || ""}
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -250,9 +244,9 @@ export default function ListProduct() {
                     fullWidth
                     id="color"
                     label="Color"
-                    error={error}
+                    error={!!error}
                     onChange={onChange}
-                    value={value}
+                    value={value || ""}
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -262,7 +256,7 @@ export default function ListProduct() {
               <Controller
                 name={"height"}
                 control={control}
-                rules={{ required: true }}
+                rules={{ validate: value => (value || getValues().type === "Pot")}}
                 render={({
                   field: { onChange, value },
                   fieldState: { error },
@@ -276,14 +270,14 @@ export default function ListProduct() {
                     label="Height"
                     placeholder="1234"
                     type="number"
-                    error={error}
+                    error={!!error}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">cm</InputAdornment>
                       ),
                     }}
                     onChange={onChange}
-                    value={value}
+                    value={value || ""}
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -303,9 +297,9 @@ export default function ListProduct() {
                     fullWidth
                     id="latinName"
                     label="Latin Name"
-                    error={error}
+                    error={!!error}
                     onChange={onChange}
-                    value={value}
+                    value={value || ""}
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -315,12 +309,11 @@ export default function ListProduct() {
               <Controller
                 name={"lighting_care_id"}
                 control={control}
-                rules={{ required: true }}
-                defaultValue
+                rules={{ validate: value => (value || getValues().type === "Pot")}}
                 render={({ field, fieldState: { error } }) => (
                   <FormControl error={error} fullWidth>
                     <InputLabel>Lighting Care</InputLabel>
-                    <Select {...field} fullWidth label="Lighting Care">
+                    <Select {...field} value={field.value || ""} fullWidth label="Lighting Care">
                       {lightingCaresList.map((lighting) => (
                         <MenuItem
                           key={lighting.lighting_id}
@@ -338,12 +331,11 @@ export default function ListProduct() {
               <Controller
                 name={"care_level_id"}
                 control={control}
-                rules={{ required: true }}
-                defaultValue
+                rules={{ validate: value => (value || getValues().type === "Pot")}}
                 render={({ field, fieldState: { error } }) => (
                   <FormControl error={error} fullWidth>
                     <InputLabel>Care Level</InputLabel>
-                    <Select {...field} fullWidth label="Care Level">
+                    <Select {...field} value={field.value || ""} fullWidth label="Care Level">
                       {careLevelsList.map((care_level) => (
                         <MenuItem
                           key={care_level.care_level_id}
@@ -361,12 +353,11 @@ export default function ListProduct() {
               <Controller
                 name={"watering_id"}
                 control={control}
-                rules={{ required: true }}
-                defaultValue
+                rules={{ validate: value => (value || getValues().type === "Pot")}}
                 render={({ field, fieldState: { error } }) => (
                   <FormControl error={error} fullWidth>
                     <InputLabel>Watering Level</InputLabel>
-                    <Select {...field} fullWidth label="Watering Level">
+                    <Select {...field} value={field.value || ""} fullWidth label="Watering Level">
                       {wateringList.map((watering) => (
                         <MenuItem
                           key={watering.watering_id}
@@ -384,12 +375,11 @@ export default function ListProduct() {
               <Controller
                 name={"humidity_id"}
                 control={control}
-                rules={{ required: true }}
-                defaultValue
+                rules={{ validate: value => (value || getValues().type === "Pot")}}
                 render={({ field, fieldState: { error } }) => (
                   <FormControl error={error} fullWidth>
                     <InputLabel>Humidity Level</InputLabel>
-                    <Select {...field} fullWidth label="Humidity Level">
+                    <Select {...field} value={field.value || ""} fullWidth label="Humidity Level">
                       {humidityList.map((humidity) => (
                         <MenuItem
                           key={humidity.humidity_id}
@@ -418,9 +408,9 @@ export default function ListProduct() {
                     id="roomType"
                     label="Room Type"
                     placeholder="Kitchen"
-                    error={error}
+                    error={!!error}
                     onChange={onChange}
-                    value={value}
+                    value={value || ""}
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -430,14 +420,15 @@ export default function ListProduct() {
               <Controller
                 name={"size"}
                 control={control}
-                defaultValue
                 render={({ field }) => (
                   <FormControl fullWidth>
                     <InputLabel id="size">Size</InputLabel>
-                    <Select {...field} fullWidth label="Size">
+                    <Select {...field} value={field.value || ""} fullWidth label="Size">
                       <MenuItem value=""></MenuItem>
                       <MenuItem value="xs">XS(0-10cm)</MenuItem>
                       <MenuItem value="s">S(10-15cm)</MenuItem>
+                      <MenuItem value="m">M(15-20cm)</MenuItem>
+                      <MenuItem value="l">L(20-25cm)</MenuItem>
                     </Select>
                   </FormControl>
                 )}
@@ -447,14 +438,15 @@ export default function ListProduct() {
               <Controller
                 name={"pot_material"}
                 control={control}
-                defaultValue
                 render={({ field }) => (
                   <FormControl fullWidth>
                     <InputLabel id="potMaterial">Pot Material</InputLabel>
-                    <Select {...field} fullWidth label="Pot Material">
-                      <MenuItem value="">None</MenuItem>
-                      <MenuItem value="xs">XS(0-10cm)</MenuItem>
-                      <MenuItem value="s">S(10-15cm)</MenuItem>
+                    <Select {...field} value={field.value || ""} fullWidth label="Pot Material">
+                      <MenuItem value=""></MenuItem>
+                      <MenuItem value="clay">Clay</MenuItem>
+                      <MenuItem value="recycled">Recycled Plastic</MenuItem>
+                      <MenuItem value="concrete">Concrete</MenuItem>
+                      <MenuItem value="ceramic">Ceramic</MenuItem>
                     </Select>
                   </FormControl>
                 )}
@@ -475,9 +467,9 @@ export default function ListProduct() {
                     id="content"
                     label="Description"
                     placeholder="Multiline Texts"
-                    error={error}
+                    error={!!error}
                     onChange={onChange}
-                    value={value}
+                    value={value || ""}
                     InputLabelProps={{ shrink: true }}
                     multiline
                   />
@@ -501,9 +493,9 @@ export default function ListProduct() {
                           required
                           fullWidth
                           label="Title"
-                          error={error}
+                          error={!!error}
                           onChange={onChange}
-                          value={value}
+                          value={value || ""}
                           InputLabelProps={{ shrink: true }}
                         />
                       )}
@@ -558,21 +550,20 @@ export default function ListProduct() {
                 name={"updated_img"}
                 control={control}
                 render={({ field: { value }, fieldState: { error } }) => (
-                  <FormControl fullWidth>
+                  <FormControl error={!!error} fullWidth>
                     <label htmlFor="contained-button-file">
                       <Input
                         accept="image/*"
                         id="contained-button-file"
                         type="file"
                         onChange={onFileChange}
-                        error={error}
                       />
                       <Button variant="outlined" component="span" fullWidth>
                         Upload Image
                       </Button>
                     </label>
                     <img
-                      src={value ? value : `public/images/${getValues().img}`}
+                      src={value ? value : getValues().img ? `/public/images/${getValues().img}` : undefined}
                       width="500"
                       alt=""
                     />
