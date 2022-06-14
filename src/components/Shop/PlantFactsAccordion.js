@@ -28,7 +28,7 @@ export const PlantFactsAccordion = () => {
           <Box>
             <Grid container>
               <Grid item xs={12}>
-                <Typography sx={{ fontFamily: "Raleway" }}>
+                <Typography>
                   Plant Like
                 </Typography>
               </Grid>
@@ -57,7 +57,7 @@ export const PlantFactsAccordion = () => {
                       <OpacityOutlinedIcon />
                     </Grid>
                     <Grid item xs={9}>
-                      <Typography sx={{ fontFamily: "Raleway" }}>
+                      <Typography>
                         {productDetails.wateringName}
                       </Typography>
                     </Grid>
@@ -71,7 +71,7 @@ export const PlantFactsAccordion = () => {
                       <WbSunnyOutlinedIcon />
                     </Grid>
                     <Grid item xs={9}>
-                      <Typography sx={{ fontFamily: "Raleway" }}>
+                      <Typography>
                         {productDetails.lightingName}
                       </Typography>
                     </Grid>
@@ -85,7 +85,7 @@ export const PlantFactsAccordion = () => {
                       <ThermostatOutlinedIcon />
                     </Grid>
                     <Grid item xs={9}>
-                      <Typography sx={{ fontFamily: "Raleway" }}>
+                      <Typography>
                         {productDetails.humidityName}
                       </Typography>
                     </Grid>
@@ -105,7 +105,7 @@ export const PlantFactsAccordion = () => {
           <Box>
             <Grid container>
               <Grid item xs={12}>
-                <Typography sx={{ fontFamily: "Raleway" }}>
+                <Typography>
                   Quick Facts
                 </Typography>
               </Grid>
@@ -129,12 +129,12 @@ export const PlantFactsAccordion = () => {
                 >
                   <Stack direction="row" spacing={2}>
                     <Box item sx={{marginBottom:"10px", marginRight:"10px"}}>
-                      <Typography sx={{ fontFamily: "Raleway" }}>
+                      <Typography>
                         {fact.title}:
                       </Typography>
                     </Box>
                     <Box item sx={{justifyItems:"10px"}}>
-                      <Typography sx={{ fontFamily: "Raleway" }}>
+                      <Typography>
                         {fact.description}
                       </Typography>
                     </Box>
@@ -154,7 +154,7 @@ export const PlantFactsAccordion = () => {
           <Box>
             <Grid container>
               <Grid item xs={12}>
-                <Typography sx={{ fontFamily: "Raleway" }}>
+                <Typography>
                   About Plants
                 </Typography>
               </Grid>
@@ -183,7 +183,7 @@ export const PlantFactsAccordion = () => {
                       <FactCheckOutlinedIcon />
                     </Grid>
                     <Grid item xs={10}>
-                      <Typography sx={{ fontFamily: "Raleway" }}>
+                      <Typography>
                         {productDetails.content}
                       </Typography>
                     </Grid>

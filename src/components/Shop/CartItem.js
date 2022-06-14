@@ -18,20 +18,20 @@ export const CartItem = ({ product }) => {
       </Grid>
       <Grid item xs={3}>
         <Stack>
-          <Typography sx={{ fontSize: "14px", fontFamily: "Raleway" }}>
+          <Typography sx={{ fontSize: "14px" }}>
             {product.title}
           </Typography>
-          <Typography sx={{ fontSize: "12px", fontFamily: "Raleway" }}>
+          <Typography sx={{ fontSize: "12px" }}>
             {product.latin_name}
           </Typography>
         </Stack>
       </Grid>
       <Grid item xs={3}>
         <Stack>
-          <Typography sx={{ fontSize: "14px", fontFamily: "Raleway" }}>
+          <Typography sx={{ fontSize: "14px" }}>
             ${product.price}
           </Typography>
-          <Typography sx={{ fontSize: "12px", fontFamily: "Raleway" }}>
+          <Typography sx={{ fontSize: "12px" }}>
             {product.itemQuantity}
           </Typography>
         </Stack>
