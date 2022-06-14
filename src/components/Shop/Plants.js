@@ -16,11 +16,11 @@ import Container from "@mui/material/Container";
 import OrderBy from "./OrderBy";
 import TotalRowCount from "./TotalRowCount";
 import { SideBarFilter } from "./SideBarFilter";
-import { useCart } from './CartContext';
+import { useCart } from "./CartContext";
 
 export const Plants = () => {
   const [params, setParams] = useState({});
-  const { addProduct } = useCart()
+  const { addProduct } = useCart();
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getProducts();
@@ -73,7 +73,7 @@ export const Plants = () => {
         <Grid item xs={12} sm={9}>
           <Container sx={{ pb: "20px" }} maxWidth="lg">
             <Grid container>
-              <Grid item xs sx={{marginBottom:"20px"}}>
+              <Grid item xs sx={{ marginBottom: "20px" }}>
                 <TotalRowCount products={products}></TotalRowCount>
               </Grid>
               <Grid item xs={6}></Grid>
@@ -121,22 +121,27 @@ export const Plants = () => {
                       </Button>
                     </CardActions>
                     <CardActions>
-                      <Button
-                      fullWidth
-                      size="small"
-                      onClick={() => addProduct(product)}
-                    >
-                      ADD PLANT TO BAG
-                    </Button>
+                      {product.quantity >= 0 && (
+                        <Button
+                          fullWidth
+                          size="small"
+                          onClick={() => addProduct(product)}
+                        >
+                          ADD PLANT TO BAG
+                        </Button>
+                      )}
                     </CardActions>
                   </Card>
                 </Grid>
               ))}
             </Grid>
             <Grid container marginTop={"20px"}>
-              <Grid item xs={12} sx={{display:"flex", justifyContent:"flex-end"}}>
+              <Grid
+                item
+                xs={12}
+                sx={{ display: "flex", justifyContent: "flex-end" }}
+              >
                 <Pagination
-                  
                   count={count}
                   size="medium"
                   page={page}

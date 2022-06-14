@@ -8,15 +8,16 @@ export const PayPal = () => {
   const { user } = useAuth();
   return (
     <PayPalButtons
+      forceReRender={[total]}
       style={{ layout: "horizontal" }}
       createOrder={(data, actions) => {
         return actions.order.create({
           purchase_units: [
             {
-              items: cartItems.map((product) => ({
-                name: product.title,
-                unit_amount: { value: product.price, currency_code: "NZD" },
-                quantity: product.quantity,
+              items: cartItems.map((item) => ({
+                name: item.title,
+                unit_amount: { value: item.price, currency_code: "NZD" },
+                quantity: item.itemQuantity,
               })),
               amount: {
                 value: total,
@@ -44,10 +45,10 @@ export const PayPal = () => {
             city: address.admin_area_2,
             region: address.admin_area_1,
             country: address.country_code,
-            items: cartItems.map((product) => ({
-              product_id: product.product_id,
-              quantity: product.quantity,
-              price: product.price,
+            items: cartItems.map((item) => ({
+              product_id: item.product_id,
+              quantity: item.itemQuantity,
+              price: item.price,
             })),
             shipping,
             subtotal,
