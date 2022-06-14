@@ -47,7 +47,7 @@ export const PlantFactsDesktop = () => {
                   <OpacityOutlinedIcon />
                 </Grid>
                 <Grid item xs={10} sx={{ paddingRight: "50px" }}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>
+                  <Typography>
                     {productDetails.wateringName}
                   </Typography>
                 </Grid>
@@ -61,7 +61,7 @@ export const PlantFactsDesktop = () => {
                   <WbSunnyOutlinedIcon />
                 </Grid>
                 <Grid item xs={10} sx={{ paddingRight: "50px" }}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>
+                  <Typography>
                     {productDetails.lightingName}
                   </Typography>
                 </Grid>
@@ -75,7 +75,7 @@ export const PlantFactsDesktop = () => {
                   <ThermostatOutlinedIcon />
                 </Grid>
                 <Grid item xs={10}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>
+                  <Typography>
                     {productDetails.humidityName}
                   </Typography>
                 </Grid>
@@ -148,7 +148,7 @@ export const PlantFactsDesktop = () => {
                   <FactCheckOutlinedIcon />
                 </Grid>
                 <Grid item xs={10}>
-                  <Typography sx={{ fontFamily: "Raleway" }}>
+                  <Typography>
                     {productDetails.content}
                   </Typography>
                 </Grid>

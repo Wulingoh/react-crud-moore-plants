@@ -54,18 +54,23 @@ export const PlantDetails = () => {
           >
             <Container>
               <Stack spacing={2}>
-                <Typography sx={{ textAlign: "start", fontFamily: "Raleway" }}>
+                <Typography sx={{ textAlign: "start" }}>
                 Title: {productDetails.title}
                 </Typography>
-                <Typography sx={{ textAlign: "start", fontFamily: "Raleway" }}>
+                <Typography sx={{ textAlign: "start" }}>
                 Price: ${productDetails.price}
                 </Typography>
-                <Typography sx={{ textAlign: "start", fontFamily: "Raleway" }}>
+                <Typography sx={{ textAlign: "start" }}>
                 Height: {productDetails.height}cm
                 </Typography>
-                <Typography sx={{ textAlign: "start", fontFamily: "Raleway" }}>
+                <Typography sx={{ textAlign: "start" }}>
                 Latin Name: {productDetails.latin_name}
                 </Typography>
+                {productDetails.quantity <= 0 ? (
+                  <Typography sx={{ textAlign: "start", fontWeight:"600", color:"darkred" }}>Out Of Stock</Typography>
+                ) : (
+                <Typography sx={{ textAlign: "start" }}>In Stock</Typography>
+                ) }
               </Stack>
               <Grid container sx={{marginTop: "20px"}}>
                 <Grid item xs={6}>
@@ -74,7 +79,7 @@ export const PlantDetails = () => {
                       <WbSunnyOutlinedIcon />
                     </Grid>
                     <Grid item xs={9} sx={{paddingRight:"40px"}}>
-                      <Typography sx={{ fontFamily: "Raleway" }}>
+                      <Typography>
                         {productDetails.lightingName}
                       </Typography>
                     </Grid>
@@ -86,7 +91,7 @@ export const PlantDetails = () => {
                       <SentimentSatisfiedOutlinedIcon />
                     </Grid>
                     <Grid item xs={9} sx={{paddingRight:"40px"}}>
-                      <Typography sx={{ fontFamily: "Raleway" }}>
+                      <Typography>
                       {productDetails.careLevelName}
                       </Typography>
                     </Grid>
@@ -95,13 +100,15 @@ export const PlantDetails = () => {
               </Grid>
               <Grid container sx={{marginTop:"20px"}}>
                 <Grid item xs={12}>
-                  {productDetails.quantity >= 0 && (<Button
+                  {productDetails.quantity >= 0 && (
+                  <Button
                     fullWidth
                     size="small"
                     onClick={() => addProduct(productDetails)}
                   >
                     ADD PLANT TO BAG
                   </Button>
+
                   )}
                 </Grid>
               </Grid>

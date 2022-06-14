@@ -24,6 +24,9 @@ const theme = createTheme({
       main: "#2E4D43",
     },
   },
+  typography: {
+    fontFamily: "Raleway"
+  }
 });
 
 const initialOptions = {

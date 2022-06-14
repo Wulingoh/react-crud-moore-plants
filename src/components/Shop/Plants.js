@@ -109,6 +109,20 @@ export const Plants = () => {
                         {product.title}
                       </Typography>
                       <Typography>{product.price}</Typography>
+                      {product.quantity <= 0 ? (
+                        <Typography
+                          sx={{
+                            textAlign: "center",
+                            fontWeight: "600",
+                            color: "darkred",
+                          }}
+                        >
+                          Out Of Stock
+                        </Typography>
+                      ) : (
+                        <Typography sx={{ textAlign: "center" }}>
+                        </Typography>
+                      )}
                     </CardContent>
                     <CardActions>
                       <Button
