@@ -26,6 +26,12 @@ switch($method){
         if($stmt->execute()) {
             $order_id = $db->lastInsertId();
             foreach($order->items as $orderProduct) {
+                $sql = "UPDATE products SET quantity = (quantity - :quantity) WHERE product_id = :product_id";
+                $stmt = $db->prepare($sql);
+                $stmt->bindParam(':product_id', $orderProduct-> product_id);
+                $stmt->bindParam(':quantity', $orderProduct->quantity);
+                $stmt->execute();
+
                 $sql = "INSERT INTO order_products(order_id, product_id, quantity, price, created_at, updated_at) VALUES (:order_id, :product_id, :quantity, :price, NOW(), NOW())";
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':order_id', $order_id);
@@ -33,6 +39,7 @@ switch($method){
                 $stmt->bindParam(':quantity', $orderProduct->quantity);
                 $stmt->bindParam(':price', $orderProduct->price);
                 $stmt->execute();
+
             }
             $data = ['status' => 1, 'message' => "Orders successfully created"];
         } else {

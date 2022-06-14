@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
-import Drawer from '@mui/material/Drawer';
+import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -11,18 +11,18 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { ReactComponent as MoorePlantLogo } from "../Images/moorePlantLogo1.svg";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import ClickAwayListener from '@mui/material/ClickAwayListener';
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Plants from "./Plants";
 import useAuth from "../AuthContext";
 import { Badge } from "@mui/material";
-import { useCart } from './CartContext';
-import {Cart } from './Cart'
+import { useCart } from "./CartContext";
+import { Cart } from "./Cart";
 
 const pages = [
   ["Home", ""],
@@ -30,17 +30,17 @@ const pages = [
   ["Pot", "/pots"],
   ["How To Green", "/howToGreen"],
   ["Story", "/about"],
-  ["Contact", "/contact"]
+  ["Contact", "/contact"],
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = () => {
-  const { user, logout, signUp } = useAuth()
-  const navigate = useNavigate()
+  const { user, logout, signUp } = useAuth();
+  const navigate = useNavigate();
   const [cartOpen, setCartOpen] = useState(false);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { itemCount } = useCart()
+  const { itemCount } = useCart();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -111,21 +111,58 @@ const ResponsiveAppBar = () => {
                 </MenuItem>
               ))}
               <MenuItem>
-                <Tooltip title="Open settings">
+                <Tooltip title="Shopping Cart">
                   <IconButton
-                    onClick={handleOpenUserMenu}
+                    onClick={() => setCartOpen(!cartOpen)}
                     sx={{ p: 0, marginRight: "10px" }}
                   >
-                    <ShoppingBagIcon />
+                    <Badge color="secondary" badgeContent={itemCount}>
+                      <ShoppingBagIcon />
+                    </Badge>
+                  </IconButton>
+                </Tooltip>
+                <Drawer
+                  anchor={"right"}
+                  open={cartOpen}
+                  onClose={() => setCartOpen(false)}
+                  PaperProps={{
+                    sx: {
+                      width: 450,
+                      height: 700,
+                      backgroundColor: "#F3F7F3",
+                    },
+                  }}
+                >
+                  <Cart onClose={() => setCartOpen(false)} />
+                </Drawer>
+              </MenuItem>
+              <MenuItem>
+                <Tooltip title="Open settings">
+                  <IconButton
+                    onClick={() => navigate("/signup")}
+                    sx={{ p: 0, marginRight: "10px" }}
+                  >
+                    <AppRegistrationIcon />
                   </IconButton>
                 </Tooltip>
               </MenuItem>
               <MenuItem>
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <LoginIcon />
-                  </IconButton>
-                </Tooltip>
+                {user ? (
+                  <Tooltip title="Logout">
+                    <IconButton onClick={logout} sx={{ p: 0 }}>
+                      <LogoutIcon />
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Login">
+                    <IconButton
+                      onClick={() => navigate("/login")}
+                      sx={{ p: 0 }}
+                    >
+                      <LoginIcon />
+                    </IconButton>
+                  </Tooltip>
+                )}
               </MenuItem>
             </Menu>
           </Box>
@@ -164,8 +201,15 @@ const ResponsiveAppBar = () => {
               anchor={"right"}
               open={cartOpen}
               onClose={() => setCartOpen(false)}
+              PaperProps={{
+                sx: {
+                  width: 450,
+                  height: 700,
+                  backgroundColor: "#F3F7F3",
+                },
+              }}
             >
-              <Cart onClose={() => setCartOpen(false)}/>
+              <Cart onClose={() => setCartOpen(false)} />
             </Drawer>
             <Tooltip title="Open settings">
               <IconButton

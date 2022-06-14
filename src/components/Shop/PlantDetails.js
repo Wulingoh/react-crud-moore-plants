@@ -95,13 +95,14 @@ export const PlantDetails = () => {
               </Grid>
               <Grid container sx={{marginTop:"20px"}}>
                 <Grid item xs={12}>
-                  <Button
+                  {productDetails.quantity >= 0 && (<Button
                     fullWidth
                     size="small"
                     onClick={() => addProduct(productDetails)}
                   >
                     ADD PLANT TO BAG
                   </Button>
+                  )}
                 </Grid>
               </Grid>
             </Container>

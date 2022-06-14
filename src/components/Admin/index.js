@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import useAuth from "../AuthContext";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,11 +11,11 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
+import LoginIcon from "@mui/icons-material/Login";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
+import Tooltip from "@mui/material/Tooltip";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -51,8 +51,8 @@ import ListHumidity from "./ListHumidity";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import CategoryIcon from "@mui/icons-material/Category";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
-import WaterIcon from '@mui/icons-material/Water';
-import SpaIcon from '@mui/icons-material/Spa';
+import WaterIcon from "@mui/icons-material/Water";
+import SpaIcon from "@mui/icons-material/Spa";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const drawerWidth = 240;
@@ -181,7 +181,8 @@ const mdTheme = createTheme({
 });
 
 function DashboardContent() {
-  const { user, logout } = useAuth()
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -218,16 +219,19 @@ function DashboardContent() {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton color="inherit" onClick={logout}>
-              <Badge color="secondary">
-                <LogoutIcon />
-              </Badge>
-            </IconButton>
+            {user ? (
+              <Tooltip title="Logout">
+                <IconButton onClick={logout} sx={{ p: 0 }}>
+                  <LogoutIcon sx={{ color: "white" }}/>
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title="Login">
+                <IconButton onClick={() => navigate("/login")} sx={{ p: 0 }}>
+                  <LoginIcon sx={{ color: "white" }}/>
+                </IconButton>
+              </Tooltip>
+            )}
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

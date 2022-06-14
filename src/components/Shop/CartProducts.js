@@ -1,31 +1,24 @@
-import React from 'react';
-import { Grid } from '@mui/material';
-import { Box } from '@mui/material';
-
-import { useCart } from './CartContext';
-import { CartItem } from './CartItem'
-
+import React from "react";
+import { Box, Container, Divider } from "@mui/material";
+import { useCart } from "./CartContext";
+import { CartItem } from "./CartItem";
 
 const CartProducts = () => {
+  const { cartItems } = useCart();
+  return (
+    <Box sx={{ backgroundColor: "#F3F7F3" }}>
+      <div>
+        {cartItems.map((product) => (
+          <div key={product.product_id}>
+            <div>
+              <CartItem product={product} />
+            </div>
+            <Divider sx={{ borderBottomWidth: 2 }} ></Divider>
+          </div>
+        ))}
+      </div>
+    </Box>
+  );
+};
 
-    const { cartItems } = useCart();
-
-    return (
-      <Box>
-        <Grid container>
-          <Grid item xs={12}>
-            {cartItems.map((product) => (
-              <Grid key={product.product_id} container>
-                <Grid item xs={12}>
-                  <CartItem key={product.product_id} product={product} />
-                </Grid>
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-      </Box>
-    );
-}
- 
 export default CartProducts;
-
