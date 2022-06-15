@@ -30,7 +30,7 @@ export const Login = () => {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: "#718879" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography align="left" component="h1" variant="h5">
@@ -122,19 +122,27 @@ export const Login = () => {
             fullWidth
             variant="contained"
             onClick={handleSubmit(login)}
-            sx={{ mt: 1, mb: 2 }}
+            sx={{ mt: 1, mb: 2,
+              color: "white",
+              backgroundColor: "#102F25",
+              border: '1px solid black' ,
+              "&:hover": {
+                background: "#fff",
+                color: "#102F25"
+              },
+            }} 
           >
             Sign In
           </Button>
           <Grid container justifyContent="center" mb="20px">
             <Stack>
               <Grid item>
-                <Link to={`/forgotPassword`} variant="body2">
+                <Link to={`/forgotPassword`} variant="body2" style={{ color: "#2E4D43", textDecoration: "none"}}>
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link to={`/signup`} variant="body2">
+                <Link to={`/signup`} variant="body2" style={{ color: "#2E4D43", textDecoration: "none"}}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

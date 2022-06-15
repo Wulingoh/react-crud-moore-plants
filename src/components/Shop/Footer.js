@@ -1,15 +1,15 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
-import Link from "@mui/material/Link";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { ReactComponent as MoorePlantLogo } from "../Images/moorePlantLogo1.svg";
-import { Container } from "@mui/material";
+import { Container, Button } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#718879",
@@ -28,8 +28,8 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link to="/" style={{textDecoration:"none", color:"#000"}}>
+        Moore Plants
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -50,7 +50,9 @@ const FormRow = () => {
             justifyContent: "flex-end",
           }}
         >
-          <TwitterIcon />
+          <Link to="/contact">
+            <TwitterIcon style={{ fill: "#102F25" }} />
+          </Link>
         </Item>
       </Grid>
       <Grid item xs={4}>
@@ -63,7 +65,9 @@ const FormRow = () => {
             justifyContent: "center",
           }}
         >
-          <FacebookIcon />
+          <Link  to="/contact">
+            <FacebookIcon style={{ fill: "#102F25" }} />
+          </Link>
         </Item>
       </Grid>
       <Grid item xs={4}>
@@ -76,12 +80,14 @@ const FormRow = () => {
             justifyContent: "flex-start",
           }}
         >
-          <InstagramIcon />
+          <Link to="/contact">
+            <InstagramIcon style={{ fill: "#102F25" }} />
+          </Link>
         </Item>
       </Grid>
     </React.Fragment>
   );
-}
+};
 
 export const Footer = () => {
   return (
@@ -101,7 +107,9 @@ export const Footer = () => {
             <Item
               sx={{ boxShadow: "none", borderRadius: 0, textAlign: "start" }}
             >
-              <MoorePlantLogo />
+              <Link to={"/plants"}>
+                <MoorePlantLogo />
+              </Link>
             </Item>
           </Grid>
         </Grid>
@@ -153,7 +161,7 @@ export const Footer = () => {
           </Grid>
         </Grid>
       </Container>
-      <Copyright sx={{ mt: 2, mb: 5 }} />
+      <Copyright sx={{ mt: 2 }} />
     </Box>
   );
 };

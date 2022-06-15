@@ -16,7 +16,7 @@ export const SideBarFilter = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={6} md={4} sx={{ justifyContent: "flex-end" }}>
-          <Button size="small" endIcon={<ReplayIcon />} onClick={() => props.setParams({})}>
+          <Button size="small" endIcon={<ReplayIcon />} sx={{color:'#102F25'}} onClick={() => props.setParams({})}>
             Reset
           </Button>
         </Grid>
