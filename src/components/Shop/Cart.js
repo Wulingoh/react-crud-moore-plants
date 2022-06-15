@@ -91,7 +91,8 @@ export const Cart = ({ onClose }) => {
                 color: "black",
                 border: '1px solid black' ,
                 "&:hover": {
-                  background: "#2E4D43",
+                  background: "#102F25",
+                  color: "#fff",
                 },
               }}
             >
@@ -108,6 +109,10 @@ export const Cart = ({ onClose }) => {
                 color: "white",
                 backgroundColor: "#102F25",
                 border: '1px solid black' ,
+                "&:hover": {
+                  background: "#fff",
+                  color: "#102F25"
+                },
               }}
             >
               Checkout

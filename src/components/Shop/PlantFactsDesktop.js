@@ -22,7 +22,7 @@ export const PlantFactsDesktop = () => {
       <Box>
         <Grid container>
           <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Raleway", fontWeight:"700"  }}>Plant Like</Typography>
+            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700"  }}>Plant Like</Typography>
           </Grid>
         </Grid>
       </Box>
@@ -87,7 +87,7 @@ export const PlantFactsDesktop = () => {
       <Box>
         <Grid container>
           <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Raleway", fontWeight:"700"  }}>Quick Facts</Typography>
+            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700"  }}>Quick Facts</Typography>
           </Grid>
         </Grid>
       </Box>
@@ -110,12 +110,12 @@ export const PlantFactsDesktop = () => {
               <Container>
                 <Stack>
                   <Box item sx={{marginBottom:"10px"}}>
-                    <Typography sx={{ fontFamily: "Oxygen", fontWeight:"Medium" }}>
+                    <Typography sx={{ fontWeight:"600" }}>
                       {fact.title}:
                     </Typography>
                   </Box>
                   <Box item>
-                    <Typography sx={{ fontFamily: "Oxygen", fontWeight:"Regular"}}>
+                    <Typography sx={{ fontWeight:"Regular"}}>
                       {fact.description}
                     </Typography>
                   </Box>
@@ -128,7 +128,7 @@ export const PlantFactsDesktop = () => {
       <Box>
         <Grid container>
           <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Raleway", fontWeight:"700"  }}>About Plant</Typography>
+            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700"  }}>About Plant</Typography>
           </Grid>
         </Grid>
       </Box>

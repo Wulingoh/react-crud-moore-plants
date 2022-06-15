@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CartProvider } from "./CartContext";
 import { Checkout } from "./Checkout";
+import { Home } from "./Home";
 import { PayPalScriptProvider} from "@paypal/react-paypal-js";
 
 const theme = createTheme({
@@ -43,7 +44,7 @@ function Shop() {
         <PayPalScriptProvider options={initialOptions}>
           <ResponsiveAppBar />
           <Routes>
-            <Route index element={"Index"} />
+            <Route index element={<Home />} />
             <Route path="/plants/:productId" element={<PlantDetails />} />
             <Route path="/plants" element={<Plants />} />
             <Route path="/pots" element={<Pots />} />

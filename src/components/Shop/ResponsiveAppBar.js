@@ -56,6 +56,7 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  
 
   return (
     <AppBar
@@ -64,7 +65,9 @@ const ResponsiveAppBar = () => {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <MoorePlantLogo sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Link to={"/"}>
+            <MoorePlantLogo sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          </Link>
           <Box
             sx={{
               flexGrow: 1,

@@ -160,7 +160,15 @@ export const SignUp = () => {
             fullWidth
             variant="contained"
             onClick={handleSubmit(signUp)}
-            sx={{ mt: 1, mb: 2 }}
+            sx={{ mt: 1, mb: 2,
+              color: "white",
+              backgroundColor: "#102F25",
+              border: '1px solid black' ,
+              "&:hover": {
+                background: "#fff",
+                color: "#102F25"
+              },
+            }}
           >
             Create account
           </Button>
@@ -186,7 +194,7 @@ export const SignUp = () => {
           </Button>
           <Grid container justifyContent="center" mb="20px">
             <Grid item>
-              <Link to={`/login`} variant="body2">
+              <Link to={`/login`} variant="body2" style={{ color: "#2E4D43", textDecoration: "none"}}>
                 Already have an account? Sign in
               </Link>
             </Grid>
