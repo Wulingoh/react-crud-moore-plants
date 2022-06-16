@@ -14,7 +14,7 @@ export const PotFactsDesktop = () => {
       <Box>
         <Grid container>
           <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700"  }}>Quick Facts</Typography>
+            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700",fontSize:"18px"  }}>Quick Facts</Typography>
           </Grid>
         </Grid>
       </Box>
@@ -26,7 +26,7 @@ export const PotFactsDesktop = () => {
           marginRight: "10px",
         }}
       >
-        <Grid container spacing={3}>
+        <Grid container spacing={0}>
           {productDetails.facts?.map((fact) => (
             <Grid
               item
@@ -36,13 +36,13 @@ export const PotFactsDesktop = () => {
             >
               <Container>
                 <Stack>
-                  <Box item sx={{marginBottom:"10px"}}>
+                  <Box sx={{marginBottom:"10px"}}>
                     <Typography sx={{ fontWeight:"600" }}>
                       {fact.title}:
                     </Typography>
                   </Box>
-                  <Box item>
-                    <Typography sx={{ fontWeight:"Regular", textAlign:"start"}}>
+                  <Box>
+                    <Typography sx={{ fontWeight:"Regular", textAlign:"center"}}>
                       {fact.description}
                     </Typography>
                   </Box>
@@ -55,7 +55,7 @@ export const PotFactsDesktop = () => {
       <Box>
         <Grid container>
           <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700"  }}>About Pot</Typography>
+            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700",fontSize:"18px"  }}>About Pot</Typography>
           </Grid>
         </Grid>
       </Box>

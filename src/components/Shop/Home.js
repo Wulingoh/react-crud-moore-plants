@@ -11,6 +11,7 @@ import Link from "@mui/material/Link";
 import { styled } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
 import { Stack, Paper} from "@mui/material";
+import { maxHeight, maxWidth } from "@mui/system";
 
 const Img = styled("img")({
   margin: "auto",
@@ -18,10 +19,12 @@ const Img = styled("img")({
   maxWidth: "100%",
   maxHeight: "100%",
 });
-const Item = styled(Grid)(({ theme }) => ({
-    padding: 0,
-    margin: 0
-  }));
+const ImageItem = styled("img") ({
+  display:"flex",
+  maxWidth: "100%",
+  maxHeight: "100%",
+
+})
 
 export const Home = () => {
   return (
@@ -53,7 +56,11 @@ export const Home = () => {
               sx={{ display: "flex", alignItems: "center" }}
             >
               <Container>
-                <Typography sx={{ textAlign: "justify" }}>
+                <Typography
+                  sx={{ textAlign: "justify" }}
+                  variant="body1"
+                  fontFamily={"Oxygen"}
+                >
                   What plants give to our lives. Warmth, comfort, freshness, a
                   delicate and bold expression that only nature can make.
                   Interior shop{" "}
@@ -74,10 +81,7 @@ export const Home = () => {
           <Grid container mb={4}>
             <Grid item md={6} xs={12}>
               <Stack spacing={2}>
-                <Img
-                  src="/images/homeImg2.png"
-                  alt=""
-                />
+                <Img src="/images/homeImg2.png" alt="" />
                 <Typography gutterBottom variant="h4" component="div">
                   Interior Plants
                 </Typography>
@@ -90,15 +94,18 @@ export const Home = () => {
                 </Typography>
               </Stack>
             </Grid>
-            <Grid item md={6} xs={12} >
+            <Grid item md={6} xs={12}>
               <Stack mt={6}>
                 <Typography variant="body2" gutterBottom fontFamily={"Oxygen"}>
-                We realize various values ​​of plants that are warm, fresh, delicate and good looking for our living. Since we thought it was an essential element of their lives. We'd like to offer the interior green lifestyle by Moore Plants.
+                  We realize various values ​​of plants that are warm, fresh,
+                  delicate and good looking for our living. Since we thought it
+                  was an essential element of their lives. We'd like to offer
+                  the interior green lifestyle by Moore Plants.
                 </Typography>
                 <Img
                   src="/images/homeImg4.png"
                   alt=""
-                  sx={{marginTop:"20px"}}
+                  sx={{ marginTop: "20px" }}
                 />
               </Stack>
             </Grid>
@@ -124,7 +131,7 @@ export const Home = () => {
                   marginTop: "20px",
                 }}
               >
-                <Typography gutterBottom variant="subtitle1" component="div">
+                <Typography gutterBottom variant="h4" component="div">
                   Pots
                 </Typography>
                 <Typography variant="body2" gutterBottom fontFamily={"Oxygen"}>
@@ -145,9 +152,58 @@ export const Home = () => {
             <Img src="/images/homeMiddleImg1.svg" alt="" />
           </Grid>
         </Grid>
-        <Box sx={{ marginBottom: "50px" }}>
-          <PromiseFooter />
-        </Box>
+        <Container disableGutters>
+          <Grid
+            container
+            direction="row"
+            mt={4}
+            flexWrap={"nowrap"}
+            spacing={1}
+          >
+            <Grid item xs={4}>
+              <ImageItem src="/images/homeImg7.png" alt="" />
+            </Grid>
+            <Grid item xs={4}>
+              <Stack spacing={0}>
+                <ImageItem
+                  src="/images/homeImg8.png"
+                  alt=""
+                  sx={{ marginBottom: "12px", maxHeight: "295px" }}
+                />
+                <ImageItem src="/images/homeImg9.png" alt="" />
+              </Stack>
+            </Grid>
+            <Grid item xs={4}>
+              <Box
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  border: "3px solid #B5AEAB",
+                }}
+              >
+                <Container maxWidth={"xs"}>
+                  <Typography
+                    variant="h4"
+                    fontFamily={"Oxygen"}
+                    textAlign={"start"}
+                    marginTop={"100px"}
+                    marginBottom={"20px"}
+                  >
+                    How to Green
+                  </Typography>
+                  <Typography variant="body2" textAlign={"start"}>
+                    Plants are as important as other accessories in the space.
+                    Well-chosen plants — artfully displayed — enhance your
+                    home’s unique look and make it feel healthier and more
+                    connected with nature. In this article I will introduce you
+                    to the most beautiful indoor plants and creative ways to use
+                    them in the interior.
+                  </Typography>
+                </Container>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
       </Container>
     </main>
   );
