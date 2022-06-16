@@ -18,7 +18,7 @@ export const PotDetails = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const productDetails = useProductDetailsShopList();
   const { addProduct } = useCart();
-
+  
   return (
     <main style={{ backgroundColor: "#F3F7F3", marginBottom: "20px" }}>
       <Container>
@@ -49,7 +49,7 @@ export const PotDetails = () => {
                     <span style={{fontWeight:"600"}}>Price: </span> ${productDetails.price}
                   </Typography>
                   <Typography sx={{ textAlign: "start" }}>
-                  <span style={{fontWeight:"600"}}>Size: </span>{productDetails.size.toUpperCase()}
+                  <span style={{fontWeight:"600"}}>Size: </span>{productDetails.size?.toUpperCase()}
                   </Typography>
                   <Typography sx={{ textAlign: "start" }}>
                   <span style={{fontWeight:"600"}}>Color: </span>{productDetails.color}
