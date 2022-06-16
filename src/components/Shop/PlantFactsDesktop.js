@@ -18,7 +18,7 @@ import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 export const PlantFactsDesktop = () => {
   const productDetails = useProductDetailsShopList();
   return (
-    <div style={{ marginBottom: "50px" }}>
+    <div style={{ marginBottom: "80px", marginTop:"50px"}}>
       <Box>
         <Grid container>
           <Grid item xs={12}>
@@ -108,14 +108,14 @@ export const PlantFactsDesktop = () => {
               sx={{ display: "flex", alignItems: "center" }}
             >
               <Container>
-                <Stack>
+                <Stack sx={{display:"flex", alignItems:"flex-start", justifyContent:"space-evenly"}}>
                   <Box item sx={{marginBottom:"10px"}}>
                     <Typography sx={{ fontWeight:"600" }}>
                       {fact.title}:
                     </Typography>
                   </Box>
                   <Box item>
-                    <Typography sx={{ fontWeight:"Regular"}}>
+                    <Typography sx={{ fontWeight:"Regular", textAlign:"start"}}>
                       {fact.description}
                     </Typography>
                   </Box>
@@ -148,7 +148,7 @@ export const PlantFactsDesktop = () => {
                   <FactCheckOutlinedIcon />
                 </Grid>
                 <Grid item xs={10}>
-                  <Typography>
+                  <Typography sx={{ textAlign:"start"}}>
                     {productDetails.content}
                   </Typography>
                 </Grid>

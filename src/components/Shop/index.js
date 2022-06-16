@@ -17,6 +17,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CartProvider } from "./CartContext";
 import { Checkout } from "./Checkout";
 import { Home } from "./Home";
+import { PotDetails } from "./PotDetails";
 import { PayPalScriptProvider} from "@paypal/react-paypal-js";
 
 const theme = createTheme({
@@ -47,6 +48,7 @@ function Shop() {
             <Route index element={<Home />} />
             <Route path="/plants/:productId" element={<PlantDetails />} />
             <Route path="/plants" element={<Plants />} />
+            <Route path="/pots/:productId" element={<PotDetails />} />
             <Route path="/pots" element={<Pots />} />
             <Route path="/howToGreen" element={<HowToGreen />} />
             <Route path="/about" element={<Story />} />

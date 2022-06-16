@@ -31,8 +31,8 @@ export default function OrderBy(props) {
           onChange={handleChange}
         >
           <MenuItem value={"products.title ASC"}>Title</MenuItem>
-          <MenuItem value={"products.price ASC"}>Highest Price</MenuItem>
-          <MenuItem value={"products.price DESC"}>Lowest Price</MenuItem>
+          <MenuItem value={"products.price DESC"}>Highest Price</MenuItem>
+          <MenuItem value={"products.price ASC"}>Lowest Price</MenuItem>
           <MenuItem value={"products.created_at DESC"}>Recently Added</MenuItem>
         </Select>
       </FormControl>
