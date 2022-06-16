@@ -30,6 +30,9 @@
                 $products['facts'] = $products['facts'] ? json_decode($products['facts']) : [];
             } else {
                 $sql .= " WHERE deleted_at IS NULL";
+                if(isset($_GET["type"]) && $_GET["type"]){
+                    $sql .= " AND products.type IN (".escape_array($db, $_GET["type"]).")";
+                }
                 if(isset($_GET["lightingCareId"]) && $_GET["lightingCareId"]){
                     $sql .= " AND products.lighting_care_id IN (".escape_array($db, $_GET["lightingCareId"]).")";
                 }
@@ -41,6 +44,15 @@
                 }
                 if(isset($_GET["roomType"]) && $_GET["roomType"]){
                     $sql .= " AND products.room_type IN (".escape_array($db, $_GET["roomType"]).")";
+                }
+                if(isset($_GET["color"]) && $_GET["color"]){
+                    $sql .= " AND products.color IN (".escape_array($db, $_GET["color"]).")";
+                }
+                if(isset($_GET["size"]) && $_GET["size"]){
+                    $sql .= " AND products.size IN (".escape_array($db, $_GET["size"]).")";
+                }
+                if(isset($_GET["potMaterial"]) && $_GET["potMaterial"]){
+                    $sql .= " AND products.pot_material IN (".escape_array($db, $_GET["potMaterial"]).")";
                 }
                 if(isset($_GET["priceGte"]) && $_GET["priceGte"]){
                     $sql .= " AND products.price >= :priceGte";
@@ -75,6 +87,7 @@
                 if(isset($_GET["heightLt"]) && $_GET["heightLt"]){
                     $stmt->bindParam(':heightLt', $_GET['heightLt']);
                 }
+                
                 $stmt->execute();
                 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($products as $product) {

@@ -19,7 +19,7 @@ import { SideBarFilter } from "./SideBarFilter";
 import { useCart } from "./CartContext";
 
 export const Plants = () => {
-  const [params, setParams] = useState({});
+  const [params, setParams] = useState({type:"Plant"});
   const { addProduct } = useCart();
   const [products, setProducts] = useState([]);
   useEffect(() => {

@@ -26,8 +26,8 @@ import { Cart } from "./Cart";
 
 const pages = [
   ["Home", ""],
-  ["Plant", "/plants"],
-  ["Pot", "/pots"],
+  ["Plants", "/plants"],
+  ["Pots", "/pots"],
   ["How To Green", "/howToGreen"],
   ["Story", "/about"],
   ["Contact", "/contact"],
