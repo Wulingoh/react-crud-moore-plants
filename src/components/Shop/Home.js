@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import AppBar from "@mui/material/AppBar";
-import Button from "@mui/material/Button";
-import PromiseFooter from "./PromiseFooter";
+import * as React from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { HomeGreenDesktop } from "./HomeGreenDesktop";
+import { HomeGreenMobile } from "./HomeGreenMobile";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -11,7 +10,6 @@ import Link from "@mui/material/Link";
 import { styled } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
 import { Stack, Paper} from "@mui/material";
-import { maxHeight, maxWidth } from "@mui/system";
 
 const Img = styled("img")({
   margin: "auto",
@@ -27,6 +25,7 @@ const ImageItem = styled("img") ({
 })
 
 export const Home = () => {
+  const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <main style={{ backgroundColor: "#F3F7F3", marginBottom: "20px" }}>
       <Container maxWidth={"lg"} disableGutters>
@@ -116,7 +115,7 @@ export const Home = () => {
             <Img src="/images/homeMiddleImg2.svg" alt="" />
           </Grid>
         </Grid>
-        <Grid container alignItems={"flex-end"} mt={"20px"} mb={"20px"}>
+        <Grid container alignItems={"flex-end"} mt={"20px"} mb={"30px"}>
           <Grid item md={6} xs={12} flexGrow={1}>
             <Img src="/images/homeImg6.svg" alt="" />
           </Grid>
@@ -147,63 +146,8 @@ export const Home = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid container mt={4}>
-          <Grid item xs={12}>
-            <Img src="/images/homeMiddleImg1.svg" alt="" />
-          </Grid>
-        </Grid>
-        <Container disableGutters>
-          <Grid
-            container
-            direction="row"
-            mt={4}
-            flexWrap={"nowrap"}
-            spacing={1}
-          >
-            <Grid item xs={4}>
-              <ImageItem src="/images/homeImg7.png" alt="" />
-            </Grid>
-            <Grid item xs={4}>
-              <Stack spacing={0}>
-                <ImageItem
-                  src="/images/homeImg8.png"
-                  alt=""
-                  sx={{ marginBottom: "12px", maxHeight: "295px" }}
-                />
-                <ImageItem src="/images/homeImg9.png" alt="" />
-              </Stack>
-            </Grid>
-            <Grid item xs={4}>
-              <Box
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  border: "3px solid #B5AEAB",
-                }}
-              >
-                <Container maxWidth={"xs"}>
-                  <Typography
-                    variant="h4"
-                    fontFamily={"Oxygen"}
-                    textAlign={"start"}
-                    marginTop={"100px"}
-                    marginBottom={"20px"}
-                  >
-                    How to Green
-                  </Typography>
-                  <Typography variant="body2" textAlign={"start"}>
-                    Plants are as important as other accessories in the space.
-                    Well-chosen plants — artfully displayed — enhance your
-                    home’s unique look and make it feel healthier and more
-                    connected with nature. In this article I will introduce you
-                    to the most beautiful indoor plants and creative ways to use
-                    them in the interior.
-                  </Typography>
-                </Container>
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
+        <Divider sx={{ bgcolor: "#6C584C", marginBottom:"20px", marginTop:"10px", borderBottomWidth: 1 }} />
+        {isMobile ? <HomeGreenMobile /> : <HomeGreenDesktop />}
       </Container>
     </main>
   );

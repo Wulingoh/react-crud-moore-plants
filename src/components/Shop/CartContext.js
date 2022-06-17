@@ -8,7 +8,7 @@ import { CartReducer, sumItems } from './CartReducer';
 
 const CartContext = createContext();
 const storage = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
-const initialState = { cartItems: storage, ...sumItems(storage), checkout: false };
+const initialState = { cartItems: storage, ...sumItems(storage, 5) };
 
 export const CartProvider = ({
   children }) => {
@@ -29,6 +29,9 @@ export const CartProvider = ({
     const removeItem = payload => {
         dispatch({type: 'REMOVE_ITEM', payload})
     }
+    const setShipping = payload => {
+      dispatch({type: "SHIPPING", payload})
+    }
 
     const clearCart = () => {
         dispatch({type: 'CLEAR'})
@@ -40,6 +43,7 @@ export const CartProvider = ({
         increase,
         decrease,
         clearCart,
+        setShipping,
         ...state
     } 
 
