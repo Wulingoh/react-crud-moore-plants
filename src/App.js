@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./components/AuthContext";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./App.css";
 import Shop from "./components/Shop";
 import Admin from "./components/Admin";
@@ -15,10 +16,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <AuthProvider>
-          <Routes>
-            <Route path="/admin/*" element={<Admin />} />
-            <Route path="/*" element={<Shop />} />
-          </Routes>
+          <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+            <Routes>
+              <Route path="/admin/*" element={<Admin />} />
+              <Route path="/*" element={<Shop />} />
+            </Routes>
+          </GoogleOAuthProvider>
         </AuthProvider>
       </BrowserRouter>
     </div>

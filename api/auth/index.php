@@ -9,6 +9,9 @@ switch ($resource) {
     case 'login':
         require __DIR__ . '/login.php';
         break;
+    case 'googleLogin':
+        require __DIR__ . '/googleLogin.php';
+        break;
     case 'signup':
         require __DIR__ . '/signup.php';
         break;
