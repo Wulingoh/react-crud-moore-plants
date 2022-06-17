@@ -2,10 +2,12 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
 import useAuth from "../AuthContext";
 import { useCart } from "./CartContext";
+import { useNavigate } from "react-router-dom";
 
 export const PayPal = () => {
   const { cartItems, total, subtotal, shipping, clearCart } = useCart();
   const { user } = useAuth();
+  const navigate = useNavigate();
   return (
     <PayPalButtons
       forceReRender={[total]}
@@ -54,7 +56,7 @@ export const PayPal = () => {
             subtotal,
             total,
             tax: 0,
-          }).then(clearCart)
+          }).then(clearCart).then(() => navigate('/confirmation'))
           
         });
       }}

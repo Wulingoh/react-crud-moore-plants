@@ -3,9 +3,13 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { PayPal } from "./PayPal";
+import { CashPickUp } from "./CashPickUp";
+import Checkbox from '@mui/material/Checkbox';
+import { useCart } from './CartContext'
+import { Review } from "./Review";
 
 export const Checkout = () => {
-
+  const { setShipping, shipping } = useCart()
 
   return (
     <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
@@ -13,10 +17,18 @@ export const Checkout = () => {
         variant="outlined"
         sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
       >
-        <Typography component="h1" variant="h4" align="center">
-          Checkout
+        <Typography component="h1" variant="h4" align="center" marginBottom={"10px"}>
+          Checkout: 
         </Typography>
+        <Container>
+          <Review />
+        </Container>
+        <Typography variant="body2" marginBottom={"20px"}>Delivery Option</Typography>
+        <Checkbox onClick={(event) => setShipping(event.target.checked ? 5 : 0)} checked={!!shipping} />Delivery ($5)
+        <Typography variant="body2" marginBottom={"20px"}>Please Select your payment method.</Typography>
         <PayPal />
+        <div style={{marginBottom:"10px"}}></div>
+        <CashPickUp />
       </Paper>
     </Container>
   );

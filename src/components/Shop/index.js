@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CartProvider } from "./CartContext";
 import { Checkout } from "./Checkout";
+import { Confirmation } from "./Confirmation";
 import { Home } from "./Home";
 import { PotDetails } from "./PotDetails";
 import { PayPalScriptProvider} from "@paypal/react-paypal-js";
@@ -58,6 +59,7 @@ function Shop() {
             <Route path="/forgotPassword" element={<ForgotPassword />} />
             <Route path="/resetPassword/:token" element={<ResetPassword />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/confirmation" element={<Confirmation />} />
           </Routes>
           <Footer />
         </PayPalScriptProvider>

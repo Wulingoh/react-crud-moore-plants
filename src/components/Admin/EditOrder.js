@@ -84,6 +84,7 @@ export default function ListProduct() {
                       <MenuItem value=""></MenuItem>
                       <MenuItem value="Pending">Pending</MenuItem>
                       <MenuItem value="Paid">Paid</MenuItem>
+                      <MenuItem value="Cash">Cash on Pick Up</MenuItem>
                     </Select>
                   </FormControl>
                 )}
