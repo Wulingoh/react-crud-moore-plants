@@ -4,6 +4,7 @@ import axios from "axios";
 import { API_HOST } from "../../config";
 import { Controller, useForm } from "react-hook-form";
 import useAuth from "../AuthContext";
+import { useGoogleLogin } from '@react-oauth/google';
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,13 +20,13 @@ import { useNavigate, Link } from "react-router-dom";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 
-
-
 export const SignUp = () => {
-  const { user, signUp } = useAuth()
+  const { user, signUp } = useAuth();
   const navigate = useNavigate();
   const { handleSubmit, control, errors} = useForm();
-
+  const login = useGoogleLogin({
+    onSuccess: tokenResponse => axios.post('/api/auth/googleLogin', tokenResponse).then(() => navigate('/checkout'))
+  });
 
   return (
     <Container component="main" maxWidth="xs">
@@ -177,21 +178,36 @@ export const SignUp = () => {
             fullWidth
             variant="contained"
             onClick={handleSubmit(signUp)}
-            sx={{ mt: 1, mb: 2 }}
-            startIcon={<GoogleIcon />}
-          >
-            Sign up with Google
-          </Button>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            onClick={handleSubmit(signUp)}
-            sx={{ mt: 1, mb: 2 }}
+            sx={{ mt: 1, mb: 2,
+              color: "white",
+              backgroundColor: "#102F25",
+              border: '1px solid black' ,
+              "&:hover": {
+                background: "#fff",
+                color: "#102F25"
+              },
+            }}
             startIcon={<FacebookIcon />}
           >
             Sign up with Facebook
           </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={() => login()}
+                sx={{ mt: 1, mb: 2,
+                  color: "white",
+                  backgroundColor: "#0F9D58",
+                  border: '1px solid #4285F4' ,
+                  "&:hover": {
+                    background: "#fff",
+                    color: "#0F9D58"
+                  },
+                }}
+                startIcon={<GoogleIcon />}
+              >
+                Sign up with Google {''}
+              </Button>
           <Grid container justifyContent="center" mb="20px">
             <Grid item>
               <Link to={`/login`} variant="body2" style={{ color: "#2E4D43", textDecoration: "none"}}>
