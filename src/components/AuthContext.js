@@ -80,6 +80,7 @@ export const AuthProvider = ({
       login,
       signUp,
       logout,
+      setUser
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [user, loading, error]

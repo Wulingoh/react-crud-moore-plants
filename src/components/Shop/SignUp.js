@@ -21,11 +21,13 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 
 export const SignUp = () => {
-  const { user, signUp } = useAuth();
+  const { setUser, signUp } = useAuth();
   const navigate = useNavigate();
   const { handleSubmit, control, errors} = useForm();
   const login = useGoogleLogin({
-    onSuccess: tokenResponse => axios.post('/api/auth/googleLogin', tokenResponse).then(() => navigate('/checkout'))
+    onSuccess: tokenResponse => axios.post('/api/auth/googleLogin', tokenResponse).then((newUser) => { setUser(newUser)
+    navigate('/checkout')}
+    )
   });
 
   return (
