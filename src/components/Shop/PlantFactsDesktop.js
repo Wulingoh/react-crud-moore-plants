@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import * as React from "react";
 import { useProductDetailsShopList } from "../FetchApi";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
-import { styled } from "@mui/material/styles";
-import Divider from "@mui/material/Divider";
 import { Stack } from "@mui/material";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined";
 import OpacityOutlinedIcon from "@mui/icons-material/OpacityOutlined";
 import ThermostatOutlinedIcon from "@mui/icons-material/ThermostatOutlined";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
@@ -100,8 +95,9 @@ export const PlantFactsDesktop = () => {
         }}
       >
         <Grid container spacing={3}>
-          {productDetails.facts?.map((fact) => (
+          {productDetails.facts?.map((fact, key) => (
             <Grid
+              key={key}
               item
               md={4}
               sm={12}

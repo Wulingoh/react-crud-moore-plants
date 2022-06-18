@@ -10,7 +10,8 @@ import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
-import { Box, Grid, Typography } from "@mui/material";
+import { IconButton, Grid, Typography } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function ListCareLevel() {
   const [CareLevels, setCareLevel] = useState([]);
@@ -67,13 +68,17 @@ export default function ListCareLevel() {
               <TableRow key={key}>
                 <TableCell>{careLevel.care_level_id}</TableCell>
                 <TableCell>
-                    <Typography noWrap>
-                    {careLevel.name}
-                    </Typography>
+                  <Typography noWrap>{careLevel.name}</Typography>
                 </TableCell>
                 <TableCell align="left">{careLevel.content}</TableCell>
                 <TableCell align="right">
-                  <Grid container spacing={1} direction="row" justifyContent="flex-end" wrap="nowrap">
+                  <Grid
+                    container
+                    spacing={1}
+                    direction="row"
+                    justifyContent="flex-end"
+                    wrap="nowrap"
+                  >
                     <Grid item>
                       <Button
                         variant="contained"
@@ -84,13 +89,14 @@ export default function ListCareLevel() {
                       </Button>
                     </Grid>
                     <Grid item>
-                      <Button
+                      <IconButton
                         variant="outlined"
+                        size="small"
                         onClick={() => deleteCareLevel(careLevel.care_level_id)}
                         color="error"
                       >
-                        Delete
-                      </Button>
+                        <DeleteIcon />
+                      </IconButton>
                     </Grid>
                   </Grid>
                 </TableCell>

@@ -19,7 +19,7 @@ export const Review = ({ onClose }) => {
         }}
       >
         <Grid container justifyContent={"center"}>
-          <Grid item xs={12} sx={{ flexGrow: 0 }}>
+          <Grid item xs={12} sx={{ flexGrow: 0, marginTop:"20px" }}>
             <Typography textAlign={"center"}>Order Summary</Typography>
           </Grid>
           <Grid item xs={12} marginTop={"10px"} marginBottom={"10px"}>
@@ -49,10 +49,10 @@ export const Review = ({ onClose }) => {
                   ${shipping.toFixed(2)}
                 </Typography>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={6} sx={{marginBottom:"30px", marginTop:"20px"}}>
                 <Typography>Total</Typography>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={6} sx={{marginBottom:"30px", marginTop:"20px"}}>
                 <Typography textAlign={"end"}>${total.toFixed(2)}</Typography>
               </Grid>
             </>

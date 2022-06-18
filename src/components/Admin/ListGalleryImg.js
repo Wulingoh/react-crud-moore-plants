@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import { API_HOST } from "../../config";
-
+import { useParams } from "react-router-dom";
 import Title from "./Title";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
@@ -14,6 +12,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Input = styled("input")({
   display: "none",
@@ -81,8 +81,8 @@ export default function ListGalleryImg() {
       </label>
       <Box m={3}>
         <Grid container item spacing={3}>
-          {galleryImages.map((item) => (
-            <Grid item>
+          {galleryImages.map((item, key) => (
+            <Grid item key={key}>
               <Card>
                 <CardMedia
                   component="img"
@@ -97,16 +97,14 @@ export default function ListGalleryImg() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button
+                  <IconButton
                     variant="outlined"
                     size="small"
-                    onClick={() =>
-                      deleteGalleryImg(item.gallery_img_id)
-                    }
+                    onClick={() => deleteGalleryImg(item.gallery_img_id)}
                     color="error"
                   >
-                    Delete
-                  </Button>
+                    <DeleteIcon />
+                  </IconButton>
                 </CardActions>
               </Card>
             </Grid>
