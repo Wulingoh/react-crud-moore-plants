@@ -25,7 +25,7 @@ export const PotFactsAccordion = () => {
           <Box>
             <Grid container>
               <Grid item xs={12}>
-                <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700"  }}>
+                <Typography sx={{ fontFamily: "Oxygen", fontWeight: "700" }}>
                   Quick Facts
                 </Typography>
               </Grid>
@@ -39,30 +39,36 @@ export const PotFactsAccordion = () => {
               marginTop: "30px",
             }}
           >
-            {productDetails.facts?.map((fact) => (
-              <Grid container spacing={3}>
+            <Grid container spacing={3}>
+              {productDetails.facts?.map((fact, key) => (
                 <Grid
+                  key={key}
                   item
                   md={4}
                   sm={12}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Stack direction="row" sx={{paddingTop:"24px"}}>
-                    <Box item sx={{marginBottom:"10px", marginRight:"10px"}}>
-                      <Typography sx={{ fontWeight:"600", textAlign:"left" }}>
+                  <Stack direction="row" sx={{ paddingTop: "24px" }}>
+                    <Box
+                      item
+                      sx={{ marginBottom: "10px", marginRight: "10px" }}
+                    >
+                      <Typography sx={{ fontWeight: "600", textAlign: "left" }}>
                         {fact.title}:
                       </Typography>
                     </Box>
                     <Divider></Divider>
                     <Box>
-                      <Typography sx={{ fontWeight:"Regular", textAlign:"left"}}>
+                      <Typography
+                        sx={{ fontWeight: "Regular", textAlign: "left" }}
+                      >
                         {fact.description}
                       </Typography>
                     </Box>
                   </Stack>
                 </Grid>
-              </Grid>
-            ))}
+              ))}
+            </Grid>
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -75,7 +81,7 @@ export const PotFactsAccordion = () => {
           <Box>
             <Grid container>
               <Grid item xs={12}>
-                <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700"  }}>
+                <Typography sx={{ fontFamily: "Oxygen", fontWeight: "700" }}>
                   About Pot
                 </Typography>
               </Grid>
@@ -104,7 +110,9 @@ export const PotFactsAccordion = () => {
                       <FactCheckOutlinedIcon />
                     </Grid>
                     <Grid item xs={10}>
-                      <Typography sx={{ fontWeight:"Regular", textAlign:"left"}}>
+                      <Typography
+                        sx={{ fontWeight: "Regular", textAlign: "left" }}
+                      >
                         {productDetails.content}
                       </Typography>
                     </Grid>

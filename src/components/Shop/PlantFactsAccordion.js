@@ -9,7 +9,6 @@ import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Stack } from "@mui/material";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined";
 import OpacityOutlinedIcon from "@mui/icons-material/OpacityOutlined";
 import ThermostatOutlinedIcon from "@mui/icons-material/ThermostatOutlined";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
@@ -28,7 +27,13 @@ export const PlantFactsAccordion = () => {
           <Box>
             <Grid container>
               <Grid item xs={12}>
-                <Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Oxygen",
+                    fontWeight: "700",
+                    fontSize: "18px",
+                  }}
+                >
                   Plant Like
                 </Typography>
               </Grid>
@@ -57,9 +62,7 @@ export const PlantFactsAccordion = () => {
                       <OpacityOutlinedIcon />
                     </Grid>
                     <Grid item xs={9}>
-                      <Typography>
-                        {productDetails.wateringName}
-                      </Typography>
+                      <Typography>{productDetails.wateringName}</Typography>
                     </Grid>
                   </Grid>
                 </Container>
@@ -71,9 +74,7 @@ export const PlantFactsAccordion = () => {
                       <WbSunnyOutlinedIcon />
                     </Grid>
                     <Grid item xs={9}>
-                      <Typography>
-                        {productDetails.lightingName}
-                      </Typography>
+                      <Typography>{productDetails.lightingName}</Typography>
                     </Grid>
                   </Grid>
                 </Container>
@@ -85,9 +86,7 @@ export const PlantFactsAccordion = () => {
                       <ThermostatOutlinedIcon />
                     </Grid>
                     <Grid item xs={9}>
-                      <Typography>
-                        {productDetails.humidityName}
-                      </Typography>
+                      <Typography>{productDetails.humidityName}</Typography>
                     </Grid>
                   </Grid>
                 </Container>
@@ -105,7 +104,13 @@ export const PlantFactsAccordion = () => {
           <Box>
             <Grid container>
               <Grid item xs={12}>
-                <Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Oxygen",
+                    fontWeight: "700",
+                    fontSize: "18px",
+                  }}
+                >
                   Quick Facts
                 </Typography>
               </Grid>
@@ -119,29 +124,35 @@ export const PlantFactsAccordion = () => {
               marginTop: "30px",
             }}
           >
-            {productDetails.facts?.map((fact) => (
-              <Grid container spacing={3}>
+            <Grid container spacing={3}>
+              {productDetails.facts?.map((fact, key) => (
                 <Grid
+                  key={key}
                   item
                   md={4}
                   sm={12}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
                   <Stack direction="row" spacing={2}>
-                    <Box item sx={{marginBottom:"10px", marginRight:"10px"}}>
-                      <Typography>
+                    <Box
+                      item
+                      sx={{ marginBottom: "10px", marginRight: "10px" }}
+                    >
+                      <Typography sx={{ fontWeight: "600", textAlign: "left" }}>
                         {fact.title}:
                       </Typography>
                     </Box>
-                    <Box item sx={{justifyItems:"10px"}}>
-                      <Typography>
+                    <Box>
+                      <Typography
+                        sx={{ fontWeight: "Regular", textAlign: "left" }}
+                      >
                         {fact.description}
                       </Typography>
                     </Box>
                   </Stack>
                 </Grid>
-              </Grid>
-            ))}
+              ))}
+            </Grid>
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -154,7 +165,13 @@ export const PlantFactsAccordion = () => {
           <Box>
             <Grid container>
               <Grid item xs={12}>
-                <Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Oxygen",
+                    fontWeight: "700",
+                    fontSize: "18px",
+                  }}
+                >
                   About Plants
                 </Typography>
               </Grid>
@@ -183,7 +200,9 @@ export const PlantFactsAccordion = () => {
                       <FactCheckOutlinedIcon />
                     </Grid>
                     <Grid item xs={10}>
-                      <Typography>
+                      <Typography
+                        sx={{ fontWeight: "Regular", textAlign: "left" }}
+                      >
                         {productDetails.content}
                       </Typography>
                     </Grid>

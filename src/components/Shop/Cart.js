@@ -3,8 +3,7 @@ import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../AuthContext";
 import Button from "@mui/material/Button";
-import { Grid, Paper, Stack, Container, ListItemButton, ListItemText,ListItem } from "@mui/material";
-import { IconButton } from "@mui/material";
+import { Grid, Container, ListItemButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -12,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import { useCart } from "./CartContext";
 import CartProducts from "./CartProducts";
 import { PayPal } from "./PayPal";
-import { positions } from '@mui/system';
+
 
 
 export const Cart = ({ onClose }) => {

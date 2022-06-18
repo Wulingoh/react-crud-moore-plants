@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { useCart } from "./CartContext";
 import { IMG_PATH } from "../../config";
 import { Button, Grid, Stack, Typography } from "@mui/material";

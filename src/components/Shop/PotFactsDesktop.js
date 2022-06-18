@@ -27,8 +27,9 @@ export const PotFactsDesktop = () => {
         }}
       >
         <Grid container spacing={0}>
-          {productDetails.facts?.map((fact) => (
+          {productDetails.facts?.map((fact, key) => (
             <Grid
+              key={key}
               item
               md={4}
               sm={12}

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import AppBar from "@mui/material/AppBar";
 import { Link } from "react-router-dom";
 import usePagination from "./Pagination";
 import Button from "@mui/material/Button";
@@ -116,7 +115,7 @@ export const Plants = () => {
                           <Typography gutterBottom variant="h6" component="h2">
                             {product.title}
                           </Typography>
-                          <Typography>${product.price}</Typography>
+                          <Typography>${parseFloat(product.price, 10).toFixed(2)}</Typography>
                         </CardContent>
                         <CardActions>
                           <Button
@@ -130,8 +129,6 @@ export const Plants = () => {
                                 color: "#fff",
                               },
                             }}
-                            component={Link}
-                            to={`/plants/${product.product_id}`}
                           >
                             VIEW DETAIL
                           </Button>
@@ -150,7 +147,10 @@ export const Plants = () => {
                                   color: "#102F25",
                                 },
                               }}
-                              onClick={() => addProduct(product)}
+                              onClick={(event) => {
+                                event.preventDefault();
+                                addProduct(product);
+                              } }
                             >
                               ADD PLANT TO BAG
                             </Button>
