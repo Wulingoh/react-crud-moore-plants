@@ -9,6 +9,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 export default function ListUser() {
   const navigate = useNavigate();
@@ -136,6 +138,25 @@ export const UserForm = ({ control }) => {
               error={error}
               onChange={onChange}
               value={value}
+            />
+          )}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Controller
+          name={"newsletter"}
+          control={control}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={value}
+                  onChange={onChange}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              }
+              label="Stay Up To Date"
             />
           )}
         />

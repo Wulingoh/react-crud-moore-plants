@@ -5,6 +5,7 @@ import useAuth from "../AuthContext";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -54,6 +55,7 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import WaterIcon from "@mui/icons-material/Water";
 import SpaIcon from "@mui/icons-material/Spa";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { Paper } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -103,7 +105,7 @@ const Drawer = styled(MuiDrawer, {
 
 const mainListItems = (
   <React.Fragment>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/admin">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
@@ -153,21 +155,9 @@ const mainListItems = (
     </ListItemButton>
     <ListItemButton component={Link} to="/admin/humidity">
       <ListItemIcon>
-        <WaterIcon />
+        <img src="images/humidity.png" alt=""/>
       </ListItemIcon>
       <ListItemText primary="Humidity" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
     </ListItemButton>
   </React.Fragment>
 );
@@ -221,7 +211,7 @@ function DashboardContent() {
             </Typography>
             {user ? (
               <Tooltip title="Logout">
-                <IconButton onClick={logout} sx={{ p: 0 }}>
+                <IconButton onClick={() => logout().then(() => navigate("/"))} sx={{ p: 0 }}>
                   <LogoutIcon sx={{ color: "white" }}/>
                 </IconButton>
               </Tooltip>

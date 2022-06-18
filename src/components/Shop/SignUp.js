@@ -32,6 +32,7 @@ export const SignUp = () => {
       }),
   });
 
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -154,9 +155,25 @@ export const SignUp = () => {
               />
             </Grid>
             <Grid item xs={12} display="flex" flexDirection="row">
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="Stay Up To Date"
+              <Controller
+                name={"newsletter"}
+                control={control}
+                defaultValue=""
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={value}
+                        onChange={onChange}
+                        inputProps={{ "aria-label": "controlled" }}
+                      />
+                    }
+                    label="Stay Up To Date"
+                  />
+                )}
               />
             </Grid>
           </Grid>
