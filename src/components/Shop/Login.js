@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Controller, useForm } from "react-hook-form";
+import axios from "axios";
 import useAuth from "../AuthContext";
+import { useGoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -11,14 +13,20 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Stack } from '@mui/material';
   
 export const Login = () => {
-  const { user, login } = useAuth()
+  const { setUser, login } = useAuth()
   const navigate = useNavigate();
   const { handleSubmit, control, errors } = useForm();
+  const googleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) =>
+      axios.post("/api/auth/googleLogin", tokenResponse).then((newUser) => {
+        setUser(newUser);
+        navigate("/checkout");
+      }),
+  });
 
   return (
     <Container component="main" maxWidth="sm">
@@ -38,30 +46,27 @@ export const Login = () => {
         </Typography>
         <Box component="form" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                onClick={handleSubmit(login)}
-                sx={{ mt: 1, mb: 2 }}
-                startIcon={<GoogleIcon />}
-              >
-                Sign In with Google
-              </Button>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                onClick={handleSubmit(login)}
-                sx={{ mt: 1, mb: 2 }}
-                startIcon={<FacebookIcon />}
-              >
-                Sign In with Facebook
-              </Button>
-            </Grid>
+            <Grid item xs={12} sm={12}>
+            <Button
+            fullWidth
+            variant="contained"
+            onClick={() => googleLogin()}
+            sx={{
+              mt: 1,
+              mb: 2,
+              color: "white",
+              backgroundColor: "#0F9D58",
+              border: "1px solid #4285F4",
+              "&:hover": {
+                background: "#fff",
+                color: "#0F9D58",
+              },
+            }}
+            startIcon={<GoogleIcon />}
+          >
+            Sign In with Google {""}
+          </Button>
+          </Grid>
             <Grid item xs={12} sm={12}>
               <Typography>or</Typography>
             </Grid>

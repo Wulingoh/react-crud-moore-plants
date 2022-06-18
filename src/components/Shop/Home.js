@@ -37,7 +37,7 @@ export const Home = () => {
         >
           <Grid container>
             <Grid item md={12} sm={12}>
-              <Img src="/images/heroIndex.svg" alt="" />
+              <Img src="/images/heroIndex.png" alt="" />
             </Grid>
           </Grid>
         </Box>
@@ -72,7 +72,7 @@ export const Home = () => {
               </Container>
             </Grid>
             <Grid item md={6} sm={12}>
-              <Img src="/images/homeImg1.svg" alt="" />
+              <Img src="/images/homeImg1.png" alt="" />
             </Grid>
           </Grid>
         </Box>
@@ -112,12 +112,12 @@ export const Home = () => {
         </Container>
         <Grid container spacing={0}>
           <Grid item xs={12}>
-            <Img src="/images/homeMiddleImg2.svg" alt="" />
+            <Img src="/images/homeMiddleImg2.png" alt="" />
           </Grid>
         </Grid>
         <Grid container alignItems={"flex-end"} mt={"20px"} mb={"30px"}>
           <Grid item md={6} xs={12} flexGrow={1}>
-            <Img src="/images/homeImg6.svg" alt="" />
+            <Img src="/images/homeImg6.png" alt="" />
           </Grid>
           <Grid item md={6} xs={12}>
             <Grid container direction="column">
@@ -141,7 +141,7 @@ export const Home = () => {
                 </Typography>
               </Grid>
               <Grid item xs={6} justifyContent="flex-end">
-                <Img src="/images/homeImg5.svg" alt="" />
+                <Img src="/images/homeImg5.png" alt="" />
               </Grid>
             </Grid>
           </Grid>
