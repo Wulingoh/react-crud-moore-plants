@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import AppBar from "@mui/material/AppBar";
-import Button from "@mui/material/Button";
+import * as React from "react";
 import PromiseFooter from "./PromiseFooter";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
 import { styled } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
 
@@ -39,7 +35,7 @@ export const Story = () => {
         >
           <Grid container spacing={3}>
             <Grid item md={6} sm={12}>
-              <Img src="/images/storyImg.svg" alt="" />
+              <Img src="/images/storyImg.png" alt="" />
             </Grid>
             <Grid
               item
@@ -87,7 +83,7 @@ export const Story = () => {
               </Container>
             </Grid>
             <Grid item md={6} sm={12}>
-              <Img src="/images/storyImg1.svg" alt="" />
+              <Img src="/images/storyImg1.png" alt="" />
             </Grid>
           </Grid>
         </Box>
