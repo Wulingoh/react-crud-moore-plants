@@ -6,11 +6,13 @@
         case 'POST' :
             $user = json_decode(file_get_contents('php://input'));
             // $hashedPassword = password_hash($user->password, PASSWORD_BCRYPT);
-            $sql = "INSERT INTO users(user_id, name, email, role) values(null, :name, :email, :role) ";
+            $sql = "INSERT INTO users(user_id, name, email, role, newsletter) values(null, :name, :email, :role, :newsletter) ";
+            $newsletter = $user->newsletter ? 1 : 0;
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':name', $user->name);
             $stmt->bindParam(':email', $user->email);
             $stmt->bindParam(':role', $user->role);
+            $stmt->bindParam(':newsletter', $newsletter);
             // $stmt->bindParam(':password', $hashedPassword);
             if($stmt->execute()) {
                 $data = ['status' => 1, 'message' => "Record successfully created"];
@@ -41,12 +43,14 @@
         
         case "PUT":
            $user = json_decode( file_get_contents('php://input'));
-           $sql = "UPDATE users SET name =:name, email =:email, role =:role WHERE user_id =:userId";
+           $sql = "UPDATE users SET name =:name, email =:email, role =:role, newsletter =:newsletter WHERE user_id =:userId";
+           $newsletter = $user->newsletter ? 1 : 0;
            $stmt = $db->prepare($sql);
            $stmt->bindParam(':userId', $user->user_id);
            $stmt->bindParam(':name', $user->name);
            $stmt->bindParam(':email', $user->email);
            $stmt->bindParam(':role', $user->role);
+           $stmt->bindParam(':newsletter', $newsletter);
            if($stmt->execute()) {
              $response = ['status' => 1, 'message' => 'Record updated successfully.'];   
             } else {

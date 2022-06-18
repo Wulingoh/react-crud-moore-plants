@@ -15,11 +15,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 
 export default function ListUser() {
-  const [Users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     getUsers();
   }, []);
-  function getUsers() {
+  const getUsers = () => {
     axios
       .get(`/api/admin/users`, {
         validateStatus: function (status) {
@@ -62,7 +62,7 @@ export default function ListUser() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {Users.map((user, key) => (
+            {users.map((user, key) => (
               <TableRow key={key}>
                 <TableCell>{user.user_id}</TableCell>
                 <TableCell>{user.name}</TableCell>

@@ -1,4 +1,6 @@
 <?php
+include __DIR__ . "/../auth/json_responses.php";
+
 if(!isset($_SESSION['role']) || $_SESSION['role'] != 'Admin'){
     returnJsonHttpResponse(401, "Unauthorised logged in");
 } else {
@@ -35,9 +37,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] != 'Admin'){
             break;
 
         default:
-            http_response_code(404);
-            echo 'Not Found';
-            break;
+            returnJsonHttpResponse(404, "Not Found");
     }
     
 }

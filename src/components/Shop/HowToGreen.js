@@ -115,7 +115,7 @@ export const HowToGreen = () => {
       >
         <Grid container spacing={3}>
           <Grid item md={12} sm={12}>
-            <Typography variant={"p"} sx={{ textAlign: "justify" }}>
+            <Typography variant={"p"} sx={{ textAlign: "justify", fontWeight:"600" }}>
               Reconfirmation of breeding environment (place)
             </Typography>
           </Grid>
@@ -297,7 +297,7 @@ export const HowToGreen = () => {
         >
           <Grid container spacing={3}>
             <Grid item md={12} sm={12}>
-              <Typography variant={"p"} sx={{ textAlign: "justify" }}>
+              <Typography variant={"p"} sx={{ textAlign: "justify", fontWeight:"600" }}>
                 How to choose a pot
               </Typography>
             </Grid>

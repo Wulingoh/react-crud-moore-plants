@@ -39,7 +39,7 @@ export const AuthProvider = ({
   function login(data) {
     setLoading(true);
 
-    userApi
+    return userApi
       .login(data)
       .then((newUser) => {
         setUser(newUser);
@@ -56,7 +56,7 @@ export const AuthProvider = ({
   function signUp(data) {
     setLoading(true);
 
-    userApi
+    return userApi
       .signUp(data)
       .then((newUser) => {
         setUser(newUser);
@@ -67,7 +67,7 @@ export const AuthProvider = ({
   }
 
   function logout() {
-    userApi.logout().then(() => setUser(undefined));
+    return userApi.logout().then(() => setUser(undefined));
   }
 
 

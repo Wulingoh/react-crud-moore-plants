@@ -1,15 +1,15 @@
 import * as React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import {  Link } from "react-router-dom";
 import { HomeGreenDesktop } from "./HomeGreenDesktop";
 import { HomeGreenMobile } from "./HomeGreenMobile";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
 import { styled } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
-import { Stack, Paper} from "@mui/material";
+import { Stack } from "@mui/material";
 
 const Img = styled("img")({
   margin: "auto",
@@ -81,9 +81,9 @@ export const Home = () => {
             <Grid item md={6} xs={12}>
               <Stack spacing={2}>
                 <Img src="/images/homeImg2.png" alt="" />
-                <Typography gutterBottom variant="h4" component="div">
+                <Link to={`/plants`} gutterBottom variant="h4" component="div" style={{ color: "#2E4D43", textDecoration: "none", fontFamily:"Oxygen", fontSize:"30px" }}>
                   Interior Plants
-                </Typography>
+                </Link>
                 <Typography variant="body2" gutterBottom fontFamily={"Oxygen"}>
                   Houseplants add touches of natural beauty to your home while
                   providing you with the opportunity to nurture and care for
@@ -130,9 +130,9 @@ export const Home = () => {
                   marginTop: "20px",
                 }}
               >
-                <Typography gutterBottom variant="h4" component="div">
+                <Link to={`/pots`} gutterBottom variant="h4" component="div" style={{ color: "#2E4D43", textDecoration: "none", fontFamily:"Oxygen", fontSize:"30px"  }}>
                   Pots
-                </Typography>
+                </Link>
                 <Typography variant="body2" gutterBottom fontFamily={"Oxygen"}>
                   Indoor plant pots are perfect for displaying flowers and
                   plants around the home. From traditional terracotta plant pots
