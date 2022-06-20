@@ -1,7 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
 import axios from "axios";
-import { API_HOST } from "../../config";
 import { Controller, useForm } from "react-hook-form";
 import useAuth from "../AuthContext";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -17,7 +15,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate, Link } from "react-router-dom";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 
 export const SignUp = () => {

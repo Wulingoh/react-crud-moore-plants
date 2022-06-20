@@ -1,15 +1,18 @@
 import React from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 import useAuth from "../AuthContext";
-import { Grid, Container, ListItemButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Grid, Container} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useCart } from "./CartContext";
 import CartProducts from "./CartProducts";
+import { CartProductsMobile } from "./CartProductsMobile";
 
 
-export const Review = ({ onClose }) => {
+export const Review = () => {
   const { shipping, total, subtotal, cartItems } = useCart();
+  const isMobile = useMediaQuery("(max-width:600px)");
+  const mobileCartProduct = () => {return isMobile ? <CartProductsMobile /> : <CartProducts />};
 
   return (
     <Box sx={{ marginTop: "20px" }}>
@@ -24,7 +27,7 @@ export const Review = ({ onClose }) => {
           </Grid>
           <Grid item xs={12} marginTop={"10px"} marginBottom={"10px"}>
             {cartItems.length > 0 ? (
-              <CartProducts />
+              isMobile ? <CartProductsMobile /> : <CartProducts />
             ) : (
               <div item>
                 <Typography>Your cart is empty</Typography>
