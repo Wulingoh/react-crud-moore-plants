@@ -15,7 +15,7 @@ export const Checkout = () => {
   const { user, loading } = useAuth()
 
   if (loading) return null
-  if (!user || user.role !== 'Admin') {
+  if (!user || user.role !== 'Customer') {
     return <Navigate to="/signup" replace />;
   }
 

@@ -120,7 +120,7 @@ const ResponsiveAppBar = () => {
               <MenuItem>
                 <Tooltip title="Shopping Cart">
                   <IconButton
-                    onClick={() => setCartOpenMobile(!cartOpenMobile)}
+                    onClick={(event) => {setCartOpenMobile(!cartOpenMobile); handleCloseNavMenu()} }
                     sx={{ p: 0, marginRight: "10px" }}
                   >
                     <Badge color="secondary" badgeContent={itemCount}>

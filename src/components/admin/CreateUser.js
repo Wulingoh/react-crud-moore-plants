@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { MenuItem, Select, FormControl, InputLabel } from "@mui/material";
 
 export default function ListUser() {
   const navigate = useNavigate();
@@ -128,17 +129,21 @@ export const UserForm = ({ control }) => {
           defaultValue=""
           rules={{ required: true }}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              autoComplete="role"
+            <FormControl error={!!error} fullWidth>
+                    <InputLabel id="role">Role</InputLabel>
+            <Select
               name="role"
               required
               fullWidth
               id="role"
               label="Role"
-              error={error}
               onChange={onChange}
               value={value}
-            />
+            >
+              <MenuItem value={"Admin"}>Admin</MenuItem>
+              <MenuItem value={"Customer"}>Customer</MenuItem>
+            </Select>
+            </FormControl>
           )}
         />
       </Grid>

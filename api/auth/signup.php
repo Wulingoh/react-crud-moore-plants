@@ -44,7 +44,7 @@ if ($stmt->rowCount() > 0) {
     $_SESSION['userId'] = $db->lastInsertId();
     $_SESSION['email'] = $data->email;
     $_SESSION['name'] = $data->name;
-    $_SESSION['role'] = "customer";
+    $_SESSION['role'] = "Customer";
 
 
 
