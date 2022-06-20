@@ -47,6 +47,14 @@ export const CartItemMobile = ({ product }) => {
               />
             </Button>
           )}
+          {product.itemQuantity === 1 && (
+            <Button onClick={() => removeItem(product)}>
+              <DeleteForeverOutlinedIcon
+                width={"10px"}
+                sx={{ color: "#718879" }}
+              />
+            </Button>
+          )}
           <Button
             onClick={() => increase(product)}
             disabled={product.itemQuantity >= product.quantity}
@@ -56,14 +64,6 @@ export const CartItemMobile = ({ product }) => {
               sx={{ color: "#718879" }}
             />
           </Button>
-          {product.itemQuantity === 1 && (
-            <Button onClick={() => removeItem(product)}>
-              <DeleteForeverOutlinedIcon
-                width={"10px"}
-                sx={{ color: "#718879" }}
-              />
-            </Button>
-          )}
         </Stack>
       </Grid>
     </Grid>

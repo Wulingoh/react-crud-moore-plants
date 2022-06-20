@@ -12,7 +12,8 @@ import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import OpacityOutlinedIcon from "@mui/icons-material/OpacityOutlined";
 import ThermostatOutlinedIcon from "@mui/icons-material/ThermostatOutlined";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
-import { Container } from "@mui/material";
+import { Container, Button } from "@mui/material";
+
 
 export const PlantFactsAccordion = () => {
   const productDetails = useProductDetailsShopList();
@@ -50,46 +51,35 @@ export const PlantFactsAccordion = () => {
             }}
           >
             <Grid container spacing={3}>
-              <Grid
-                item
-                md={4}
-                sm={12}
-                sx={{ display: "flex", alignItems: "center" }}
-              >
-                <Container>
-                  <Grid container>
-                    <Grid item xs={3}>
-                      <OpacityOutlinedIcon />
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Typography>{productDetails.wateringName}</Typography>
-                    </Grid>
+              <Grid item xs={12} sx={{ display: "flex", alignItems: "center" }}>
+                <Grid container>
+                  <Grid item xs={2}>
+                    <OpacityOutlinedIcon />
                   </Grid>
-                </Container>
+                  <Grid item xs={10}>
+                    <Typography>{productDetails.wateringName}</Typography>
+                  </Grid>
+                </Grid>
               </Grid>
-              <Grid item md={4} sm={12}>
-                <Container>
-                  <Grid container>
-                    <Grid item xs={3}>
-                      <WbSunnyOutlinedIcon />
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Typography>{productDetails.lightingName}</Typography>
-                    </Grid>
+              <Grid item xs={12}>
+                <Grid container>
+                  <Grid item xs={2}>
+                    <WbSunnyOutlinedIcon />
                   </Grid>
-                </Container>
+                  <Grid item xs={10}>
+                    <Typography>{productDetails.lightingName}</Typography>
+                  </Grid>
+                </Grid>
               </Grid>
-              <Grid item md={4} sm={12}>
-                <Container>
-                  <Grid container>
-                    <Grid item xs={3}>
-                      <ThermostatOutlinedIcon />
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Typography>{productDetails.humidityName}</Typography>
-                    </Grid>
+              <Grid item xs={12}>
+                <Grid container>
+                  <Grid item xs={2}>
+                    <ThermostatOutlinedIcon />
                   </Grid>
-                </Container>
+                  <Grid item xs={10}>
+                    <Typography>{productDetails.humidityName}</Typography>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Box>
@@ -129,27 +119,23 @@ export const PlantFactsAccordion = () => {
                 <Grid
                   key={key}
                   item
-                  md={4}
-                  sm={12}
+                  xs={12}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Stack direction="row" spacing={2}>
-                    <Box
-                      item
-                      sx={{ marginBottom: "10px", marginRight: "10px" }}
-                    >
+                  <Grid container>
+                    <Grid item xs={12}>
                       <Typography sx={{ fontWeight: "600", textAlign: "left" }}>
                         {fact.title}:
                       </Typography>
-                    </Box>
-                    <Box>
+                    </Grid>
+                    <Grid item xs={12}>
                       <Typography
                         sx={{ fontWeight: "Regular", textAlign: "left" }}
                       >
                         {fact.description}
                       </Typography>
-                    </Box>
-                  </Stack>
+                    </Grid>
+                  </Grid>
                 </Grid>
               ))}
             </Grid>
