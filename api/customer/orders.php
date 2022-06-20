@@ -5,10 +5,12 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch($method){
     case 'POST':
         $order = json_decode(file_get_contents('php://input'));
-        $sql = "INSERT INTO orders(token, status, subtotal, tax, shipping, total, name, email, line_1, line_2, city, postcode, country, comment, created_at, updated_at) values(:token, :status, :subtotal, :tax, :shipping, :total, :name, :email, :line1, :line2, :city, :postcode, :country, :comment, NOW(), NOW())";
+        $sql = "INSERT INTO orders(token, user_id, status, subtotal, tax, shipping, total, name, email, line_1, line_2, city, postcode, country, comment, created_at, updated_at) values(:token, :userId, :status, :subtotal, :tax, :shipping, :total, :name, :email, :line1, :line2, :city, :postcode, :country, :comment, NOW(), NOW())";
         $token = uniqid();
+        $userId = $_SESSION['userId'];
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':token', $token);
+        $stmt->bindParam(':userId', $userId);
         $stmt->bindParam(':status', $order->status);
         $stmt->bindParam(':subtotal', $order->subtotal);
         $stmt->bindParam(':tax', $order->tax);

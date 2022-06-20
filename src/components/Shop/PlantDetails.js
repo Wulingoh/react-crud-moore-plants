@@ -1,31 +1,22 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import * as React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import PlantFactsAccordion from "./PlantFactsAccordion";
 import { PlantFactsDesktop } from "./PlantFactsDesktop";
 import { useProductDetailsShopList } from "../FetchApi";
 import ProductCarousel from "./ProductCarousel";
-import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import PromiseFooter from "./PromiseFooter";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
 import { styled } from "@mui/material/styles";
-import Divider from "@mui/material/Divider";
 import { Stack } from "@mui/material";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined";
 import { useCart } from "./CartContext";
 
-const Img = styled("img")({
-  margin: "auto",
-  display: "block",
-  maxWidth: "100%",
-  maxHeight: "100%",
-});
+
 
 export const PlantDetails = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -55,11 +46,11 @@ export const PlantDetails = () => {
             >
               <Container>
                 <Stack spacing={2}>
-                  <Typography sx={{ textAlign: "start" }}>
-                    <span style={{fontWeight:"600"}}>Title: </span> {productDetails.title}
+                  <Typography variant="h6" sx={{ textAlign: "start" }}>
+                    <span style={{fontWeight:"600"}}></span> {productDetails.title?.toUpperCase()}
                   </Typography>
                   <Typography sx={{ textAlign: "start" }}>
-                    <span style={{fontWeight:"600"}}>Price: </span> ${productDetails.price}
+                    <span style={{fontWeight:"600"}}>Price: </span> ${parseFloat(productDetails.price, 10).toFixed(2)}
                   </Typography>
                   <Typography sx={{ textAlign: "start" }}>
                   <span style={{fontWeight:"600"}}>Height: </span>{productDetails.height}cm

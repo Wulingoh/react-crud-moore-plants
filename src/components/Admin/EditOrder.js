@@ -109,6 +109,7 @@ export default function ListProduct() {
                     onChange={onChange}
                     value={value}
                     InputLabelProps={{ shrink: true }}
+                    disabled={true} 
                   />
                 )}
               />

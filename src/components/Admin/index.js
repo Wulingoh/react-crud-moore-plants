@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import useAuth from "../AuthContext";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -109,7 +109,7 @@ const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="Home" />
     </ListItemButton>
     <ListItemButton component={Link} to="/admin/orders">
       <ListItemIcon>
@@ -155,7 +155,7 @@ const mainListItems = (
     </ListItemButton>
     <ListItemButton component={Link} to="/admin/humidity">
       <ListItemIcon>
-        <img src="images/humidity.png" alt=""/>
+        <img src="/images/humidity.png" alt=""/>
       </ListItemIcon>
       <ListItemText primary="Humidity" />
     </ListItemButton>
@@ -309,5 +309,12 @@ function DashboardContent() {
 }
 
 export default function Dashboard() {
+  const { user, loading } = useAuth()
+
+  if (loading) return null
+  if (!user || user.role !== 'Admin') {
+    return <Navigate to="/login" replace />;
+  }
+
   return <DashboardContent />;
 }

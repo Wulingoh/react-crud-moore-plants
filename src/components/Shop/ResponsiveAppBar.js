@@ -23,6 +23,7 @@ import useAuth from "../AuthContext";
 import { Badge } from "@mui/material";
 import { useCart } from "./CartContext";
 import { Cart } from "./Cart";
+import { CartMobile } from "./CartMobile";
 
 const pages = [
   ["Home", ""],
@@ -124,23 +125,9 @@ const ResponsiveAppBar = () => {
                     </Badge>
                   </IconButton>
                 </Tooltip>
-                <Drawer
-                  anchor={"right"}
-                  open={cartOpen}
-                  onClose={() => setCartOpen(false)}
-                  PaperProps={{
-                    sx: {
-                      width: 450,
-                      height: 700,
-                      backgroundColor: "#F3F7F3",
-                    },
-                  }}
-                >
-                  <Cart onClose={() => setCartOpen(false)} />
-                </Drawer>
               </MenuItem>
               <MenuItem>
-                <Tooltip title="Open settings">
+                <Tooltip title="Sign Up">
                   <IconButton
                     onClick={() => navigate("/signup")}
                     sx={{ p: 0, marginRight: "10px" }}
@@ -214,7 +201,7 @@ const ResponsiveAppBar = () => {
             >
               <Cart onClose={() => setCartOpen(false)} />
             </Drawer>
-            <Tooltip title="Open settings">
+            <Tooltip title="Sign Up">
               <IconButton
                 onClick={() => navigate("/signup")}
                 sx={{ p: 0, marginRight: "10px" }}
