@@ -4,6 +4,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./App.css";
 import Shop from "./components/Shop";
 import Admin from "./components/Admin";
+import ScrollToTop from './components/ScrollToTop'
 import "@fontsource/oxygen/300.css";
 import "@fontsource/oxygen/400.css";
 import "@fontsource/oxygen/700.css";
@@ -15,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ScrollToTop />
         <AuthProvider>
           <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
             <Routes>

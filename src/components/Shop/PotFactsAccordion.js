@@ -7,10 +7,8 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
-import { Stack } from "@mui/material";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import { Container } from "@mui/material";
-import { Divider } from "@mui/material";
 
 export const PotFactsAccordion = () => {
   const productDetails = useProductDetailsShopList();
@@ -44,28 +42,23 @@ export const PotFactsAccordion = () => {
                 <Grid
                   key={key}
                   item
-                  md={4}
-                  sm={12}
+                  xs={12}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Stack direction="row" sx={{ paddingTop: "24px" }}>
-                    <Box
-                      item
-                      sx={{ marginBottom: "10px", marginRight: "10px" }}
-                    >
+                  <Grid container>
+                    <Grid item xs={12}>
                       <Typography sx={{ fontWeight: "600", textAlign: "left" }}>
                         {fact.title}:
                       </Typography>
-                    </Box>
-                    <Divider></Divider>
-                    <Box>
+                    </Grid>
+                    <Grid item xs={12}>
                       <Typography
                         sx={{ fontWeight: "Regular", textAlign: "left" }}
                       >
                         {fact.description}
                       </Typography>
-                    </Box>
-                  </Stack>
+                    </Grid>
+                  </Grid>
                 </Grid>
               ))}
             </Grid>
