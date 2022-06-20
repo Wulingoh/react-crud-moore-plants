@@ -39,6 +39,7 @@ const ResponsiveAppBar = () => {
   const { user, logout, signUp } = useAuth();
   const navigate = useNavigate();
   const [cartOpen, setCartOpen] = useState(false);
+  const [cartOpenMobile, setCartOpenMobile] = useState(false);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { itemCount } = useCart();
@@ -67,7 +68,9 @@ const ResponsiveAppBar = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to={"/"}>
-            <MoorePlantLogo sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <MoorePlantLogo
+              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            />
           </Link>
           <Box
             sx={{
@@ -117,7 +120,7 @@ const ResponsiveAppBar = () => {
               <MenuItem>
                 <Tooltip title="Shopping Cart">
                   <IconButton
-                    onClick={() => setCartOpen(!cartOpen)}
+                    onClick={() => setCartOpenMobile(!cartOpenMobile)}
                     sx={{ p: 0, marginRight: "10px" }}
                   >
                     <Badge color="secondary" badgeContent={itemCount}>
@@ -125,6 +128,20 @@ const ResponsiveAppBar = () => {
                     </Badge>
                   </IconButton>
                 </Tooltip>
+                <Drawer
+                  anchor={"right"}
+                  open={cartOpenMobile}
+                  onClose={() => setCartOpenMobile(false)}
+                  PaperProps={{
+                    sx: {
+                      width: 300,
+                      height: 600,
+                      backgroundColor: "#F3F7F3",
+                    },
+                  }}
+                >
+                  <CartMobile onClose={() => setCartOpenMobile(false)} />
+                </Drawer>
               </MenuItem>
               <MenuItem>
                 <Tooltip title="Sign Up">

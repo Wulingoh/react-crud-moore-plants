@@ -96,7 +96,7 @@ export const CartMobile = ({ onClose }) => {
               }}
             >
               <ArrowBackIosIcon sx={{ color: "#718879" }} />
-              Keep Browsing
+              Shopping
             </Button>
           </Grid>
           <Grid item xs={6} marginTop={"10px"}>

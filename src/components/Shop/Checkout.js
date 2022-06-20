@@ -1,4 +1,6 @@
 import * as React from "react";
+import useAuth from "../AuthContext";
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -9,7 +11,13 @@ import { useCart } from './CartContext'
 import { Review } from "./Review";
 
 export const Checkout = () => {
-  const { setShipping, shipping } = useCart()
+  const { setShipping, shipping } = useCart();
+  const { user, loading } = useAuth()
+
+  if (loading) return null
+  if (!user || user.role !== 'Admin') {
+    return <Navigate to="/signup" replace />;
+  }
 
   return (
     <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
