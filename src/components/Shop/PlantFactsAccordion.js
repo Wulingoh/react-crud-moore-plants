@@ -34,7 +34,7 @@ export const PlantFactsAccordion = () => {
                     fontSize: "18px",
                   }}
                 >
-                  Plant Like
+                  Plant Likes
                 </Typography>
               </Grid>
             </Grid>

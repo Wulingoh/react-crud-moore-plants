@@ -17,7 +17,7 @@ export const PlantFactsDesktop = () => {
       <Box>
         <Grid container>
           <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700", fontSize:"18px"  }}>Plant Like</Typography>
+            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700", fontSize:"18px"  }}>Plant Likes</Typography>
           </Grid>
         </Grid>
       </Box>

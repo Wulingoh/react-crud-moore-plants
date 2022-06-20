@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { Controller, useForm, useFieldArray } from "react-hook-form";
-import { 
-  useCategoryList, 
-  useLightingCareList, 
-  useCareLevelList, 
+import { Controller, useForm, useFieldArray, useWatch } from "react-hook-form";
+import {
+  useCategoryList,
+  useLightingCareList,
+  useCareLevelList,
   useWateringList,
-  useHumidityList  
+  useHumidityList,
 } from "../FetchApi";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -22,29 +22,33 @@ import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Input = styled("input")({
   display: "none",
 });
 
-export default function ListProduct() {
+export default function CreateProduct() {
   const navigate = useNavigate();
-  const { handleSubmit, setValue, control, getValues } = useForm();
+  const { handleSubmit, setValue, control, clearErrors } = useForm();
+  const type = useWatch({ control, name: "type" });
   const { fields, remove, append } = useFieldArray({ control, name: "facts" });
   const categoryList = useCategoryList();
   const lightingCaresList = useLightingCareList();
   const careLevelsList = useCareLevelList();
   const wateringList = useWateringList();
   const humidityList = useHumidityList();
+
+  useEffect(() => clearErrors(), [clearErrors, type])
+
   const onFileChange = (e) => {
-    const files = e.target.files
+    const files = e.target.files;
     const fileReader = new FileReader();
     fileReader.readAsDataURL(files[0]);
     fileReader.onload = (event) => {
-      setValue('img', event.target.result);
-    }
-  }
+      setValue("img", event.target.result);
+    };
+  };
   const onSubmit = (data) => {
     axios
       .post(`/api/admin/products`, data)
@@ -93,24 +97,6 @@ export default function ListProduct() {
                     <Select {...field} value={field.value || ""} label="Type">
                       <MenuItem value="Plant">Plant</MenuItem>
                       <MenuItem value="Pot">Pot</MenuItem>
-                    </Select>
-                  </FormControl>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name={"category_id"}
-                control={control}
-                rules={{ validate: value => (value || getValues().type === "Pot")}}
-                render={({ field, fieldState: { error } }) => (
-                  <FormControl error={!!error} fullWidth>
-                    <InputLabel id="category">Category</InputLabel>
-                    <Select {...field} value={field.value || ""} fullWidth label="Category" >
-                    {categoryList.map((category) =>
-                        <MenuItem key={category.category_id}
-                        value={category.category_id}>{category.name}</MenuItem>
-                     )}
                     </Select>
                   </FormControl>
                 )}
@@ -218,210 +204,293 @@ export default function ListProduct() {
                 )}
               />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name={"color"}
-                control={control}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="color"
-                    name="color"
-                    required
-                    fullWidth
-                    id="color"
-                    label="Color"
-                    error={!!error}
-                    onChange={onChange}
-                    value={value || ""}
+            {type === "Plant" && (
+              <>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name={"category_id"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field, fieldState: { error } }) => (
+                      <FormControl error={!!error} fullWidth>
+                        <InputLabel id="category">Category</InputLabel>
+                        <Select
+                          {...field}
+                          value={field.value || ""}
+                          fullWidth
+                          label="Category"
+                        >
+                          {categoryList.map((category) => (
+                            <MenuItem
+                              key={category.category_id}
+                              value={category.category_id}
+                            >
+                              {category.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    )}
                   />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name={"height"}
-                control={control}
-                rules={{ validate: value => (value || getValues().type === "Pot")}}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="height"
-                    name="height"
-                    required
-                    fullWidth
-                    id="height"
-                    label="Height"
-                    placeholder="1234"
-                    type="number"
-                    error={!!error}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">cm</InputAdornment>
-                      ),
-                    }}
-                    onChange={onChange}
-                    value={value || ""}
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name={"height"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <TextField
+                        autoComplete="height"
+                        name="height"
+                        required
+                        fullWidth
+                        id="height"
+                        label="Height"
+                        placeholder="1234"
+                        type="number"
+                        error={!!error}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">cm</InputAdornment>
+                          ),
+                        }}
+                        onChange={onChange}
+                        value={value || ""}
+                      />
+                    )}
                   />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name={"latin_name"}
-                control={control}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="latin_name"
-                    name="latin_name"
-                    fullWidth
-                    id="latinName"
-                    label="Latin Name"
-                    error={!!error}
-                    onChange={onChange}
-                    value={value || ""}
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name={"latin_name"}
+                    control={control}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <TextField
+                        autoComplete="latin_name"
+                        name="latin_name"
+                        fullWidth
+                        id="latinName"
+                        label="Latin Name"
+                        error={!!error}
+                        onChange={onChange}
+                        value={value || ""}
+                      />
+                    )}
                   />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name={"lighting_care_id"}
-                control={control}
-                rules={{ validate: value => (value || getValues().type === "Pot")}}
-                render={({ field, fieldState: { error } }) => (
-                  <FormControl fullWidth>
-                    <InputLabel>Lighting Care</InputLabel>
-                    <Select {...field} value={field.value || ""} error={!!error} fullWidth label="Lighting Care" >
-                    {lightingCaresList.map((lighting) =>
-                        <MenuItem key={lighting.lighting_id}
-                        value={lighting.lighting_id}>{lighting.name}</MenuItem>
-                     )}
-                    </Select>
-                  </FormControl>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name={"care_level_id"}
-                control={control}
-                rules={{ validate: value => (value || getValues().type === "Pot")}}
-                render={({ field, fieldState: { error } }) => (
-                  <FormControl error={!!error} fullWidth>
-                    <InputLabel>Care Level</InputLabel>
-                    <Select {...field} value={field.value || ""} fullWidth label="Care Level">
-                    {careLevelsList.map((care_level) =>
-                        <MenuItem key={care_level.care_level_id}
-                        value={care_level.care_level_id}>{care_level.name}</MenuItem>
-                     )}
-                    </Select>
-                  </FormControl>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name={"watering_id"}
-                control={control}
-                rules={{ validate: value => (value || getValues().type === "Pot")}}
-                render={({ field, fieldState: { error } }) => (
-                  <FormControl error={!!error} fullWidth>
-                    <InputLabel>Watering Level</InputLabel>
-                    <Select {...field} value={field.value || ""} fullWidth label="Watering Level">
-                    {wateringList.map((watering) =>
-                        <MenuItem key={watering.watering_id}
-                        value={watering.watering_id}>{watering.name}</MenuItem>
-                     )}
-                    </Select>
-                  </FormControl>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name={"humidity_id"}
-                control={control}
-                rules={{ validate: value => (value || getValues().type === "Pot")}}
-                render={({ field, fieldState: { error }}) => (
-                  <FormControl error={!!error} fullWidth>
-                    <InputLabel>Humidity Level</InputLabel>
-                    <Select {...field} value={field.value || ""} fullWidth label="Humidity Level">
-                    {humidityList.map((humidity) =>
-                        <MenuItem key={humidity.humidity_id}
-                        value={humidity.humidity_id}>{humidity.name}</MenuItem>
-                     )}
-                    </Select>
-                  </FormControl>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name={"room_type"}
-                control={control}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <TextField
-                    autoComplete="room_type"
-                    name="room_type"
-                    fullWidth
-                    id="roomType"
-                    label="Room Type"
-                    placeholder="Kitchen"
-                    error={!!error}
-                    onChange={onChange}
-                    value={value || ""}
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name={"lighting_care_id"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field, fieldState: { error } }) => (
+                      <FormControl error={!!error} fullWidth>
+                        <InputLabel>Lighting Care</InputLabel>
+                        <Select
+                          {...field}
+                          value={field.value || ""}
+                          fullWidth
+                          label="Lighting Care"
+                        >
+                          {lightingCaresList.map((lighting) => (
+                            <MenuItem
+                              key={lighting.lighting_id}
+                              value={lighting.lighting_id}
+                            >
+                              {lighting.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    )}
                   />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name={"size"}
-                control={control}
-                render={({ field, fieldState: { error } }) => (
-                  <FormControl error={!!error} fullWidth>
-                    <InputLabel>Size</InputLabel>
-                    <Select {...field} value={field.value || ""} fullWidth label="Size">
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value="xs">XS(0-10cm)</MenuItem>
-                      <MenuItem value="s">S(10-15cm)</MenuItem>
-                      <MenuItem value="m">M(15-20cm)</MenuItem>
-                      <MenuItem value="l">L(20-25cm)</MenuItem>
-                    </Select>
-                  </FormControl>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Controller
-                name={"pot_material"}
-                control={control}
-                render={({ field, fieldState: { error } }) => (
-                  <FormControl error={!!error} fullWidth>
-                    <InputLabel>Pot Material</InputLabel>
-                    <Select {...field} value={field.value || ""} fullWidth label="Pot Material">
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value="clay">Clay</MenuItem>
-                      <MenuItem value="recycled">Recycled Plastic</MenuItem>
-                      <MenuItem value="concrete">Concrete</MenuItem>
-                      <MenuItem value="ceramic">Ceramic</MenuItem>
-                    </Select>
-                  </FormControl>
-                )}
-              />
-            </Grid>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name={"care_level_id"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field, fieldState: { error } }) => (
+                      <FormControl error={!!error} fullWidth>
+                        <InputLabel>Care Level</InputLabel>
+                        <Select
+                          {...field}
+                          value={field.value || ""}
+                          fullWidth
+                          label="Care Level"
+                        >
+                          {careLevelsList.map((care_level) => (
+                            <MenuItem
+                              key={care_level.care_level_id}
+                              value={care_level.care_level_id}
+                            >
+                              {care_level.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name={"watering_id"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field, fieldState: { error } }) => (
+                      <FormControl error={!!error} fullWidth>
+                        <InputLabel>Watering Level</InputLabel>
+                        <Select
+                          {...field}
+                          value={field.value || ""}
+                          fullWidth
+                          label="Watering Level"
+                        >
+                          {wateringList.map((watering) => (
+                            <MenuItem
+                              key={watering.watering_id}
+                              value={watering.watering_id}
+                            >
+                              {watering.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name={"humidity_id"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field, fieldState: { error } }) => (
+                      <FormControl error={!!error} fullWidth>
+                        <InputLabel>Humidity Level</InputLabel>
+                        <Select
+                          {...field}
+                          value={field.value || ""}
+                          fullWidth
+                          label="Humidity Level"
+                        >
+                          {humidityList.map((humidity) => (
+                            <MenuItem
+                              key={humidity.humidity_id}
+                              value={humidity.humidity_id}
+                            >
+                              {humidity.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name={"room_type"}
+                    control={control}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <TextField
+                        autoComplete="room_type"
+                        name="room_type"
+                        fullWidth
+                        id="roomType"
+                        label="Room Type"
+                        placeholder="Kitchen"
+                        error={!!error}
+                        onChange={onChange}
+                        value={value || ""}
+                      />
+                    )}
+                  />
+                </Grid>
+              </>
+            )}
+            {type === "Pot" && (
+              <>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name={"color"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <TextField
+                        autoComplete="color"
+                        name="color"
+                        required
+                        fullWidth
+                        id="color"
+                        label="Color"
+                        error={!!error}
+                        onChange={onChange}
+                        value={value || ""}
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name={"size"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field, fieldState: { error } }) => (
+                      <FormControl error={!!error} fullWidth>
+                        <InputLabel>Size</InputLabel>
+                        <Select
+                          {...field}
+                          value={field.value || ""}
+                          fullWidth
+                          label="Size"
+                        >
+                          <MenuItem value=""></MenuItem>
+                          <MenuItem value="xs">XS(0-10cm)</MenuItem>
+                          <MenuItem value="s">S(10-15cm)</MenuItem>
+                          <MenuItem value="m">M(15-20cm)</MenuItem>
+                          <MenuItem value="l">L(20-25cm)</MenuItem>
+                        </Select>
+                      </FormControl>
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Controller
+                    name={"pot_material"}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field, fieldState: { error } }) => (
+                      <FormControl error={!!error} fullWidth>
+                        <InputLabel>Pot Material</InputLabel>
+                        <Select
+                          {...field}
+                          value={field.value || ""}
+                          fullWidth
+                          label="Pot Material"
+                        >
+                          <MenuItem value=""></MenuItem>
+                          <MenuItem value="clay">Clay</MenuItem>
+                          <MenuItem value="recycled">Recycled Plastic</MenuItem>
+                          <MenuItem value="concrete">Concrete</MenuItem>
+                          <MenuItem value="ceramic">Ceramic</MenuItem>
+                        </Select>
+                      </FormControl>
+                    )}
+                  />
+                </Grid>
+              </>
+            )}
             <Grid item xs={12}>
               <Controller
                 name={"content"}
@@ -493,15 +562,19 @@ export default function ListProduct() {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <IconButton color="error" type="button" onClick={() => remove(k)}>
+                    <IconButton
+                      color="error"
+                      type="button"
+                      onClick={() => remove(k)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </Grid>
                 </Grid>
               ))}
               <Button
-                variant="outlined" 
-                component="span" 
+                variant="outlined"
+                component="span"
                 fullWidth
                 type="button"
                 onClick={() =>
@@ -519,21 +592,18 @@ export default function ListProduct() {
                 name={"img"}
                 control={control}
                 rules={{ required: true }}
-                render={({
-                  field: { value },
-                  fieldState: { error },
-                }) => (
+                render={({ field: { value }, fieldState: { error } }) => (
                   <FormControl error={!!error} fullWidth>
                     <label htmlFor="contained-button-file">
-                    <Input
-                      accept="image/*"
-                      id="contained-button-file"
-                      type="file"
-                      onChange={onFileChange}
-                    />
-                    <Button variant="outlined" component="span" fullWidth>
-                      Upload Image
-                    </Button>
+                      <Input
+                        accept="image/*"
+                        id="contained-button-file"
+                        type="file"
+                        onChange={onFileChange}
+                      />
+                      <Button variant="outlined" component="span" color={error ? 'error' : 'primary'} fullWidth>
+                        Upload Image
+                      </Button>
                     </label>
                     {value && <img src={value} width="500" alt="" />}
                   </FormControl>

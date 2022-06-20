@@ -10,7 +10,6 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { styled } from "@mui/material/styles";
 import { Stack } from "@mui/material";
 import { useCart } from "./CartContext";
 
@@ -18,7 +17,7 @@ export const PotDetails = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const productDetails = useProductDetailsShopList();
   const { addProduct } = useCart();
-  
+
   return (
     <main style={{ backgroundColor: "#F3F7F3", marginBottom: "20px" }}>
       <Container>
@@ -42,17 +41,21 @@ export const PotDetails = () => {
             >
               <Container>
                 <Stack spacing={2}>
-                  <Typography sx={{ textAlign: "start" }}>
-                    <span style={{fontWeight:"600"}}>Title: </span> {productDetails.title}
+                  <Typography variant="h6" sx={{ textAlign: "start" }}>
+                    <span style={{ fontWeight: "600" }}></span>{" "}
+                    {productDetails.title?.toUpperCase()}
                   </Typography>
                   <Typography sx={{ textAlign: "start" }}>
-                    <span style={{fontWeight:"600"}}>Price: </span> ${productDetails.price}
+                    <span style={{ fontWeight: "600" }}>Price: </span> $
+                    {parseFloat(productDetails.price, 10).toFixed(2)}
                   </Typography>
                   <Typography sx={{ textAlign: "start" }}>
-                  <span style={{fontWeight:"600"}}>Size: </span>{productDetails.size?.toUpperCase()}
+                    <span style={{ fontWeight: "600" }}>Size: </span>
+                    {productDetails.size?.toUpperCase()}
                   </Typography>
                   <Typography sx={{ textAlign: "start" }}>
-                  <span style={{fontWeight:"600"}}>Color: </span>{productDetails.color}
+                    <span style={{ fontWeight: "600" }}>Color: </span>
+                    {productDetails.color}
                   </Typography>
                   {productDetails.quantity <= 0 ? (
                     <Typography

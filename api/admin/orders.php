@@ -29,9 +29,10 @@
         
         case "PUT":
             $orders = json_decode( file_get_contents('php://input'));
-            $sql = "UPDATE orders SET status =:status, subtotal =:subtotal, tax =:tax, shipping =:shipping, total =:total, name =:name , email =:email, mobile =:mobile, line_1 =:line1, line_2 =:line2, city =:city, postcode =:postcode, country =:country, comment =:comment, updated_at=NOW() WHERE order_id =:orderId";
+            $sql = "UPDATE orders SET user_id =:userId, status =:status, subtotal =:subtotal, tax =:tax, shipping =:shipping, total =:total, name =:name , email =:email, mobile =:mobile, line_1 =:line1, line_2 =:line2, city =:city, postcode =:postcode, country =:country, comment =:comment, updated_at=NOW() WHERE order_id =:orderId";
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':orderId', $orders->order_id);
+            $stmt->bindParam(':userId', $_SESSION['userId']);
             $stmt->bindParam(':status', $orders->status);
             $stmt->bindParam(':subtotal', $orders->subtotal);
             $stmt->bindParam(':tax', $orders->tax);

@@ -1,20 +1,58 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import AppBar from "@mui/material/AppBar";
-import Button from "@mui/material/Button";
+import * as React from "react";
+import { Link } from "react-router-dom";
 import PromiseFooter from "./PromiseFooter";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
 import CircleIcon from "@mui/icons-material/Circle";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
+import { styled } from "@mui/material/styles";
+import { Paper } from "@mui/material";
+
+const ButtonMailto = ({ mailto, label }) => {
+  return (
+    <Link
+      style={{ textDecoration: "none", color: "black" }}
+      to="#"
+      onClick={(e) => {
+        window.location.href = mailto;
+        e.preventDefault();
+      }}
+    >
+      {label}
+    </Link>
+  );
+};
+const ButtonTelto = ({ tel, label }) => {
+  return (
+    <Link
+      style={{ textDecoration: "none", color: "black" }}
+      to="#"
+      onClick={(e) => {
+        window.location.href = tel;
+        e.preventDefault();
+      }}
+    >
+      {label}
+    </Link>
+  );
+};
+
+const styles = {
+  paperContainer: {
+    maxWidth: "100vw",
+    maxHeight: "100vh",
+    backgroundImage: `url("/Images/moorePlantsMap.png")`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
+    backgroundSize: "cover",
+    height: "400px",
+  },
+};
 
 export const Contact = () => {
   return (
@@ -28,7 +66,9 @@ export const Contact = () => {
               </Typography>
             </Grid>
             <Grid item md={12} xs={12}>
-              <Typography variant="h6" fontFamily={"Oxygen"}>Our Location</Typography>
+              <Typography variant="h6" fontFamily={"Oxygen"}>
+                Our Location
+              </Typography>
             </Grid>
             <Grid item md={12} xs={12}>
               <Typography variant="h6" fontFamily={"Oxygen"}>
@@ -38,13 +78,24 @@ export const Contact = () => {
           </Grid>
         </Box>
         <Box sx={{ marginBottom: "20px", marginTop: "30px" }}>
-          <Grid container spacing={3}>
-            <Grid item lg={12} sm={12}>
-              <img
-                style={{ width: "100%" }}
-                src="/images/moorePlantsMap.svg"
-                alt=""
-              />
+          <Grid container>
+            <Grid item lg={12} xs={12}>
+              <Paper
+                style={styles.paperContainer}
+                sx={{
+                  display: "flex",
+                  alignItems: "flex-end",
+                  justifyContent: "flex-start"
+                }}
+              >
+                <Box sx={{
+                  border: "dashed 4px #6C584C"
+                }}>
+                  <CircleIcon sx={{ fontSize: "35px" }} />
+                  <Typography>Delivery Range</Typography>
+                </Box>
+
+              </Paper>
             </Grid>
           </Grid>
         </Box>
@@ -54,8 +105,6 @@ export const Contact = () => {
               <Stack spacing={2} alignItems={"center"}>
                 <RoomOutlinedIcon sx={{ fontSize: "35px" }} />
                 <Typography>Retail Store</Typography>
-                <CircleIcon sx={{ fontSize: "35px" }} />
-                <Typography>Delivery Range</Typography>
                 <Typography>Mon - Sat 9am to 5pm</Typography>
                 <Typography>25 Winchester Street</Typography>
                 <Typography>Lyttleton</Typography>
@@ -66,14 +115,17 @@ export const Contact = () => {
               <Stack spacing={2} alignItems={"center"}>
                 <MailOutlineOutlinedIcon sx={{ fontSize: "35px" }} />
                 <Typography>Email Address</Typography>
-                <Typography>info@mooreplants.co.nz</Typography>
+                <ButtonMailto
+                  label="info@mooreplants.co.nz"
+                  mailto="mailto:no-reply@example.com"
+                />
               </Stack>
             </Grid>
             <Grid item md={4} xs={12}>
               <Stack spacing={2} alignItems={"center"}>
                 <PhoneOutlinedIcon sx={{ fontSize: "35px" }} />
-                <Typography>03-385-8623</Typography>
-                <Typography>022-9045-3012</Typography>
+                <ButtonTelto label="03-385-8623" tel="tel:03-385-8623" />
+                <ButtonTelto label="022-9045-3012" tel="tel:022-9045-3012" />
               </Stack>
             </Grid>
           </Grid>

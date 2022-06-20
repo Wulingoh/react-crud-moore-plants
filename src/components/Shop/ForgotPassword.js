@@ -29,7 +29,7 @@ export const ForgotPassword = () => {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: "#718879" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography align="left" component="h1" variant="h5">
@@ -37,9 +37,6 @@ export const ForgotPassword = () => {
         </Typography>
         <Box component="form" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={12}>
-              <Typography>or</Typography>
-            </Grid>
             <Grid item xs={12}>
               <Controller
                 name={"email"}
@@ -71,7 +68,15 @@ export const ForgotPassword = () => {
             fullWidth
             variant="contained"
             onClick={handleSubmit(onSubmit)}
-            sx={{ mt: 1, mb: 2 }}
+            sx={{ mt: 1, mb: 2,
+              color: "white",
+              backgroundColor: "#102F25",
+              border: '1px solid black' ,
+              "&:hover": {
+                background: "#fff",
+                color: "#102F25"
+              },
+            }}
           >
             Submit
           </Button>

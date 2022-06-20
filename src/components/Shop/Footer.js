@@ -18,6 +18,20 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
+const ButtonMailto = ({ mailto, label }) => {
+  return (
+      <Link
+        style={{textDecoration:"none", color:"black"}}
+          to='#'
+          onClick={(e) => {
+              window.location.href = mailto;
+              e.preventDefault();
+          }}
+      >
+          {label}
+      </Link>
+  );
+};
 
 function Copyright(props) {
   return (
@@ -120,7 +134,7 @@ export const Footer = () => {
                 boxShadow: "none",
                 borderRadius: 0,
                 textAlign: "center",
-                fontFamily: "Raleway",
+                color:"black"
               }}
             >
               Address:
@@ -128,7 +142,7 @@ export const Footer = () => {
           </Grid>
           <Grid item xs={6} md={10}>
             <Item
-              sx={{ boxShadow: "none", borderRadius: 0, textAlign: "start" }}
+              sx={{ boxShadow: "none", borderRadius: 0, textAlign: "start", color:"black" }}
             >
               25 Winchester Street, Lyttleton
             </Item>
@@ -151,7 +165,7 @@ export const Footer = () => {
             <Item
               sx={{ boxShadow: "none", borderRadius: 0, textAlign: "start" }}
             >
-              info@mooreplants.co.nz
+              <ButtonMailto label="info@mooreplants.co.nz" mailto="mailto:no-reply@example.com" />
             </Item>
           </Grid>
         </Grid>

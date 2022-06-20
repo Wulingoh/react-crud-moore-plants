@@ -39,7 +39,6 @@ export const PayPal = () => {
           const { address, name } = details.purchase_units[0].shipping;
           axios.post(`/api/customer/orders`, {
             status: "Paid",
-            user_id: user.userId,
             name: name.full_name,
             email: email_address,
             line_1: address.address_line_1,

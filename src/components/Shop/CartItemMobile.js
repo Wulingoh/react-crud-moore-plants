@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { useCart } from "./CartContext";
 import { IMG_PATH } from "../../config";
 import { Button, Grid, Stack, Typography } from "@mui/material";
@@ -7,20 +7,18 @@ import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOut
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 
-
-export const CartItem = ({ product }) => {
+export const CartItemMobile = ({ product }) => {
   const { increase, decrease, removeItem } = useCart();
+  const [flexBasis] = useState(200);
 
   return (
-    <Grid container sx={{ marginTop: "10px", marginBottom:"10px" }}>
-      <Grid item xs={3}>
-        <img src={`${IMG_PATH}${product.img}`} width="75" alt="" />
+    <Grid container sx={{ marginTop: "10px", marginBottom: "10px" }}>
+      <Grid item xs={12}>
+        <img src={`${IMG_PATH}${product.img}`} width="150" alt="" />
       </Grid>
       <Grid item xs={3}>
         <Stack>
-          <Typography sx={{ fontSize: "14px" }}>
-            {product.title}
-          </Typography>
+          <Typography sx={{ fontSize: "14px" }}>{product.title}</Typography>
           <Typography sx={{ fontSize: "12px" }}>
             {product.latin_name}
           </Typography>
@@ -28,9 +26,7 @@ export const CartItem = ({ product }) => {
       </Grid>
       <Grid item xs={3}>
         <Stack>
-          <Typography sx={{ fontSize: "14px" }}>
-            ${product.price}
-          </Typography>
+          <Typography sx={{ fontSize: "14px" }}>${product.price}</Typography>
           <Typography sx={{ fontSize: "12px" }}>
             {product.itemQuantity}
           </Typography>
@@ -40,15 +36,27 @@ export const CartItem = ({ product }) => {
         <Stack direction={"row"} justifyContent={"flex-end"}>
           {product.itemQuantity > 1 && (
             <Button onClick={() => decrease(product)}>
-              <RemoveCircleOutlineOutlinedIcon width={"10px"} sx={{ color:"#718879"}}/>
+              <RemoveCircleOutlineOutlinedIcon
+                width={"10px"}
+                sx={{ color: "#718879" }}
+              />
             </Button>
           )}
-          <Button onClick={() => increase(product)} disabled={product.itemQuantity >= product.quantity}>
-            <AddCircleOutlineOutlinedIcon width={"10px"} sx={{ color:"#718879"}}/>
+          <Button
+            onClick={() => increase(product)}
+            disabled={product.itemQuantity >= product.quantity}
+          >
+            <AddCircleOutlineOutlinedIcon
+              width={"10px"}
+              sx={{ color: "#718879" }}
+            />
           </Button>
           {product.itemQuantity === 1 && (
             <Button onClick={() => removeItem(product)}>
-              <DeleteForeverOutlinedIcon width={"10px"} sx={{ color:"#718879"}}/>
+              <DeleteForeverOutlinedIcon
+                width={"10px"}
+                sx={{ color: "#718879" }}
+              />
             </Button>
           )}
         </Stack>
