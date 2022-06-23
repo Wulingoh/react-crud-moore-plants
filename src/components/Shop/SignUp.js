@@ -23,8 +23,8 @@ export const SignUp = () => {
   const { handleSubmit, control, errors } = useForm();
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) =>
-      axios.post("/api/auth/googleLogin", tokenResponse).then((newUser) => {
-        setUser(newUser);
+      axios.post("/api/auth/googleLogin", tokenResponse).then(({ data }) => {
+        setUser(data);
         navigate("/checkout");
       }),
   });
