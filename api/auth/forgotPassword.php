@@ -23,8 +23,25 @@ if($data->email) {
         $stmt->bindParam(':token', $token);
         $stmt->execute();
         if($stmt->execute()) {
-            mail($data->email, "Reset Password", "To Reset the Password, Please Visit: $url", "From: support@domain.com\r\n");
-        } 
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://api.mailgun.net/v3/sandbox91319309c07b4bcfb5f8cec194ead2f5.mailgun.org/messages');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            $post = array(
+                'from' => 'Moore Plants <postmaster@sandbox91319309c07b4bcfb5f8cec194ead2f5.mailgun.org>',
+                'to' => $data->email,
+                'subject' => 'Reset Password',
+                'text' => "To Reset the Password, Please Visit: $url"
+            );
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+            curl_setopt($ch, CURLOPT_USERPWD, 'api' . ':' . '');
+
+            $result = curl_exec($ch);
+            if (curl_errno($ch)) {
+                returnJsonHttpResponse(500, 'Error:' . curl_error($ch));
+            }
+            curl_close($ch);
+        }
         returnJsonHttpResponse(200, "Please check your email!"); 
     }
        else {
