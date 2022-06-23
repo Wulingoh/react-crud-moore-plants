@@ -27,7 +27,7 @@ $stmt->execute();
 if ($stmt->rowCount() > 0) {
     returnJsonHttpResponse(422, "This email already exists!");
 } else {
-    $sql = "INSERT INTO users(name, email, password_hash, role, newsletter) values (:name, :email, :passwordHash, 'customer', :newsletter)";
+    $sql = "INSERT INTO users(name, email, password_hash, role, newsletter) values (:name, :email, :passwordHash, 'Customer', :newsletter)";
     $passwordHash = password_hash($data->password, PASSWORD_DEFAULT);
     $newsletter = $data->newsletter ? 1 : 0;
     $stmt = $db->prepare($sql);

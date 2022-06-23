@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import { Controller, useForm } from "react-hook-form";
 import useAuth from "../AuthContext";
 import { Link } from "react-router-dom";
@@ -15,7 +15,8 @@ import { useNavigate } from 'react-router-dom';
 
   
 export const ForgotPassword = () => {
-  const  onSubmit = (data)=> forgotPassword(data);
+  const [message, setMessage] = useState(null);
+  const  onSubmit = (data)=> forgotPassword(data).then(() => setMessage("Please check your email!"));
   const navigate = useNavigate();
   const { handleSubmit, control, errors } = useForm();
 
@@ -34,6 +35,9 @@ export const ForgotPassword = () => {
         </Avatar>
         <Typography align="left" component="h1" variant="h5">
           Forgot Password
+        </Typography>
+        <Typography color="green" align="left" variant="subtitle1">
+         {message}
         </Typography>
         <Box component="form" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>

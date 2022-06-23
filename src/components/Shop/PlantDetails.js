@@ -98,7 +98,7 @@ export const PlantDetails = () => {
                 </Grid>
                 <Grid container sx={{ marginTop: "20px" }}>
                   <Grid item xs={12}>
-                    {productDetails.quantity >= 0 && (
+                    {productDetails.quantity > 0 && (
                       <Button
                         fullWidth
                         size="small"

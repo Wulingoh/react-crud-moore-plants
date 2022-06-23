@@ -51,16 +51,16 @@ export const HomeGreenMobile = () => {
 
             </Grid>
             <Grid item  sm={12} xs={12}>
-                <Img src="/images/homeImg7.png" alt="" />
+                <Img src="/public/images/homeImg7.png" alt="" />
             </Grid>
             <Grid item xs={12}>
                 <Img
-                    src="/images/homeImg8.png"
+                    src="/public/images/homeImg8.png"
                     alt=""
                     />  
             </Grid>
             <Grid item sm={12} xs={12}>
-                <Img src="/images/homeImg9.png" alt="" />
+                <Img src="/public/images/homeImg9.png" alt="" />
             </Grid>
         </Grid>
 

@@ -18,7 +18,7 @@ $passwordHash = password_hash(
 );
 // Password Hashing is used here.
 
-$sql = "UPDATE `users` SET `password_hash` = ':password_hash', `password_reset_token` = NULL WHERE `password_reset_token` = ':token'";
+$sql = "UPDATE `users` SET `password_hash` = :password_hash, `password_reset_token` = NULL WHERE `password_reset_token` = :token";
 
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':password_hash', $passwordHash);

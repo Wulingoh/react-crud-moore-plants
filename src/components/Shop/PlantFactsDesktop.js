@@ -13,11 +13,15 @@ import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 export const PlantFactsDesktop = () => {
   const productDetails = useProductDetailsShopList();
   return (
-    <div style={{ marginBottom: "80px", marginTop:"50px"}}>
+    <div style={{ marginBottom: "80px", marginTop: "50px" }}>
       <Box>
         <Grid container>
           <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700", fontSize:"18px"  }}>Plant Likes</Typography>
+            <Typography
+              sx={{ fontFamily: "Oxygen", fontWeight: "700", fontSize: "18px" }}
+            >
+              Plant Likes
+            </Typography>
           </Grid>
         </Grid>
       </Box>
@@ -38,13 +42,11 @@ export const PlantFactsDesktop = () => {
           >
             <Container>
               <Grid container>
-                <Grid item xs={2} sx={{ paddingLeft: "40px" }}>
+                <Grid item md={2} xs={2}>
                   <OpacityOutlinedIcon />
                 </Grid>
-                <Grid item xs={10} sx={{ paddingRight: "50px" }}>
-                  <Typography>
-                    {productDetails.wateringName}
-                  </Typography>
+                <Grid item md={10} xs={10}>
+                  <Typography>{productDetails.wateringName}</Typography>
                 </Grid>
               </Grid>
             </Container>
@@ -52,13 +54,11 @@ export const PlantFactsDesktop = () => {
           <Grid item md={4} sm={12}>
             <Container>
               <Grid container>
-                <Grid item xs={2} sx={{ paddingLeft: "40px" }}>
+                <Grid item md={2} xs={2}>
                   <WbSunnyOutlinedIcon />
                 </Grid>
-                <Grid item xs={10} sx={{ paddingRight: "50px" }}>
-                  <Typography>
-                    {productDetails.lightingName}
-                  </Typography>
+                <Grid item md={10} xs={10}>
+                  <Typography>{productDetails.lightingName}</Typography>
                 </Grid>
               </Grid>
             </Container>
@@ -66,13 +66,11 @@ export const PlantFactsDesktop = () => {
           <Grid item md={4} sm={12}>
             <Container>
               <Grid container>
-                <Grid item xs={2}>
+                <Grid item md={2} xs={2}>
                   <ThermostatOutlinedIcon />
                 </Grid>
-                <Grid item xs={10}>
-                  <Typography>
-                    {productDetails.humidityName}
-                  </Typography>
+                <Grid item md={10} xs={10}>
+                  <Typography>{productDetails.humidityName}</Typography>
                 </Grid>
               </Grid>
             </Container>
@@ -82,7 +80,11 @@ export const PlantFactsDesktop = () => {
       <Box>
         <Grid container>
           <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700", fontSize:"18px"}}>Quick Facts</Typography>
+            <Typography
+              sx={{ fontFamily: "Oxygen", fontWeight: "700", fontSize: "18px" }}
+            >
+              Quick Facts
+            </Typography>
           </Grid>
         </Grid>
       </Box>
@@ -99,24 +101,21 @@ export const PlantFactsDesktop = () => {
             <Grid
               key={key}
               item
-              md={4}
-              sm={12}
+              xs={12}
               sx={{ display: "flex", alignItems: "center" }}
             >
-              <Container>
-                <Stack sx={{display:"flex", justifyContent:"space-evenly"}}>
-                  <Box item sx={{marginBottom:"10px"}}>
-                    <Typography sx={{ fontWeight:"600" }}>
-                      {fact.title}:
-                    </Typography>
-                  </Box>
-                  <Box item>
-                    <Typography sx={{ fontWeight:"Regular"}}>
-                      {fact.description}
-                    </Typography>
-                  </Box>
-                </Stack>
-              </Container>
+              <Grid container>
+                <Grid item sm={3}>
+                  <Typography sx={{ fontWeight: "600", textAlign: "left" }}>
+                    {fact.title}:
+                  </Typography>
+                </Grid>
+                <Grid item sm={9}>
+                  <Typography sx={{ fontWeight: "Regular", textAlign: "left" }}>
+                    {fact.description}
+                  </Typography>
+                </Grid>
+              </Grid>
             </Grid>
           ))}
         </Grid>
@@ -124,7 +123,11 @@ export const PlantFactsDesktop = () => {
       <Box>
         <Grid container>
           <Grid item xs={12}>
-            <Typography sx={{ fontFamily: "Oxygen", fontWeight:"700", fontSize:"18px"  }}>About Plant</Typography>
+            <Typography
+              sx={{ fontFamily: "Oxygen", fontWeight: "700", fontSize: "18px" }}
+            >
+              About Plant
+            </Typography>
           </Grid>
         </Grid>
       </Box>
@@ -144,7 +147,7 @@ export const PlantFactsDesktop = () => {
                   <FactCheckOutlinedIcon />
                 </Grid>
                 <Grid item xs={10}>
-                  <Typography sx={{ textAlign:"start"}}>
+                  <Typography sx={{ textAlign: "start" }}>
                     {productDetails.content}
                   </Typography>
                 </Grid>

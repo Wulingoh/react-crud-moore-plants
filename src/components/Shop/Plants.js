@@ -134,7 +134,7 @@ export const Plants = () => {
                           </Button>
                         </CardActions>
                         <CardActions>
-                          {product.quantity >= 0 && (
+                          {product.quantity > 0 && (
                             <Button
                               fullWidth
                               size="small"

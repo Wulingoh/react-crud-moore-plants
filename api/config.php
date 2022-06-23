@@ -12,7 +12,7 @@ class DbConnect {
 
     public function connect() {
         try {
-            $link = new PDO('mysql:host=' .$this->server .';dbname=' .$this->dbname, $this->user, $this->password);
+            $link = new PDO('mysql:host=' .$this->server .';dbname=' .$this->dbname .';charset=utf8mb4', $this->user, $this->password);
             $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $link;
         } catch (\Exception $e) {

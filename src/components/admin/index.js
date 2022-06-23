@@ -155,7 +155,7 @@ const mainListItems = (
     </ListItemButton>
     <ListItemButton component={Link} to="/admin/humidity">
       <ListItemIcon>
-        <img src="/images/humidity.png" alt=""/>
+        <img src="/public/images/humidity.png" alt=""/>
       </ListItemIcon>
       <ListItemText primary="Humidity" />
     </ListItemButton>
