@@ -35,7 +35,7 @@ export const Story = () => {
         >
           <Grid container spacing={3}>
             <Grid item md={6} sm={12}>
-              <Img src="/images/storyImg.png" alt="" />
+              <Img src="/public/images/storyImg.png" alt="" />
             </Grid>
             <Grid
               item
@@ -45,7 +45,7 @@ export const Story = () => {
             >
               <Container>
                 <Typography sx={{ textAlign: "justify" }}>
-                  Moore Plants is an independent indoor plants retail brand,
+                <span style={{ fontWeight: "600" }}>Moore Plants</span> is an independent indoor plants retail brand,
                   established in Lyttleton, New Zealand in 2018. We make stylish
                   indoor plants easy and accessible to all with great looking
                   houseplant varieties, the biggest selection of planters and
@@ -83,7 +83,7 @@ export const Story = () => {
               </Container>
             </Grid>
             <Grid item md={6} sm={12}>
-              <Img src="/images/storyImg1.png" alt="" />
+              <Img src="/public/images/storyImg1.png" alt="" />
             </Grid>
           </Grid>
         </Box>

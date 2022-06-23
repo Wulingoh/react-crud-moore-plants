@@ -26,29 +26,26 @@ export const PotFactsDesktop = () => {
           marginRight: "10px",
         }}
       >
-        <Grid container spacing={0}>
+        <Grid container spacing={3}>
           {productDetails.facts?.map((fact, key) => (
             <Grid
               key={key}
               item
-              md={4}
-              sm={12}
+              xs={12}
               sx={{ display: "flex", alignItems: "center" }}
             >
-              <Container>
-                <Stack>
-                  <Box sx={{marginBottom:"10px"}}>
-                    <Typography sx={{ fontWeight:"600" }}>
-                      {fact.title}:
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography sx={{ fontWeight:"Regular", textAlign:"center"}}>
-                      {fact.description}
-                    </Typography>
-                  </Box>
-                </Stack>
-              </Container>
+              <Grid container>
+                <Grid item md={6} sm={3}>
+                  <Typography sx={{ fontWeight: "600", textAlign: "left" }}>
+                    {fact.title}:
+                  </Typography>
+                </Grid>
+                <Grid item md={6} sm={9}>
+                  <Typography sx={{ fontWeight: "Regular", textAlign: "left" }}>
+                    {fact.description}
+                  </Typography>
+                </Grid>
+              </Grid>
             </Grid>
           ))}
         </Grid>

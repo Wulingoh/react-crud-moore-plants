@@ -46,7 +46,7 @@ const styles = {
   paperContainer: {
     maxWidth: "100vw",
     maxHeight: "100vh",
-    backgroundImage: `url("/Images/moorePlantsMap.png")`,
+    backgroundImage: `url("/public/images/moorePlantsMap.png")`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center center",
     backgroundSize: "cover",
