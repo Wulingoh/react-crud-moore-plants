@@ -25,7 +25,7 @@ if ($stmt = $db->prepare($sql)) {
         returnJsonHttpResponse(200, array('role' => $row["role"]));
     } else {
         error_log(json_encode($data));
-        $sql = "INSERT INTO users(name, email, role) values (:name, :email, 'customer')";
+        $sql = "INSERT INTO users(name, email, role) values (:name, :email, 'Customer')";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':name', $data->full_name);
         $stmt->bindParam(':email', $data->email);
@@ -36,9 +36,9 @@ if ($stmt = $db->prepare($sql)) {
         $_SESSION['userId'] = $db->lastInsertId();
         $_SESSION['email'] = $data->email;
         $_SESSION['name'] = $data->name;
-        $_SESSION['role'] = "customer";
+        $_SESSION['role'] = "Customer";
 
-        returnJsonHttpResponse(200, array('role' => "customer"));
+        returnJsonHttpResponse(200, array('role' => "Customer"));
     }
 }
 ?>
