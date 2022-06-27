@@ -18,7 +18,7 @@ import { useNavigate, Link } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
 
 export const SignUp = () => {
-  const { setUser, signUp } = useAuth();
+  const { setUser, signUp, error } = useAuth();
   const navigate = useNavigate();
   const { handleSubmit, control, getValues } = useForm();
   const login = useGoogleLogin({
@@ -49,6 +49,11 @@ export const SignUp = () => {
         </Typography>
         <Box component="form" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>
+            <Grid item xs={12} sm={12}>
+              <Typography textAlign={'center'} color="red" align="left" variant="subtitle1">
+                  {error}
+              </Typography>
+            </Grid>
             <Grid item xs={12} sm={12}>
               <Controller
                 name={"name"}

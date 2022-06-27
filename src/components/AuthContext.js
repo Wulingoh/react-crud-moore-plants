@@ -62,7 +62,7 @@ export const AuthProvider = ({
         setUser(newUser);
         navigate("/login");
       })
-      .catch((newError) => setError(newError))
+      .catch(() => setError("This email already exists!"))
       .finally(() => setLoading(false));
   }
 
