@@ -20,7 +20,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 export const SignUp = () => {
   const { setUser, signUp } = useAuth();
   const navigate = useNavigate();
-  const { handleSubmit, control, errors } = useForm();
+  const { handleSubmit, control, getValues } = useForm();
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) =>
       axios.post("/api/auth/googleLogin", tokenResponse).then(({ data }) => {
@@ -79,7 +79,7 @@ export const SignUp = () => {
                 name={"email"}
                 control={control}
                 defaultValue=""
-                rules={{ required: true }}
+                rules={{ required: true, validate:(value) => /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) }}
                 render={({
                   field: { onChange, value },
                   fieldState: { error },
@@ -130,7 +130,7 @@ export const SignUp = () => {
                 name={"confirmPassword"}
                 control={control}
                 defaultValue=""
-                rules={{ required: true }}
+                rules={{ required: true, validate:(value) => getValues().password === value }}
                 render={({
                   field: { onChange, value },
                   fieldState: { error },
@@ -144,7 +144,7 @@ export const SignUp = () => {
                     id="password"
                     label="Confirm Password"
                     autoFocus
-                    error={error}
+                    error={!!error}
                     onChange={onChange}
                     value={value}
                   />

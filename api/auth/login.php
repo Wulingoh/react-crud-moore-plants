@@ -36,7 +36,7 @@ if ($stmt = $db->prepare($sql)) {
         }
     }
     else {
-        returnJsonHttpResponse(404, "No account found with that email address!");
+        returnJsonHttpResponse(422, "The password you entered was not valid!");
     }
 }
 ?>

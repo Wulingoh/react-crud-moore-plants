@@ -1,25 +1,25 @@
-import * as React from 'react';
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 import useAuth from "../AuthContext";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { useNavigate } from 'react-router-dom';
-import GoogleIcon from '@mui/icons-material/Google';
-import { Stack } from '@mui/material';
-  
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { useNavigate } from "react-router-dom";
+import GoogleIcon from "@mui/icons-material/Google";
+import { Stack } from "@mui/material";
+
 export const Login = () => {
-  const { setUser, login } = useAuth()
+  const { setUser, login, error } = useAuth();
   const navigate = useNavigate();
-  const { handleSubmit, control, errors } = useForm();
+  const { handleSubmit, control } = useForm();
   const googleLogin = useGoogleLogin({
     onSuccess: (tokenResponse) =>
       axios.post("/api/auth/googleLogin", tokenResponse).then((newUser) => {
@@ -47,35 +47,44 @@ export const Login = () => {
         <Box component="form" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>
-            <Button
-            fullWidth
-            variant="contained"
-            onClick={() => googleLogin()}
-            sx={{
-              mt: 1,
-              mb: 2,
-              color: "white",
-              backgroundColor: "#0F9D58",
-              border: "1px solid #4285F4",
-              "&:hover": {
-                background: "#fff",
-                color: "#0F9D58",
-              },
-            }}
-            startIcon={<GoogleIcon />}
-          >
-            Sign In with Google {""}
-          </Button>
-          </Grid>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={() => googleLogin()}
+                sx={{
+                  mt: 1,
+                  mb: 2,
+                  color: "white",
+                  backgroundColor: "#0F9D58",
+                  border: "1px solid #4285F4",
+                  "&:hover": {
+                    background: "#fff",
+                    color: "#0F9D58",
+                  },
+                }}
+                startIcon={<GoogleIcon />}
+              >
+                Sign In with Google {""}
+              </Button>
+            </Grid>
             <Grid item xs={12} sm={12}>
               <Typography>or</Typography>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <Typography textAlign={'center'} color="red" align="left" variant="subtitle1">
+                {error}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <Controller
                 name={"email"}
                 control={control}
                 defaultValue=""
-                rules={{ required: true }}
+                rules={{
+                  required: true,
+                  validate: (value) =>
+                    /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value),
+                }}
                 render={({
                   field: { onChange, value },
                   fieldState: { error },
@@ -88,7 +97,7 @@ export const Login = () => {
                     id="email"
                     label="Enter your email"
                     autoFocus
-                    error={error}
+                    error={!!error}
                     onChange={onChange}
                     value={value}
                   />
@@ -127,27 +136,37 @@ export const Login = () => {
             fullWidth
             variant="contained"
             onClick={handleSubmit(login)}
-            sx={{ mt: 1, mb: 2,
+            sx={{
+              mt: 1,
+              mb: 2,
               color: "white",
               backgroundColor: "#102F25",
-              border: '1px solid black' ,
+              border: "1px solid black",
               "&:hover": {
                 background: "#fff",
-                color: "#102F25"
+                color: "#102F25",
               },
-            }} 
+            }}
           >
             Sign In
           </Button>
           <Grid container justifyContent="center" mb="20px">
             <Stack>
               <Grid item>
-                <Link to={`/forgotPassword`} variant="body2" style={{ color: "#2E4D43", textDecoration: "none"}}>
+                <Link
+                  to={`/forgotPassword`}
+                  variant="body2"
+                  style={{ color: "#2E4D43", textDecoration: "none" }}
+                >
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link to={`/signup`} variant="body2" style={{ color: "#2E4D43", textDecoration: "none"}}>
+                <Link
+                  to={`/signup`}
+                  variant="body2"
+                  style={{ color: "#2E4D43", textDecoration: "none" }}
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
