@@ -49,7 +49,7 @@ export const AuthProvider = ({
           navigate("/checkout", {replace:true});
         }
       })
-      .catch((newError) => setError(newError))
+      .catch(() => setError("Email and Password does not match!"))
       .finally(() => setLoading(false));
   }
 
