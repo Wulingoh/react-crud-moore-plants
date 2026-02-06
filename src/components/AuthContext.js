@@ -1,5 +1,3 @@
-import axios from "axios";
-import { API_HOST } from "../config";
 import React, {
   createContext,
   ReactNode,
