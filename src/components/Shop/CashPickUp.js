@@ -1,7 +1,7 @@
 import axios from "axios";
 import useAuth from "../AuthContext";
 import { useCart } from "./CartContext";
-import { useNavigate, useHistory, Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 export const CashPickUp = () => {

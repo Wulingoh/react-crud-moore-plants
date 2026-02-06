@@ -15,7 +15,7 @@ import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { ReactComponent as MoorePlantLogo } from "../Images/moorePlantLogo1.svg";
+import MoorePlantLogo from "../Images/moorePlantLogo1.svg?react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Plants from "./Plants";

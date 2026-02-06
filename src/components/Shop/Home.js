@@ -1,6 +1,7 @@
 import * as React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {  Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import Link from "@mui/material/Link";
 import { HomeGreenDesktop } from "./HomeGreenDesktop";
 import { HomeGreenMobile } from "./HomeGreenMobile";
 import Grid from "@mui/material/Grid";
@@ -81,7 +82,7 @@ export const Home = () => {
             <Grid item md={6} xs={12}>
               <Stack spacing={2}>
                 <Img src="/public/images/homeImg2.png" alt="" />
-                <Link to={`/plants`} gutterBottom variant="h4" component="div" style={{ color: "#2E4D43", textDecoration: "none", fontFamily:"Oxygen", fontSize:"30px" }}>
+                <Link component={RouterLink} to={`/plants`} gutterBottom variant="h4" sx={{ color: "#2E4D43", textDecoration: "none", fontFamily: "Oxygen", fontSize: "30px" }}>
                   Interior Plants
                 </Link>
                 <Typography variant="body2" gutterBottom fontFamily={"Oxygen"}>
@@ -130,7 +131,7 @@ export const Home = () => {
                   marginTop: "20px",
                 }}
               >
-                <Link to={`/pots`} gutterBottom variant="h4" component="div" style={{ color: "#2E4D43", textDecoration: "none", fontFamily:"Oxygen", fontSize:"30px"  }}>
+                <Link component={RouterLink} to={`/pots`} gutterBottom variant="h4" sx={{ color: "#2E4D43", textDecoration: "none", fontFamily: "Oxygen", fontSize: "30px" }}>
                   Pots
                 </Link>
                 <Typography variant="body2" gutterBottom fontFamily={"Oxygen"}>

@@ -8,7 +8,7 @@ import { Typography } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import { ReactComponent as MoorePlantLogo } from "../Images/moorePlantLogo1.svg";
+import MoorePlantLogo from "../Images/moorePlantLogo1.svg?react";
 import { Container } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({

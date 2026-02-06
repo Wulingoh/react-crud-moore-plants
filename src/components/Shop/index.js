@@ -19,8 +19,6 @@ import { Checkout } from "./Checkout";
 import { Confirmation } from "./Confirmation";
 import { Home } from "./Home";
 import { PotDetails } from "./PotDetails";
-import { PayPalScriptProvider} from "@paypal/react-paypal-js";
-
 const theme = createTheme({
   pallette: {
     primary: {
@@ -32,19 +30,12 @@ const theme = createTheme({
   }
 });
 
-const initialOptions = {
-  "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
-  currency: "NZD",
-  intent: "capture"
-};
-
 function Shop() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <CartProvider>
-        <PayPalScriptProvider options={initialOptions}>
-          <ResponsiveAppBar />
+        <ResponsiveAppBar />
           <Routes>
             <Route index element={<Home />} />
             <Route path="/plants/:productId" element={<PlantDetails />} />
@@ -62,7 +53,6 @@ function Shop() {
             <Route path="/confirmation" element={<Confirmation />} />
           </Routes>
           <Footer />
-        </PayPalScriptProvider>
       </CartProvider>
     </ThemeProvider>
   );
