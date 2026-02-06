@@ -35,7 +35,7 @@ export const Story = () => {
         >
           <Grid container spacing={3}>
             <Grid item md={6} sm={12}>
-              <Img src="/public/images/storyImg.png" alt="" />
+              <Img src="/images/storyImg.png" alt="" />
             </Grid>
             <Grid
               item
@@ -83,7 +83,7 @@ export const Story = () => {
               </Container>
             </Grid>
             <Grid item md={6} sm={12}>
-              <Img src="/public/images/storyImg1.png" alt="" />
+              <Img src="/images/storyImg1.png" alt="" />
             </Grid>
           </Grid>
         </Box>

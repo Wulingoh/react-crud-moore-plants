@@ -107,7 +107,7 @@ export const Pots = () => {
                             // 16:9
                             pt: "0px",
                           }}
-                          src={`/public/images/${product.img}`}
+                          src={`/images/${product.img}`}
                           width="150"
                           alt="random"
                         />

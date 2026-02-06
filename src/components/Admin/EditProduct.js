@@ -619,7 +619,7 @@ export default function EditProduct() {
                         value
                           ? value
                           : getValues().img
-                          ? `/public/images/${getValues().img}`
+                          ? `/images/${getValues().img}`
                           : undefined
                       }
                       width="500"

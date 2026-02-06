@@ -15,7 +15,6 @@ import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import MoorePlantLogo from "../Images/moorePlantLogo1.svg?react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Plants from "./Plants";
@@ -24,6 +23,7 @@ import { Badge } from "@mui/material";
 import { useCart } from "./CartContext";
 import { Cart } from "./Cart";
 import { CartMobile } from "./CartMobile";
+const moorePlantLogoUrl = new URL("../Images/moorePlantLogo1.svg", import.meta.url).href;
 
 const pages = [
   ["Home", ""],
@@ -68,8 +68,11 @@ const ResponsiveAppBar = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to={"/"}>
-            <MoorePlantLogo
-              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            <Box
+              component="img"
+              src={moorePlantLogoUrl}
+              alt="Moore Plants"
+              sx={{ display: { xs: "none", md: "flex" }, mr: 1, height: 40 }}
             />
           </Link>
           <Box

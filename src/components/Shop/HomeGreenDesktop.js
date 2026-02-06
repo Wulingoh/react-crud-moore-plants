@@ -26,16 +26,16 @@ export const HomeGreenDesktop = () => {
       <Container disableGutters>
         <Grid container direction="row" mt={4} flexWrap={"nowrap"} spacing={1}>
           <Grid item xs={4}>
-            <ImageItem src="/public/images/homeImg7.png" alt="" />
+            <ImageItem src="/images/homeImg7.png" alt="" />
           </Grid>
           <Grid item xs={4}>
             <Stack spacing={0}>
               <ImageItem
-                src="/public/images/homeImg8.png"
+                src="/images/homeImg8.png"
                 alt=""
                 sx={{ marginBottom: "12px", maxHeight: "295px" }}
               />
-              <ImageItem src="/public/images/homeImg9.png" alt="" />
+              <ImageItem src="/images/homeImg9.png" alt="" />
             </Stack>
           </Grid>
           <Grid item xs={4}>

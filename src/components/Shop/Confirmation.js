@@ -24,7 +24,7 @@ export const Confirmation = () => {
       >
         <Grid container marginBottom={"20px"}>
             <Grid item xs={12}>
-                <Img src="/public/images/smiley.png" alt="" /> 
+                <Img src="/images/smiley.png" alt="" /> 
             </Grid>
         </Grid>
         <Typography component="h1" variant="h4" align="center" marginBottom={"10px"}>

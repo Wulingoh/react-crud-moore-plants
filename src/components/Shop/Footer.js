@@ -8,8 +8,9 @@ import { Typography } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import MoorePlantLogo from "../Images/moorePlantLogo1.svg?react";
 import { Container } from "@mui/material";
+
+const moorePlantLogoUrl = new URL("../Images/moorePlantLogo1.svg", import.meta.url).href;
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#718879",
@@ -122,7 +123,7 @@ export const Footer = () => {
               sx={{ boxShadow: "none", borderRadius: 0, textAlign: "start" }}
             >
               <Link to={"/plants"}>
-                <MoorePlantLogo />
+                <Box component="img" src={moorePlantLogoUrl} alt="Moore Plants" sx={{ height: 36 }} />
               </Link>
             </Item>
           </Grid>

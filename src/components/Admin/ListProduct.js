@@ -79,7 +79,7 @@ export default function ListProduct() {
                 <TableCell>{product.price}</TableCell>
                 <TableCell>
                   <img
-                    src={`/public/images/${product.img}`}
+                    src={`/images/${product.img}`}
                     width="150"
                     alt=""
                   />

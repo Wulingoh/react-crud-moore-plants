@@ -21,7 +21,7 @@ const styles = {
   paperContainer: {
     maxWidth: "100%",
     maxHeight: "100vw",
-    backgroundImage: `url("/public/images/HowToGreenHero.png")`,
+    backgroundImage: `url("/images/HowToGreenHero.png")`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center center",
     backgroundSize: "cover",
@@ -30,7 +30,7 @@ const styles = {
   paperContainerMiddle: {
     maxWidth: "100%",
     maxHeight: "100%",
-    backgroundImage: `url("/public/images/HowToGreenMiddleImg.png")`,
+    backgroundImage: `url("/images/HowToGreenMiddleImg.png")`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center center",
     backgroundSize: "cover",
@@ -161,7 +161,7 @@ export const HowToGreen = () => {
             >
               <Stack spacing={2}>
                 <Container maxWidth={"sm"}>
-                  <Img src="/public/images/sunlightGreen.png" alt="" />
+                  <Img src="/images/sunlightGreen.png" alt="" />
                 </Container>
                 <Container maxWidth={"sm"}>
                   <Typography
@@ -191,7 +191,7 @@ export const HowToGreen = () => {
             >
               <Stack spacing={2}>
                 <Container maxWidth={"sm"}>
-                  <Img src="/public/images/ventilationGreen.png" alt="" />
+                  <Img src="/images/ventilationGreen.png" alt="" />
                 </Container>
                 <Container maxWidth={"sm"}>
                   <Typography
@@ -232,7 +232,7 @@ export const HowToGreen = () => {
             >
               <Stack spacing={2}>
                 <Container maxWidth={"sm"}>
-                  <Img src="/public/images/temperatureGreen.png" alt="" />
+                  <Img src="/images/temperatureGreen.png" alt="" />
                 </Container>
                 <Container maxWidth={"sm"}>
                   <Typography
@@ -262,7 +262,7 @@ export const HowToGreen = () => {
             >
               <Stack spacing={2}>
                 <Container maxWidth={"sm"}>
-                  <Img src="/public/images/wateringGreen.png" alt="" />
+                  <Img src="/images/wateringGreen.png" alt="" />
                 </Container>
                 <Container maxWidth={"sm"}>
                   <Typography
@@ -342,7 +342,7 @@ export const HowToGreen = () => {
             >
               <Stack spacing={2}>
                 <Container maxWidth={"sm"}>
-                  <Img src="/public/images/potGreenCover1.png" alt="" />
+                  <Img src="/images/potGreenCover1.png" alt="" />
                 </Container>
                 <Container maxWidth={"sm"}>
                   <Typography
@@ -371,7 +371,7 @@ export const HowToGreen = () => {
             >
               <Stack spacing={2}>
                 <Container maxWidth={"sm"}>
-                  <Img src="/public/images/fiberGreenPot.png" alt="" />
+                  <Img src="/images/fiberGreenPot.png" alt="" />
                 </Container>
                 <Container maxWidth={"sm"}>
                   <Typography
@@ -412,7 +412,7 @@ export const HowToGreen = () => {
             >
               <Stack spacing={2}>
                 <Container maxWidth={"sm"}>
-                  <Img src="/public/images/potteryGreenPot.png" alt="" />
+                  <Img src="/images/potteryGreenPot.png" alt="" />
                 </Container>
                 <Container maxWidth={"sm"}>
                   <Typography
@@ -443,7 +443,7 @@ export const HowToGreen = () => {
             >
               <Stack spacing={2}>
                 <Container maxWidth={"sm"}>
-                  <Img src="/public/images/woodGreenPot.png" alt="" />
+                  <Img src="/images/woodGreenPot.png" alt="" />
                 </Container>
                 <Container maxWidth={"sm"}>
                   <Typography

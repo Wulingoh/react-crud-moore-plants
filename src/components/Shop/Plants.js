@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import usePagination from "./Pagination";
 import Button from "@mui/material/Button";
@@ -25,12 +24,7 @@ export const Plants = () => {
     getProducts();
   }, [params]);
   function getProducts() {
-    axios
-      .get(`/api/customer/products?${new URLSearchParams(params).toString()}`)
-      .then(function (response) {
-        console.log(response.data);
-        setProducts(response.data);
-      });
+    setProducts([{ product_id: 0, title: 'Placeholder', price: '0', img: '', quantity: 0 }]);
   }
 
   let [page, setPage] = useState(1);
@@ -107,7 +101,7 @@ export const Plants = () => {
                             // 16:9
                             pt: "0px",
                           }}
-                          src={`/public/images/${product.img}`}
+                          src={`/images/${product.img}`}
                           width="150"
                           alt="random"
                         />

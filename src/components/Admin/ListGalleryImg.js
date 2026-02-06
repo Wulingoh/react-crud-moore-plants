@@ -87,7 +87,7 @@ export default function ListGalleryImg() {
                 <CardMedia
                   component="img"
                   height="140"
-                  image={`/public/images/${item.img}`}
+                  image={`/images/${item.img}`}
                   alt={item.title}
                   loading="lazy"
                 />
