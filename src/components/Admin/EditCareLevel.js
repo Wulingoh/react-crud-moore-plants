@@ -1,8 +1,6 @@
 import { useEffect } from "react";
-import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import { CareLevelForm } from "./CreateCareLevel";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -11,28 +9,17 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 
-export default function ListCareLevel() {
+export default function EditCareLevel() {
   const navigate = useNavigate();
   const { careLevelId } = useParams();
   const { handleSubmit, control, reset } = useForm();
   useEffect(() => {
-    axios
-      .get(`/api/admin/care_level/${careLevelId}`)
-      .then(function (response) {
-        reset(response.data);
-      });
+    reset([]);
   }, []);
 
   const onSubmit = (data) => {
-    axios
-      .put(`/api/admin/care_level/${careLevelId}`, data)
-      .then(function (response) {
-        if (response.data.status === 1) {
-          navigate("/admin/care_level");
-        } else {
-          alert("Failed to update");
-        }
-      });
+    console.log(data);
+    navigate("/admin/care_level");
   };
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>

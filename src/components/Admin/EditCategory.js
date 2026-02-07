@@ -1,8 +1,6 @@
 import { useEffect } from "react";
-import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import { CategoryForm } from "./CreateCategory";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -11,28 +9,17 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 
-export default function ListCategory() {
+export default function EditCategory() {
   const navigate = useNavigate();
   const { categoryId } = useParams();
   const { handleSubmit, control, reset } = useForm();
   useEffect(() => {
-    axios
-      .get(`/api/admin/category/${categoryId}`)
-      .then(function (response) {
-        reset(response.data);
-      });
+    reset([]);
   }, []);
 
   const onSubmit = (data) => {
-    axios
-      .put(`/api/admin/category/${categoryId}`, data)
-      .then(function (response) {
-        if (response.data.status === 1) {
-          navigate("/admin/category");
-        } else {
-          alert("Failed to update");
-        }
-      });
+    console.log(data);
+    navigate("/admin/category");
   };
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>

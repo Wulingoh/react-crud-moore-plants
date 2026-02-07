@@ -1,5 +1,4 @@
 import * as React from "react";
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
@@ -9,26 +8,12 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 
-export default function ListCareLevel() {
+export default function CreateCareLevel() {
   const navigate = useNavigate();
   const { handleSubmit, control } = useForm();
   const onSubmit = (data) => {
-    axios
-      .post(`/api/admin/care_level`, data)
-      .then(function (response) {
-        console.log(response.data);
-        navigate("/admin/care_level");
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log("server responded");
-        } else if (error.request) {
-          console.log("network error");
-        } else {
-          console.log(error);
-        }
-      });
+    console.log(data);
+    navigate("/admin/care_level");  
   };
 
   return (

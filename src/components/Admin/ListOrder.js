@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import {format} from 'date-fns'
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -21,28 +19,10 @@ export default function ListOrder() {
     getOrders();
   }, []);
   function getOrders() {
-    axios
-      .get(`/api/admin/orders`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        setOrders(response.data);
-      });
+    setOrders([]);
   }
-  const deleteOrder = (orderId) => {
-    axios
-      .delete(`/api/admin/orders/${orderId}/delete`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        getOrders();
-      });
+  const deleteOrder = () => {
+    // Stub: no backend
   };
 
   return (

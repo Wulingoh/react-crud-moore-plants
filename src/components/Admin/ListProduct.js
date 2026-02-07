@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -20,28 +18,10 @@ export default function ListProduct() {
     getProducts();
   }, []);
   function getProducts() {
-    axios
-      .get(`/api/admin/products`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        setProducts(response.data);
-      });
+    setProducts([]);
   }
-  const deleteProduct = (productId) => {
-    axios
-      .delete(`/api/admin/products/${productId}/delete`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        getProducts();
-      });
+  const deleteProduct = () => {
+    // Stub: no backend
   };
 
   return (

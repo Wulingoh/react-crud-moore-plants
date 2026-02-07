@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Controller, useForm, useFieldArray, useWatch } from "react-hook-form";
 import {
@@ -50,22 +49,8 @@ export default function CreateProduct() {
     };
   };
   const onSubmit = (data) => {
-    axios
-      .post(`/api/admin/products`, data)
-      .then(function (response) {
-        console.log(response.data);
-        navigate("/admin/products");
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log("server responded");
-        } else if (error.request) {
-          console.log("network error");
-        } else {
-          console.log(error);
-        }
-      });
+    console.log(data);
+    navigate("/admin/products");
   };
 
   return (

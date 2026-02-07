@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import axios from "axios";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Controller, useForm, useFieldArray, useWatch } from "react-hook-form";
 import {
   useCategoryList,
@@ -38,7 +37,6 @@ export default function EditProduct() {
   const { handleSubmit, control, reset, setValue, getValues, clearErrors } = useForm();
   const type = useWatch({ control, name: "type" });
   const { fields, remove, append } = useFieldArray({ control, name: "facts" });
-  const { productId } = useParams();
   const onFileChange = (e) => {
     const files = e.target.files;
     const fileReader = new FileReader();
@@ -49,21 +47,22 @@ export default function EditProduct() {
   };
 
   useEffect(() => {
-    axios.get(`/api/admin/products/${productId}`).then(function (response) {
-      reset(response.data);
+    reset({
+      type: "",
+      name: "",
+      title: "",
+      price: "",
+      quantity: "",
+      category_id: "",
+      height: "",
+      latin_name: "",
+      lighting_care_id: "",
     });
-  }, [productId, reset]);
+  }, [reset]);
 
   const onSubmit = (data) => {
-    axios
-      .put(`/api/admin/products/${productId}`, data)
-      .then(function (response) {
-        if (response.data.status === 1) {
-          navigate("/admin/products");
-        } else {
-          alert("Failed to update");
-        }
-      });
+    console.log(data);
+    navigate("/admin/products");
   };
 
   return (

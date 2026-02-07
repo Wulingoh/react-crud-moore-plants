@@ -1,36 +1,22 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import { Controller, useForm } from "react-hook-form";
-import { 
-  useCategoryList, 
-} from "../FetchApi";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import { FormControl } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";  
 
 const Input = styled("input")({
   display: "none",
 });
 
-export default function ListProduct() {
+export default function CreateImgGallery() {
   const navigate = useNavigate();
   const { handleSubmit, setValue, control } = useForm();
-  const categoryList = useCategoryList();
 
   const onFileChange = (e) => {
     const files = e.target.files
@@ -41,22 +27,8 @@ export default function ListProduct() {
     }
   }
   const onSubmit = (data) => {
-    axios
-      .post(`/api/admin/products`, data)
-      .then(function (response) {
-        console.log(response.data);
-        navigate("/admin/products");
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log("server responded");
-        } else if (error.request) {
-          console.log("network error");
-        } else {
-          console.log(error);
-        }
-      });
+    console.log(data);
+    navigate("/admin/products");
   };
 
   return (

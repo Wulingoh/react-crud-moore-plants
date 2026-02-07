@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -24,27 +22,29 @@ const Input = styled("input")({
   display: "none",
 });
 
-export default function ListProduct() {
+export default function EditOrder() {
   const navigate = useNavigate();
   const { handleSubmit, control, reset, setValue, getValues } = useForm();
   const { orderId } = useParams();
 
   useEffect(() => {
-    axios.get(`/api/admin/orders/${orderId}`).then(function (response) {
-      reset(response.data);
+    reset({
+      status: "",
+      user_id: "",
+      name: "",
+      email: "",
+      mobile: "",
+      line_1: "",
+      line_2: "",
+      city: "",
+      postcode: "",
+      country: "",
     });
-  }, [orderId, reset]);
+  }, [reset]);
 
   const onSubmit = (data) => {
-    axios
-      .put(`/api/admin/orders/${orderId}`, data)
-      .then(function (response) {
-        if (response.data.status === 1) {
-          navigate("/admin/orders");
-        } else {
-          alert("Failed to update");
-        }
-      });
+    console.log(data);
+    navigate("/admin/orders");
   };
 
   const updateTotal = () => {

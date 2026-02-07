@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -20,28 +18,10 @@ export default function ListCategory() {
     getCategories();
   }, []);
   function getCategories() {
-    axios
-      .get(`/api/admin/category`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        setCategories(response.data);
-      });
+    setCategories([]);
   }
-  const deleteCategory = (categoryId) => {
-    axios
-      .delete(`/api/admin/category/${categoryId}/delete`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        getCategories();
-      });
+  const deleteCategory = () => {
+    // Stub: no backend
   };
 
   return (
@@ -91,7 +71,7 @@ export default function ListCategory() {
                       <IconButton
                         variant="outlined"
                         size="small"
-                        onClick={() => deleteCategory(category.category_id)}
+                        onClick={() => deleteCategory()}
                         color="error"
                       >
                         <DeleteIcon />

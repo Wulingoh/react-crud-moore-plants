@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -20,39 +19,15 @@ export default function ListLightingCare() {
         getLightingCares();
     }, []);
     function getLightingCares() {
-        axios.get(`/api/admin/lighting`, {
-            validateStatus:function (status) {
-                return status;
-            }
-        })
-            .then(function(response) {
-                console.log(response.data);
-                setLightingCare(response.data);  
-            });
+        setLightingCare([]);
     }
-    const deleteLightingCare = (lightingId) => {
-        axios.delete(`/api/admin/lighting/${lightingId}/delete`, {
-            validateStatus:function (status) {
-                return status;
-            }
-        })
-        .then(function(response) {
-            console.log(response.data);
-            getLightingCares();
-        })
+    const deleteLightingCare = () => {
+        // Stub: no backend
     }
 
     return (
-      <React.Fragment>
-        <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <Title>List Lighting Care</Title>
-          <Button
-            variant="contained"
-            component={Link}
-            to={`/admin/lighting/create`}
-          >
-            Add New Lighting Care
-          </Button>
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <Title>List Lighting Care</Title>
           <Table size="small">
             <TableHead>
               <TableRow>
@@ -91,7 +66,7 @@ export default function ListLightingCare() {
                         <IconButton
                           variant="outlined"
                           size="small"
-                          onClick={() => deleteLightingCare(lighting.lighting_id)}
+                          onClick={() => deleteLightingCare()}
                           color="error"
                         >
                           <DeleteIcon />
@@ -103,7 +78,6 @@ export default function ListLightingCare() {
               ))}
             </TableBody>
           </Table>
-        </Paper>
-      </React.Fragment>
+      </Paper>
     );
 }

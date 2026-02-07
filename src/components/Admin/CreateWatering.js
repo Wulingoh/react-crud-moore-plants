@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -10,26 +8,12 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 
-export default function ListWatering() {
+export default function CreateWatering() {
   const navigate = useNavigate();
   const { handleSubmit, control } = useForm();
   const onSubmit = (data) => {
-    axios
-      .post(`/api/admin/watering`, data)
-      .then(function (response) {
-        console.log(response.data);
-        navigate("/admin/watering");
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log("server responded");
-        } else if (error.request) {
-          console.log("network error");
-        } else {
-          console.log(error);
-        }
-      });
+    console.log(data);
+    navigate("/admin/watering");
   };
 
   return (

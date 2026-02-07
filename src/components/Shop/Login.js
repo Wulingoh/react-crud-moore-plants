@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import axios from "axios";
 import useAuth from "../AuthContext";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
@@ -21,11 +20,10 @@ export const Login = () => {
   const navigate = useNavigate();
   const { handleSubmit, control } = useForm();
   const googleLogin = useGoogleLogin({
-    onSuccess: (tokenResponse) =>
-      axios.post("/api/auth/googleLogin", tokenResponse).then((newUser) => {
-        setUser(newUser);
-        navigate("/checkout");
-      }),
+    onSuccess: () => {
+      setUser({ userId: 1, name: "Demo", email: "demo@example.com", role: "Customer" });
+      navigate("/checkout");
+    },
   });
 
   return (

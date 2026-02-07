@@ -1,8 +1,6 @@
 import { useEffect } from "react";
-import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import { WateringForm } from "./CreateWatering";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -11,28 +9,17 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 
-export default function ListWatering() {
+export default function EditWatering() {
   const navigate = useNavigate();
   const { wateringId } = useParams();
   const { handleSubmit, control, reset } = useForm();
   useEffect(() => {
-    axios
-      .get(`/api/admin/watering/${wateringId}`)
-      .then(function (response) {
-        reset(response.data);
-      });
+    reset([]);
   }, []);
 
   const onSubmit = (data) => {
-    axios
-      .put(`/api/admin/watering/${wateringId}`, data)
-      .then(function (response) {
-        if (response.data.status === 1) {
-          navigate("/admin/watering");
-        } else {
-          alert("Failed to update");
-        }
-      });
+    console.log(data);
+    navigate("/admin/watering");
   };
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>

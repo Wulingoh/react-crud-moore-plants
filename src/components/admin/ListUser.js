@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -20,28 +18,10 @@ export default function ListUser() {
     getUsers();
   }, []);
   const getUsers = () => {
-    axios
-      .get(`/api/admin/users`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        setUsers(response.data);
-      });
+    setUsers([]);
   }
-  const deleteUser = (userId) => {
-    axios
-      .delete(`/api/admin/users/${userId}/delete`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        getUsers();
-      });
+  const deleteUser = () => {
+    // Stub: no backend
   };
 
   return (
@@ -89,7 +69,7 @@ export default function ListUser() {
                       <IconButton
                         variant="outlined"
                         size="small"
-                        onClick={() => deleteUser(user.user_id)}
+                        onClick={() => deleteUser()}
                         color="error"
                       >
                         <DeleteIcon />

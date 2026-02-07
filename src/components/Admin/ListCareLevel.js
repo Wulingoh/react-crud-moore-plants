@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -19,28 +17,10 @@ export default function ListCareLevel() {
     getCareLevels();
   }, []);
   function getCareLevels() {
-    axios
-      .get(`/api/admin/care_level`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        setCareLevel(response.data);
-      });
+    setCareLevel([]);
   }
-  const deleteCareLevel = (careLevelId) => {
-    axios
-      .delete(`/api/admin/care_level/${careLevelId}/delete`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        getCareLevels();
-      });
+  const deleteCareLevel = () => {
+    // Stub: no backend
   };
 
   return (
@@ -92,7 +72,7 @@ export default function ListCareLevel() {
                       <IconButton
                         variant="outlined"
                         size="small"
-                        onClick={() => deleteCareLevel(careLevel.care_level_id)}
+                        onClick={() => deleteCareLevel()}
                         color="error"
                       >
                         <DeleteIcon />

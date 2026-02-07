@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -20,28 +18,10 @@ export default function ListWatering() {
     getWaters();
   }, []);
   function getWaters() {
-    axios
-      .get(`/api/admin/watering`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        setWater(response.data);
-      });
+    setWater([]);
   }
-  const deleteCareLevel = (wateringId) => {
-    axios
-      .delete(`/api/admin/watering/${wateringId}/delete`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        getWaters();
-      });
+  const deleteCareLevel = () => {
+    // Stub: no backend
   };
 
   return (
@@ -93,7 +73,7 @@ export default function ListWatering() {
                       <IconButton
                         variant="outlined"
                         size="small"
-                        onClick={() => deleteCareLevel(watering.watering_id)}
+                        onClick={() => deleteCareLevel()}
                         color="error"
                       >
                         <DeleteIcon />

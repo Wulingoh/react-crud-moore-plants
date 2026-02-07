@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
 import Title from "./Title";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
@@ -20,50 +18,24 @@ const Input = styled("input")({
 });
 
 export default function ListGalleryImg() {
-  const { productId } = useParams();
   const [galleryImages, setGalleryImages] = useState([]);
   useEffect(() => {
     getGalleryImages();
   }, []);
   function getGalleryImages() {
-    axios
-      .get(`/api/admin/gallery_img?product_id=${productId}`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        setGalleryImages(response.data);
-      });
+    setGalleryImages([]);
   }
   const onFileChange = (e) => {
     const files = e.target.files;
     const fileReader = new FileReader();
     fileReader.readAsDataURL(files[0]);
     fileReader.onload = (event) => {
-      axios
-        .post(`/api/admin/gallery_img`, {
-          product_id: productId,
-          img: event.target.result,
-        })
-        .then(function (response) {
-          console.log(response.data);
-          getGalleryImages();
-        });
+      console.log(event.target.result);
+      getGalleryImages();
     };
   };
-  const deleteGalleryImg = (galleryImgId) => {
-    axios
-      .delete(`/api/admin/gallery_img/${galleryImgId}/delete`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        getGalleryImages();
-      });
+  const deleteGalleryImg = () => {
+    // Stub: no backend
   };
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -100,7 +72,7 @@ export default function ListGalleryImg() {
                   <IconButton
                     variant="outlined"
                     size="small"
-                    onClick={() => deleteGalleryImg(item.gallery_img_id)}
+                    onClick={() => deleteGalleryImg()}
                     color="error"
                   >
                     <DeleteIcon />

@@ -1,4 +1,3 @@
-import axios from "axios";
 import useAuth from "../AuthContext";
 import { useCart } from "./CartContext";
 import { useNavigate, Navigate } from "react-router-dom";
@@ -18,21 +17,7 @@ export const CashPickUp = () => {
           color: "#102F25"
         },
       }}variant="outlined" fullWidth onClick={() =>
-        axios.post(`/api/customer/orders`, {
-            status: "Cash",
-            user_id: user.userId,
-            name: user.name,
-            email: user.email,
-            items: cartItems.map((item) => ({
-              product_id: item.product_id,
-              quantity: item.itemQuantity,
-              price: item.price,
-            })),
-            shipping,
-            subtotal,
-            total,
-            tax: 0,
-          }).then(clearCart).then(() => navigate('/confirmation'))
+        clearCart().then(() => navigate('/confirmation'))
           
     }
      >

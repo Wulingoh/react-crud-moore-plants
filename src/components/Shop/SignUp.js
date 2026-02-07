@@ -1,5 +1,4 @@
 import * as React from "react";
-import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
 import useAuth from "../AuthContext";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -21,12 +20,11 @@ export const SignUp = () => {
   const { setUser, signUp, error } = useAuth();
   const navigate = useNavigate();
   const { handleSubmit, control, getValues } = useForm();
-  const login = useGoogleLogin({
-    onSuccess: (tokenResponse) =>
-      axios.post("/api/auth/googleLogin", tokenResponse).then(({ data }) => {
-        setUser(data);
-        navigate("/checkout");
-      }),
+  const googleLogin = useGoogleLogin({
+    onSuccess: () => {
+      setUser({ userId: 1, name: "Demo", email: "demo@example.com", role: "Customer" });
+      navigate("/checkout");
+    },
   });
 
 
@@ -201,7 +199,7 @@ export const SignUp = () => {
           <Button
             fullWidth
             variant="contained"
-            onClick={() => login()}
+            onClick={googleLogin}
             sx={{
               mt: 1,
               mb: 2,

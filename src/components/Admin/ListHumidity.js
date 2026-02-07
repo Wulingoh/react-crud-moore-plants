@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { API_HOST } from "../../config";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -20,28 +18,11 @@ export default function ListHumidity() {
     getHumidities();
   }, []);
   function getHumidities() {
-    axios
-      .get(`/api/admin/humidity`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        setHumidity(response.data);
-      });
+    setHumidity([]);
   }
-  const deleteHumidity = (humidityId) => {
-    axios
-      .delete(`/api/admin/humidity/${humidityId}/delete`, {
-        validateStatus: function (status) {
-          return status;
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        getHumidities();
-      });
+  const deleteHumidity = () => {
+    // Stub: no backend
+      
   };
 
   return (
